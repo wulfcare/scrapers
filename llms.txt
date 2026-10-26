@@ -20,6 +20,13 @@
 - [AI Visibility Tracker](https://apify.com/wulfcare/ai-visibility-tracker): ChatGPT, Gemini and Google AI Overviews in one run: visibility score, share of voice, HTML report. Input: {"yourBrand": "Pipedrive, pipedrive.com", "category": "CRM for small business", "promptCount": 10}. $0.04 per answer.
 - [AI Training Jobs Scraper](https://apify.com/wulfcare/ai-training-jobs-scraper): AI trainer and data-annotation jobs from Mercor, Outlier, DataAnnotation, Alignerr and 11 more platforms, pay as numbers. Input: {"keywords": ["python"], "minHourlyRate": 30}. Free.
 
+## For agents
+
+- [AGENTS.md](https://github.com/wulfcare/scrapers/blob/main/AGENTS.md): which Actor for which request, how to call, cost cap, reading results.
+- [catalog.json](https://raw.githubusercontent.com/wulfcare/scrapers/main/catalog.json): machine-readable list of every Actor with full input fields, example input, sample output, pricing, OpenAPI and MCP URLs.
+- [llms-full.txt](https://raw.githubusercontent.com/wulfcare/scrapers/main/llms-full.txt): every Actor's full input reference and sample output in one text file.
+- OpenAPI spec per Actor: https://api.apify.com/v2/acts/wulfcare~{name}/builds/default/openapi.json
+
 ## Code
 
 - [pytrends_alternative.py](https://github.com/wulfcare/scrapers/blob/main/google-trends/pytrends_alternative.py): drop-in pytrends TrendReq without 429 errors.

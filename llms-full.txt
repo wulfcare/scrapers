@@ -1,0 +1,1848 @@
+# Wulfcare Data scrapers: full reference for AI agents
+
+Every Actor below runs on Apify. Call: POST {runSyncUrl}?token=APIFY_TOKEN with the JSON input as the body; the response is a JSON array of result items (waits up to 300 s). Longer jobs: POST /v2/acts/{actor}/runs, poll the run, then GET /v2/datasets/{defaultDatasetId}/items. Items with an "error" field are failed rows and are not charged.
+
+---
+
+# Google Trends Scraper: Unlimited Keywords + Daily Data
+
+`wulfcare/google-trends-scraper`: Google Trends without its limits: compare up to 100 keywords on one 0-100 scale (Google stops at 5), and daily data for any range, even 5 years or 2004-now (Google gives weekly/monthly). Plus regions, related queries and Trending Now. Paced so runs finish.
+
+**Use it for:**
+- Google Trends interest over time, interest by region, related queries for keywords
+- compare more than 5 keywords on one 0-100 scale (up to 100)
+- daily Google Trends data for long ranges (12 months, 5 years, 2004-now)
+- what is trending on Google right now in a country (Trending Now)
+- replacement for pytrends when it fails with 429 TooManyRequestsError
+
+- Store page: https://apify.com/wulfcare/google-trends-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~google-trends-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/google-trends-scraper`
+
+**Price:**
+- $0.003 per trends report (trends-report): One Explore report: interest over time, interest by region and related queries for up to 5 compared terms.
+- $0.0005 per trending search (trending-item): One trending search from Trending Now, with volume, growth, related searches and category.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~google-trends-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"searchTerms": ["coffee, tea"], "geo": "US", "timeRange": "today 12-m"}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/google-trends-scraper").call(run_input={"searchTerms": ["coffee, tea"], "geo": "US", "timeRange": "today 12-m"})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `mode` | string |  | "explore" | `explore` (Explore: search terms (interest over time, by region, related queries)), `trendingNow` (Trending Now: what's trending in a country right now) | What to scrape: Explore gives interest over time, by region and related queries for your search terms. Trending Now lists every search trending in the countries you pick. |
+| `searchTerms` | array |  |  |  | Search terms: One report per line. Compare terms by separating them with commas, e.g. coffee, tea. No 5-term limit: put up to 100 terms on one line and they all come back on one 0-100 scale (Google itself compares only 5; we chain overlapping groups, charged per Google query used). You can also paste a Google Trends explore URL, and its terms, country, time range and category are used as-is. |
+| `geo` | string |  | "" |  | Country or region: ISO country code like US, AU, GB, or a region like US-CA. Leave empty for worldwide. |
+| `timeRange` | string |  | "today 12-m" | `now 1-H` (Past hour), `now 4-H` (Past 4 hours), `now 1-d` (Past day), `now 7-d` (Past 7 days), `today 1-m` (Past 30 days), `today 3-m` (Past 90 days), `today 12-m` (Past 12 months), `today 5-y` (Past 5 years), `all` (2004 - present) | Time range: Period to analyse. Google picks the resolution: minutes for the past hour or 4 hours, hours for 7 days, days up to 90 days, weeks up to 5 years, and months since 2004. |
+| `customTimeRange` | string |  |  |  | Custom time range (optional): Overrides the time range above. Format YYYY-MM-DD YYYY-MM-DD, e.g. 2024-01-01 2024-06-30. |
+| `dailyData` | boolean |  | false |  | Daily data for any time range: Google only gives daily points for ranges under ~9 months, then weekly or monthly. Turn this on to get daily points for the whole range (12 months, 5 years, even 2004 to now): we fetch ~8-month daily windows and scale each one to Google's full-range series. Each window is one more Google query, charged as a report (5 years ≈ 10 reports). Up to 5 terms per line. |
+| `category` | integer |  | 0 |  | Category ID: Google Trends category, e.g. 0 = all, 71 = Food & Drink, 7 = Finance. Default 0. |
+| `searchProperty` | string |  | "" | `` (Web search), `images` (Image search), `news` (News search), `froogle` (Google Shopping), `youtube` (YouTube search) | Search type: Which Google search to measure: web (default), images, news, Google Shopping or YouTube. |
+| `interestOverTime` | boolean |  | true |  | Interest over time: Relative search interest (0-100) over the chosen time range. |
+| `interestByRegion` | boolean |  | true |  | Interest by region: Relative search interest (0-100) by country, region, city or US metro area. |
+| `relatedQueries` | boolean |  | true |  | Related queries (top + rising): The top and rising searches related to each term, including "Breakout" queries (growth over 5,000%). |
+| `regionResolution` | string |  | "" | `` (Google default), `COUNTRY` (Countries), `REGION` (Regions / states), `CITY` (Cities), `DMA` (US metro areas (DMA)) | Region resolution: Level of detail for interest by region. "Google default" uses countries for worldwide and regions within a country. |
+| `includeLowVolumeRegions` | boolean |  | false |  | Include low search volume regions: Include regions with too little search volume for Google to rate reliably (they usually show 0). |
+| `saveCsv` | boolean |  | true |  | Also save spreadsheet-friendly CSVs: Saves interest_over_time.csv, interest_by_region.csv and related_queries.csv (one row per value) to the run's key-value store for Excel or Google Sheets. Free. |
+| `trendingGeos` | array |  |  |  | Countries or regions: ISO codes like US, GB, AU, or regions like US-CA. One set of trends per entry. |
+| `trendingHours` | string |  | "24" | `4` (Past 4 hours), `24` (Past 24 hours), `48` (Past 48 hours), `168` (Past 7 days) | Time window: How far back to look for trending searches. |
+| `trendingCategories` | array |  |  |  | Only these categories (optional): Leave empty for all categories. |
+| `trendingActiveOnly` | boolean |  | false |  | Only trends that are still active: Skip trends that have already ended. |
+| `maxTrendsPerGeo` | integer |  | 0 | 0– | Max trends per country (0 = all): Trends are sorted by search volume, highest first. |
+| `language` | string |  | "en-US" |  | Interface language: Language of Google's labels and related queries, e.g. en-US, en-GB, de, ja. |
+| `timezoneOffsetMinutes` | integer |  | 0 |  | Timezone offset (minutes): Google's tz parameter: minutes WEST of UTC (Sydney = -600, New York = 300). |
+| `maxConcurrency` | integer |  | 3 | 1–10 | Parallel reports: How many reports run at once, each on its own IP. Only applies when using a proxy. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "searchTerms": [
+    "coffee",
+    "tea",
+    "matcha",
+    "… 4 more"
+  ],
+  "geo": "US",
+  "timeRange": "today 12-m",
+  "category": 0,
+  "property": "web",
+  "trendsUrl": "https://trends.google.com/trends/explore?q=coffee%2Ctea%2Cmatcha%2Cespresso%2Clatte&date=today+12-m&hl=en-US&geo=US",
+  "interestOverTime": [
+    {
+      "date": "2025-10-26T00:00:00+00:00",
+      "label": "Oct 26 – Nov 1, 2025",
+      "values": {
+        "coffee": 58,
+        "tea": 29,
+        "matcha": 4,
+        "espresso": 7,
+        "latte": 5,
+        "chai": 2.6429,
+        "kombucha": 1.0714
+      },
+      "isPartial": false
+    },
+    {
+      "date": "2025-11-02T00:00:00+00:00",
+      "label": "Nov 2 – 8, 2025",
+      "values": {
+        "coffee": 69,
+        "tea": 32,
+        "matcha": 5,
+        "espresso": 7,
+        "latte": 6,
+        "chai": 3.3571,
+        "kombucha": 0.8571
+      },
+      "isPartial": false
+    },
+    {
+      "date": "2025-11-09T00:00:00+00:00",
+      "label": "Nov 9 – 15, 2025",
+      "values": {
+        "coffee": 69,
+        "tea": 33,
+        "matcha": 5,
+        "espresso": 8,
+        "latte": 6,
+        "chai": 3.4286,
+        "kombucha": 0.9286
+      },
+      "isPartial": false
+    },
+    "… 50 more"
+  ],
+  "averages": {
+    "coffee": 75.6981,
+    "tea": 35.3774,
+    "matcha": 6.0377,
+    "espresso": 9.3774,
+    "latte": 5.1132,
+    "chai": 2.9218,
+    "kombucha": 1.0553
+  },
+  "ranking": [
+    {
+      "rank": 1,
+      "term": "coffee",
+      "average": 75.6981,
+      "vsTop": 1,
+      "lowPrecision": false,
+      "tooSmallToMeasure": false
+    },
+    {
+      "rank": 2,
+      "term": "tea",
+      "average": 35.3774,
+      "vsTop": 0.4673,
+      "lowPrecision": false,
+      "tooSmallToMeasure": false
+    },
+    {
+      "rank": 3,
+      "term": "espresso",
+      "average": 9.3774,
+      "vsTop": 0.1239,
+      "lowPrecision": false,
+      "tooSmallToMeasure": false
+    },
+    "… 4 more"
+  ],
+  "stitch": {
+    "method": "anchor chain (any number of terms)",
+    "googleQueries": 4,
+    "groups": [
+      [
+        "coffee",
+        "tea",
+        "espresso",
+        "… 2 more"
+      ],
+      [
+        "latte",
+        "chai",
+        "kombucha"
+      ]
+    ],
+    "lowPrecisionTerms": []
+  },
+  "scrapedAt": "2026-10-26T16:37:27+00:00"
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# YouTube Transcript Scraper: Channels, Playlists & Search
+
+`wulfcare/youtube-transcript-scraper`: Get YouTube transcripts (captions and subtitles) as plain text, timestamped segments or SRT for videos, Shorts, whole channels, playlists and searches. Pick the language, fall back to auto-generated captions, and get title, channel, publish date, views and duration with each one.
+
+**Use it for:**
+- transcripts / captions / subtitles of YouTube videos as text, timestamped segments or SRT
+- transcripts of every video in a channel, playlist or search
+- replacement for youtube-transcript-api when it raises RequestBlocked / IpBlocked
+
+- Store page: https://apify.com/wulfcare/youtube-transcript-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~youtube-transcript-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/youtube-transcript-scraper`
+
+**Price:**
+- $0.003 per transcript (transcript): The transcript of one video (text, timestamped segments and optional SRT) with its title, channel, publish date and other details. Videos without captions, unavailable videos, bad inputs and failed requests are never charged.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~youtube-transcript-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"urls": ["https://www.youtube.com/watch?v=UF8uR6Z6KLc"], "languages": ["en"]}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/youtube-transcript-scraper").call(run_input={"urls": ["https://www.youtube.com/watch?v=UF8uR6Z6KLc"], "languages": ["en"]})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `urls` | array |  |  |  | Videos, channels or playlists: Any mix of video URLs (watch, youtu.be, Shorts, live, embed), 11-character video ids, channel URLs (@handle, /channel/UC..., /c/..., /user/...) and playlist URLs. Channels and playlists are expanded into their videos, newest first, up to the limit below. |
+| `searchQueries` | array |  |  |  | YouTube searches: Optional. Transcripts of the videos YouTube lists for each search term (videos only, YouTube's relevance order). |
+| `maxVideosPerSource` | integer |  | 20 | 0– | Max videos per channel, playlist or search: 0 = all of them. Single video URLs are always fetched. |
+| `channelTabs` | array |  | ["videos"] |  | Channel tabs: Which of a channel's tabs to take videos from. Each tab counts as its own source for the limit above. |
+| `languages` | array |  | ["en"] |  | Transcript language: Language codes in order of preference (en, es, pt-BR, ja...). "en" also matches en-US and en-GB. Captions uploaded by the creator are used before auto-generated ones in the same language. Leave empty to always get the video's original (spoken) language. |
+| `ifLanguageMissing` | string |  | "original" | `original` (Use the video's original language), `skip` (Skip the video (free error row)) | If a video has none of these languages: Every row says which language it's in (language, isAutoGenerated) and lists all the video's caption languages (availableLanguages). |
+| `includeAutoGenerated` | boolean |  | true |  | Use auto-generated captions: Most videos only have YouTube's automatic (speech recognition) captions. Turn off to accept only captions made by a person. |
+| `includeSegments` | boolean |  | true |  | Timestamped segments: segments: [{start, duration, text}] in seconds, as shown on screen. The full transcript is always in text. |
+| `includeSrt` | boolean |  | false |  | SRT subtitles: Adds the transcript as an .srt subtitle file (srt field), ready for video editors and players. |
+| `includePublishDate` | boolean |  | true |  | Publish date and category: publishedAt and category, from one extra request per video. Off makes big runs about twice as fast: YouTube limits how many videos one IP address may ask for per minute. |
+| `includeDescription` | boolean |  | true |  | Video description: The full description text. Title, channel, duration, views, keywords and thumbnail are always included. |
+| `maxConcurrency` | integer |  | 5 | 1–20 | Videos at a time: Videos processed at once. YouTube lets each IP address fetch roughly 40-75 videos a minute, so a bigger proxy pool speeds up big runs more than this does. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "input": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+  "videoId": "UF8uR6Z6KLc",
+  "url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+  "title": "Steve Jobs' 2005 Stanford Commencement Address",
+  "channelName": "Stanford",
+  "channelId": "UC-EnprmCZ3OXyAoG7vjVNCA",
+  "channelUrl": "https://www.youtube.com/channel/UC-EnprmCZ3OXyAoG7vjVNCA",
+  "publishedAt": "2008-03-08T01:17:20Z",
+  "durationSeconds": 904,
+  "viewCount": 49316192,
+  "category": "Education",
+  "language": "en",
+  "languageName": "English - English",
+  "isAutoGenerated": false,
+  "wordCount": 2298,
+  "text": "This program is brought to you by Stanford University. Please visit us at stanford.edu Thank You. I am honored to be with you today at your commencement from one of the finest universities in the world. Truth be told I never graduated from …",
+  "segments": [
+    {
+      "start": 7.47,
+      "duration": 2.899,
+      "text": "This program is brought to you by Stanford University."
+    },
+    {
+      "start": 10.47,
+      "duration": 3.973,
+      "text": "Please visit us at stanford.edu"
+    },
+    {
+      "start": 22.492,
+      "duration": 7.527,
+      "text": "Thank You. I am honored to be with you today at your commencement"
+    },
+    "… 241 more"
+  ],
+  "srt": null,
+  "availableLanguages": [
+    {
+      "language": "ar",
+      "name": "Arabic",
+      "isAutoGenerated": false
+    },
+    {
+      "language": "en",
+      "name": "English (auto-generated)",
+      "isAutoGenerated": true
+    },
+    {
+      "language": "en",
+      "name": "English - English",
+      "isAutoGenerated": false
+    },
+    "… 6 more"
+  ],
+  "isLive": false,
+  "keywords": [
+    "apple",
+    "graduation",
+    "education",
+    "… 11 more"
+  ],
+  "description": "Drawing from some of the most pivotal points in his life, Steve Jobs, chief executive officer and co-founder of Apple Computer and of Pixar Animation Studios, urged graduates to pursue their dreams and see the opportunities in life's setbac…",
+  "thumbnail": "https://i.ytimg.com/vi/UF8uR6Z6KLc/hqdefault.jpg",
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Free YouTube Scraper: Videos, Shorts, Channels & Search
+
+`wulfcare/youtube-scraper`: Free YouTube scraper: videos, Shorts and streams from searches (all filters), channels, playlists and hashtags. Views, likes, comments count, exact publish time, duration, description, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper.
+
+**Use it for:**
+- YouTube video metadata (views, likes, comment count, publish date, duration, tags) from searches, channels, playlists, hashtags
+- YouTube channel stats (subscribers, total views, country)
+- YouTube search without YouTube Data API quota
+
+- Store page: https://apify.com/wulfcare/youtube-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~youtube-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/youtube-scraper`
+
+**Price:**
+- Free (only Apify platform usage, usually fractions of a cent)
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~youtube-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"searchQueries": ["python tutorial"], "maxResults": 20}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/youtube-scraper").call(run_input={"searchQueries": ["python tutorial"], "maxResults": 20})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `searchQueries` | array |  |  |  | Search terms: What you would type in YouTube's search box. Each term is searched separately and gets up to "Maximum videos" results (and Shorts / live streams if you ask for them below). |
+| `maxResults` | integer |  | 10 | 0–999999 | Maximum videos per search term, channel, playlist or hashtag: Regular videos to get from each search term, channel (its Videos tab), playlist and hashtag. 0 = none. Video URLs in Direct URLs are always scraped. |
+| `maxResultsShorts` | integer |  | 0 | 0–999999 | Maximum Shorts per search term or channel: Shorts to get from each search term (YouTube's "Shorts" search filter) and each channel (its Shorts tab). 0 = none. |
+| `maxResultStreams` | integer |  | 0 | 0–999999 | Maximum live streams per search term or channel: Live streams to get from each channel (its Live tab: past, current and upcoming streams) and each search term (YouTube's "Live" filter: streams live right now). 0 = none. |
+| `startUrls` | array |  | [] |  | Direct URLs: YouTube URLs: videos, Shorts, channels (@handle, /channel/UC..., /c/..., /user/...; a channel tab URL like /@name/shorts gets only that tab), playlists, search result pages (with their filters) and hashtag pages. Bare video ids, @handles and channel ids work too. |
+| `sortingOrder` | string |  |  | `relevance` (Relevance), `rating` (Rating), `date` (Upload date), `views` (View count) | Sorting order: How YouTube orders the search results. YouTube doesn't follow "Upload date" strictly. |
+| `dateFilter` | string |  |  | `hour` (Last hour), `today` (Today), `week` (This week), `month` (This month), `year` (This year) | Upload date: Only videos uploaded within this time. |
+| `videoType` | string |  |  | `video` (Video), `movie` (Movie) | Type: Videos (default) or movies. |
+| `lengthFilter` | string |  |  | `under4` (Under 4 minutes), `between420` (4-20 minutes), `plus20` (Over 20 minutes) | Duration: Only videos of this length. |
+| `isHD` | boolean |  |  |  | HD: Only videos with the "HD" feature. |
+| `hasSubtitles` | boolean |  |  |  | Subtitles/CC: Only videos with the "Subtitles/CC" feature. |
+| `hasCC` | boolean |  |  |  | Creative Commons: Only videos with the "Creative Commons" feature. |
+| `is3D` | boolean |  |  |  | 3D: Only videos with the "3D" feature. |
+| `isLive` | boolean |  |  |  | Live: Only streams that are live now. |
+| `isBought` | boolean |  |  |  | Purchased: Only videos with the "Purchased" feature. |
+| `is4K` | boolean |  |  |  | 4K: Only videos with the "4K" feature. |
+| `is360` | boolean |  |  |  | 360°: Only videos with the "360°" feature. |
+| `hasLocation` | boolean |  |  |  | Location: Only videos with the "Location" feature. |
+| `isHDR` | boolean |  |  |  | HDR: Only videos with the "HDR" feature. |
+| `isVR180` | boolean |  |  |  | VR180: Only videos with the "VR180" feature. |
+| `oldestPostDate` | string |  |  |  | Only videos published on or after: A date (2026-01-31) or an age ("7 days", "2 weeks", "3 months", "1 year"). Works for every source. On a channel listed newest first the run stops at the first older video; elsewhere older videos are skipped. |
+| `sortVideosBy` | string |  | "NEWEST" | `NEWEST` (Newest), `POPULAR` (Popular), `OLDEST` (Oldest) | Channel order: The order of a channel's videos, Shorts and streams (the channel page's Latest / Popular / Oldest buttons). |
+| `includeVideoDetails` | boolean |  | true |  | Open every video (likes, comments, exact date, description, tags...): On: each video's likes, comment count, exact publish time, full description with its links, hashtags, category, tags and more. Off: only what the list shows (title, views, duration, "3 days ago"), several times faster. Video URLs are always opened. |
+| `includeChannelInfo` | boolean |  | true |  | Add channel info to each video: The channel's subscribers, total views, video count, country, joined date, description, links, avatar and banner, on every row (one small request per channel). |
+| `maxConcurrency` | integer |  | 10 | 1–30 | Videos at a time: How many videos are fetched in parallel. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "title": "Learn Python in Less than 10 Minutes for Beginners (Fast & Easy)",
+  "id": "fWjsdhR3z3c",
+  "url": "https://www.youtube.com/watch?v=fWjsdhR3z3c",
+  "type": "video",
+  "thumbnailUrl": "https://i.ytimg.com/vi/fWjsdhR3z3c/hqdefault.jpg",
+  "viewCount": 1870725,
+  "likes": 39074,
+  "commentsCount": 989,
+  "date": "2021-05-26T12:32:40Z",
+  "dateText": "May 26, 2021",
+  "duration": "00:10:30",
+  "durationSeconds": 630,
+  "text": "In this crash course I'll be teaching you the basics of Python in less than 10 minutes. Python is super easy to learn compared to the other languages!\n\nDownload Python: https://www.python.org/\nDownload PyCharm: https://www.jetbrains.com/pyc…",
+  "descriptionLinks": [
+    {
+      "url": "https://www.python.org/",
+      "text": "https://www.python.org/"
+    },
+    {
+      "url": "https://www.jetbrains.com/pycharm/download/",
+      "text": "https://www.jetbrains.com/pycharm/download/"
+    }
+  ],
+  "hashtags": [],
+  "location": null,
+  "category": "Education",
+  "keywords": [
+    "code palace",
+    "cde palace",
+    "code palce",
+    "… 1 more"
+  ],
+  "isLive": false,
+  "commentsTurnedOff": false,
+  "isMembersOnly": false,
+  "isAgeRestricted": false,
+  "isUnlisted": false,
+  "isMonetized": null,
+  "isPaidContent": null,
+  "collaborators": null,
+  "subtitles": null,
+  "translatedTitle": null,
+  "translatedText": null,
+  "channelName": "Indently",
+  "channelId": "UCuudpdbKmQWq2PPzYgVCWlA",
+  "channelUrl": "https://www.youtube.com/@Indently",
+  "channelUsername": "Indently",
+  "numberOfSubscribers": 369000,
+  "isChannelVerified": true,
+  "channelAvatarUrl": "https://yt3.googleusercontent.com/68ZQuFvv8mZTJQD65biYl2BWjKKMxkDS5k_sIdAGpRY9-p1vYsqwE1jNMTDEveZoSpkfOpKG=s900-c-k-c0x00ffffff-no-rj",
+  "channelBannerUrl": "https://yt3.googleusercontent.com/V5C-vDux-5HHfGj_r8vnRHKuA9ACkkhELk2L-mudI1EJHKABL0P7qGnqz_dcEWTKyXjW1S8W=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+  "channelDescription": "Simple is better than complex_\n",
+  "channelDescriptionLinks": [
+    {
+      "text": "Indently.io",
+      "url": "https://www.indently.io/"
+    },
+    {
+      "text": "Instagram",
+      "url": "https://www.instagram.com/indentlyreels/"
+    }
+  ],
+  "channelLocation": "United States",
+  "channelJoinedDate": "2019-09-01",
+  "channelTotalVideos": 1055,
+  "channelTotalViews": 48698877,
+  "input": "python tutorial",
+  "fromYTUrl": "https://www.youtube.com/results?search_query=python%20tutorial&sp=EgIQAQ%3D%3D",
+  "order": 1,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Google Jobs Scraper: Salaries, Descriptions & Apply Links
+
+`wulfcare/google-jobs-scraper`: Scrape Google Jobs: title, company, location, salary, job type, posted date, full description, highlights and every real apply link (LinkedIn, Indeed, company site...). Up to 200 unique jobs per search, 27 countries.
+
+**Use it for:**
+- job listings from Google Jobs (Google for Jobs) with salary, description and apply links
+
+- Store page: https://apify.com/wulfcare/google-jobs-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~google-jobs-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/google-jobs-scraper`
+
+**Price:**
+- $0.004 per job posting (google-job): One unique Google Jobs posting with title, company, location, salary, type, description, highlights and apply links. Duplicates are never charged.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~google-jobs-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"queries": ["data analyst jobs london"], "country": "GB", "maxJobsPerQuery": 30}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/google-jobs-scraper").call(run_input={"queries": ["data analyst jobs london"], "country": "GB", "maxJobsPerQuery": 30})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `queries` | array | yes |  |  | Searches: What you'd type into Google, one per line, e.g. data analyst jobs london or remote python developer. Include the place in the search. |
+| `country` | string |  | "US" | `US` (United States), `GB` (United Kingdom), `IE` (Ireland), `CA` (Canada), `DE` (Germany), `AT` (Austria), `CH` (Switzerland), `FR` (France), `BE` (Belgium), `NL` (Netherlands), `ES` (Spain), `PT` (Portugal), `IT` (Italy), `PL` (Poland), `SE` (Sweden), `NO` (Norway), `DK` (Denmark), `FI` (Finland), `IN` (India), `SG` (Singapore), `AE` (United Arab Emirates), `ZA` (South Africa), `BR` (Brazil), `MX` (Mexico), `JP` (Japan), `AU` (Australia (limited)), `NZ` (New Zealand (limited)) | Country: Which country's Google to search. Google Jobs isn't offered for every country; Australia and New Zealand usually return no jobs view. |
+| `maxJobsPerQuery` | integer |  | 30 | 1–200 | Max jobs per search: Unique jobs to return per search. Google shows 10 at a time, so more than 10 needs 'Expand results'. |
+| `expandResults` | boolean |  | true |  | Expand results: Google only shows 10 jobs per search. This runs natural variations (full time, senior, posted this week, remote...) and removes duplicates, for typically 40-80 unique jobs per search. You're only charged for unique jobs. |
+| `includeDescription` | boolean |  | true |  | Include full job description: The full posting text. Turn off for smaller, faster output. |
+| `language` | string |  | "en" |  | Language: Google interface language, e.g. en, de, fr, es. |
+| `maxConcurrency` | integer |  | 3 | 1–10 | Parallel searches: How many Google searches run at once. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "query": "remote software engineer",
+  "searchUsed": "remote software engineer",
+  "country": "US",
+  "position": 1,
+  "title": "Full-Stack Software Engineer (New Grad) - Remote",
+  "company": "SpruceID",
+  "location": "Anywhere",
+  "via": "ZipRecruiter",
+  "postedAgo": "8 days ago",
+  "postedAt": "2026-10-17T10:01:13+00:00",
+  "salary": "110K-140K a year",
+  "jobType": "Full-time",
+  "degree": null,
+  "otherTags": [],
+  "applyOptions": [
+    {
+      "source": "ZipRecruiter",
+      "url": "https://www.ziprecruiter.com/c/SpruceID/Job/Full-Stack-Software-Engineer-Remote/-in-Remote,US?jid=19daffea3bfe03e5",
+      "domain": "ziprecruiter.com",
+      "direct": false
+    },
+    {
+      "source": "Jobgether",
+      "url": "https://jobgether.com/offer/6a7bdabf490731f1e196f124-full-stack-software-engineer---remote-services",
+      "domain": "jobgether.com",
+      "direct": false
+    },
+    {
+      "source": "JobLeads",
+      "url": "https://www.jobleads.com/us/job/full-stack-software-engineer-new-grad-remote--united-states--e458dc7a885af25429cd861e8c385462b",
+      "domain": "jobleads.com",
+      "direct": false
+    },
+    "… 5 more"
+  ],
+  "highlights": {
+    "qualifications": [
+      "This is an ideal role for a recent graduate who wants to grow quickly while working on technology that matters",
+      "We're not looking for someone who already knows everything",
+      "We're looking for someone eager to learn, humble enough to ask questions, and motivated to do meaningful work",
+      "… 15 more"
+    ],
+    "benefits": [
+      "Dedicated mentorship from senior engineers who will guide your technical development"
+    ],
+    "responsibilities": [
+      "You'll work alongside experienced engineers and directly with state governments, public sector partners, and enterprise clients to help design, build, and deploy impactful identity solutions",
+      "You'll gain hands-on experience across the full stack, learn from senior engineers, and contribute to systems that serve millions of people",
+      "Collaborate with customer delivery leads, engineers, and UX designers on real-world deployments",
+      "… 11 more"
+    ]
+  },
+  "description": "About SpruceID\nSpruceID builds privacy-preserving, standards-based digital identity and credentialing solutions that give individuals control of their information while enabling governments and enterprises to deliver secure, interoperable s…",
+  "googleJobId": "UsmJK6H351WAV-x4AAAAAA==",
+  "applyUrl": "https://www.monster.com/job-openings/full-stack-software-engineer-new-grad-remote-beverly-hills-ca--706c9c1e-bef1-4862-823f-d1bfce004f9a",
+  "scrapedAt": "2026-10-25T10:01:13+00:00"
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Google Hotels Prices Scraper
+
+`wulfcare/google-hotels-scraper`: Hotel prices from Google Hotels: every booking site's price (Booking.com, Expedia, Agoda, the hotel's own site...) for any hotel and dates, per night and total, with and without taxes, plus hotel searches like "hotels in Paris" with ratings, stars, address and lowest price. $0.80 per 1,000 prices.
+
+**Use it for:**
+- hotel prices from every booking site (Booking.com, Expedia, Agoda, official site) for given dates
+- hotel price calendar over many check-in dates
+- list of hotels in a city with rating, stars and lowest price
+
+- Store page: https://apify.com/wulfcare/google-hotels-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~google-hotels-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/google-hotels-scraper`
+
+**Price:**
+- $0.0008 per price (price): One booking site's price for one hotel and one check-in date (per night and total, with and without taxes, booking link). Dates without prices and errors are never charged.
+- $0.0015 per hotel from a search (hotel): One hotel from a Google Hotels search, with its details (stars, rating, reviews, address, location, photos) and lowest price.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~google-hotels-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"hotels": ["Hilton London Paddington"], "checkInDate": "+30 days", "nights": 2, "adults": 2, "currency": "USD"}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/google-hotels-scraper").call(run_input={"hotels": ["Hilton London Paddington"], "checkInDate": "+30 days", "nights": 2, "adults": 2, "currency": "USD"})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `hotels` | array |  |  |  | Hotels: Hotels to get every booking site's prices for. Each one can be a hotel's name (best with the city: "Hilton London Paddington"), a Google Hotels link (https://www.google.com/travel/hotels/entity/...) or its entity ID (the "Ch..." code in that link), or the hotel's Google Maps link or CID. |
+| `searchQueries` | array |  |  |  | Searches: Google Hotels searches, e.g. "hotels in Paris" or "beach hotels in Bali". Each gives one row per hotel (name, stars, rating, reviews, address, lowest price and more), up to "Maximum hotels per search". |
+| `maxHotels` | integer |  | 20 | 1–1000 | Maximum hotels per search: Hotels to get from each search, in Google's order. |
+| `includeAllPrices` | boolean |  | false |  | Every booking site's price for searched hotels: Searches give each hotel's lowest price. Turn this on to also get every booking site's price for each hotel found (in its "prices" list, charged per price). |
+| `checkInDate` | string |  |  |  | Check-in date: First check-in date (YYYY-MM-DD, or "tomorrow", "+7 days"). Empty = tomorrow. Google has prices for about a year ahead. |
+| `days` | integer |  | 1 | 1–365 | Check-in dates: How many check-in dates in a row, from the first: 30 gives a price calendar for the next 30 check-ins. |
+| `nights` | integer |  | 1 | 1–30 | Nights: Length of each stay. |
+| `adults` | integer |  | 2 | 1–10 | Adults: Guests. Prices and the booking sites offering them change with the number of guests. |
+| `currency` | string |  | "USD" |  | Currency: Three-letter code (USD, EUR, GBP, AUD...). Google prices in the currency of the country the request comes from (USD with the default US proxy); other currencies are converted at the day's ECB reference rate. For prices exactly as shown in a country (local currency and taxes), use a residential proxy from that country. |
+| `outputFormat` | string |  | "providers" | `providers` (One row per booking site and date), `hotels` (One row per hotel and date (prices in a list)) | Output: How rows for the hotels above come out. Searches always give one row per hotel. |
+| `device` | string |  | "desktop" | `desktop` (Desktop), `mobile` (Mobile) | Device: Get the prices Google shows on desktop or on mobile (some sites have mobile-only rates). |
+| `language` | string |  | "en" |  | Language: Language of hotel descriptions and texts (en, fr, de, es...). |
+| `maxConcurrency` | integer |  | 6 | 1–20 | Parallel requests: Requests to Google at once. |
+| `entity` | string |  |  |  | Entity (compatibility): A single hotel (entity ID, link or name): same as one line in Hotels. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "query": "hotels in Paris",
+  "rank": 1,
+  "name": "The Originals Boutique, Hôtel Maison Montmartre, Paris",
+  "hotelClass": 4,
+  "hotelClassText": "4-star tourist hotel",
+  "rating": 4,
+  "reviewCount": 2135,
+  "checkInDate": "2026-10-26",
+  "checkOutDate": "2026-10-27",
+  "nights": 1,
+  "adults": 2,
+  "currency": "USD",
+  "pricePerNight": 76.03,
+  "pricePerNightWithTaxes": 102.56,
+  "totalPrice": 76.03,
+  "totalPriceWithTaxes": 102.56,
+  "priceText": "$76",
+  "dealText": "17% less than usual",
+  "cheapestProvider": null,
+  "prices": null,
+  "address": null,
+  "phone": null,
+  "website": "https://www.hotelmaisonmontmartre.com/?utm_campaign=uberall&utm_medium=organic&utm_source=googlelisting",
+  "latitude": 48.900537,
+  "longitude": 2.3362689999999997,
+  "countryCode": "FR",
+  "checkInTime": "3:00 PM",
+  "checkOutTime": "12:00 PM",
+  "description": "Hip hotel featuring a sophisticated restaurant & a cool rooftop eatery/bar with a terrace.",
+  "descriptionLong": null,
+  "ratingBreakdown": {
+    "1": 225,
+    "2": 107,
+    "3": 180,
+    "4": 497,
+    "5": 1126
+  },
+  "reviewAspects": [
+    {
+      "aspect": "Safety",
+      "mentions": 67,
+      "positive": 13,
+      "negative": 51
+    },
+    {
+      "aspect": "Bar or lounge",
+      "mentions": 60,
+      "positive": 47,
+      "negative": 6
+    },
+    {
+      "aspect": "Room entertainment",
+      "mentions": 17,
+      "positive": 8,
+      "negative": 9
+    },
+    "… 3 more"
+  ],
+  "otherRatings": null,
+  "nearbyPlaces": [
+    {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "travelTimes": {
+        "driving": "19 min",
+        "transit": "56 min"
+      }
+    },
+    {
+      "name": "Restaurant le 365",
+      "travelTimes": {
+        "walking": "7 min"
+      }
+    }
+  ],
+  "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/AABkmLfwYtcmqfrRWvXV6Jl_jRqJ1i-gDYNxdNuhF8KnH9MlOZvxPqJR-u-L9giDhwMbyl2jRtRgs-9rCsbYPTzZdW9R1MUmqq_Z8J0e33BQSSc_Zid_ePbJWZ4YavQcgFDAQzqNBvS2=s150-w92-h150-n-k-no",
+  "photos": [
+    "https://lh3.googleusercontent.com/grass-cs/AABkmLfwYtcmqfrRWvXV6Jl_jRqJ1i-gDYNxdNuhF8KnH9MlOZvxPqJR-u-L9giDhwMbyl2jRtRgs-9rCsbYPTzZdW9R1MUmqq_Z8J0e33BQSSc_Zid_ePbJWZ4YavQcgFDAQzqNBvS2=s287-w287-h192-n-k-no-v1",
+    "https://lh3.googleusercontent.com/grass-cs/AABkmLeNZs2aEW5P2S1v2uLfL5EAo-_dNkj_vVC-0_D0Ws0CCJWKzPnPzBKN3Zluz7bAO2QpGLzK1plMg1a9n1BR2Sb9WotAg4MTqB9ZsBMKzUiIzoWDV1zSxLBbwNehjlGFN3dc3514=s287-w287-h192-n-k-no-v1",
+    "https://lh3.googleusercontent.com/grass-cs/AABkmLcIWcvK-UkQaYFjs6lLuuwBw34mD0V2f_8LabReVSEGypdwGKQqelb6A_df2oWwfF3qxM18cdiPmIaAdT4-TUVO7z4ujzRTy_TOo3mMAOs3QMrX53L7GkqpCLJIFh-HZzPv2ZM1=s287-w287-h192-n-k-no-v1",
+    "… 6 more"
+  ],
+  "googleMapsUrl": "https://www.google.com/maps?cid=11195438155682968190",
+  "googleCurrency": null,
+  "exchangeRate": null,
+  "entityId": "ChoI_uTZsvz1i6-bARoNL2cvMTFmZHB6eDEwMxAB",
+  "hotelUrl": "https://www.google.com/travel/hotels/entity/ChoI_uTZsvz1i6-bARoNL2cvMTFmZHB6eDEwMxAB/prices?hl=en&gl=us&ts=CAASCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAKGBoSBwjqDxAKGBsYATICEAA",
+  "input": "hotels in Paris",
+  "scrapedAt": "2026-10-25T09:56:42+00:00",
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# App Store Scraper: Reviews, App Details, Search & Charts
+
+`wulfcare/app-store-scraper`: Scrape Apple App Store reviews with no 500 cap (any country, newest/helpful/critical sort, star and date filters, developer replies), full app details with rating histogram, version history and App Privacy labels, search results, top charts, developer apps and similar apps.
+
+**Use it for:**
+- Apple App Store app details, rating histogram, version history, privacy labels
+- App Store search results, top charts, developer apps, similar apps
+- App Store reviews together with app data
+
+- Store page: https://apify.com/wulfcare/app-store-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~app-store-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/app-store-scraper`
+
+**Price:**
+- $0.0001 per review (review): One App Store review with stars, title, text, date, the developer reply and (for recent reviews) the app version. Not-found apps and failed requests are never charged.
+- $0.0005 per app details (app-details): Full details of one app: rating histogram, price, in-app purchases, version history, age rating, privacy labels, chart position and more.
+- $0.0002 per app in a list (app-list-item): One app from a search, top chart, developer page or similar-apps list, with title, rating, price, category and description.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~app-store-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"mode": "apps", "appIds": ["324684580"], "countries": ["us"]}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/app-store-scraper").call(run_input={"mode": "apps", "appIds": ["324684580"], "countries": ["us"]})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `mode` | string | yes | "reviews" | `reviews` (Reviews of apps), `apps` (App details (full)), `search` (Search results), `charts` (Top charts), `developer` (Apps by developer), `similar` (Similar apps (You Might Also Like)) | What to scrape: Each run returns one kind of row, so your dataset always has the same columns. Reviews, App details and Similar apps use the app list below; the other modes use their own section. |
+| `appIds` | array |  |  |  | Apps: App Store URLs (https://apps.apple.com/us/app/.../id324684580), numeric app ids (324684580) or bundle ids (com.spotify.client). Used by Reviews, App details and Similar apps. |
+| `countries` | array |  | ["us"] |  | Countries: Two-letter App Store country codes (us, gb, de, jp, br, ...). Each country is its own store with its own reviews, prices, charts and search results; add several to cover them all in one run. Every row says which country it came from. |
+| `language` | string |  |  |  | Language: Optional, e.g. en-US, de-DE, fr-FR. App names and descriptions come in this language when the developer provides it. Leave empty for each country's default language. Reviews are always the ones written in that country's store, whatever their language. |
+| `maxReviewsPerApp` | integer |  | 100 | 0– | Max reviews per app: 0 = every review the App Store has for the app in each country (no 500 cap). With a star filter, this counts only reviews with those stars. |
+| `reviewsSort` | string |  | "newest" | `newest` (Newest first), `helpful` (Most helpful (App Store default)), `favorable` (Most favorable (5 stars first)), `critical` (Most critical (1 star first)) | Sort reviews by: Newest first is best for monitoring and date cutoffs. Most critical is the fastest way to get complaints. |
+| `reviewStars` | array |  |  |  | Only these star ratings: Leave empty for all ratings. You're only charged for reviews with these stars. Tip: with Most critical (or Most favorable) the run stops as soon as it's past the stars you picked. |
+| `reviewsSince` | string |  |  |  | Only reviews since: Skip reviews older than this, e.g. 2026-09-01 or "30 days". With Newest first the run stops as soon as it reaches older reviews. |
+| `includeReviewerNames` | boolean |  | false |  | Include reviewer nicknames: Off by default. The App Store shows a nickname for each reviewer; no other reviewer data is collected. |
+| `searchQueries` | array |  |  |  | Search terms: One search per line, e.g. "habit tracker". Up to 200 apps per term and country. |
+| `chartCollections` | array |  | ["topfree"] |  | Charts: Which top charts to fetch (up to 100 apps each, Apple's limit). |
+| `chartDevice` | string |  | "iphone" | `iphone` (iPhone), `ipad` (iPad), `mac` (Mac) | Chart device: iPhone, iPad or Mac App Store charts. |
+| `chartGenres` | array |  | ["all"] |  | Chart categories: One chart per category (and per chart and country). iPhone and iPad only; Mac charts are overall. |
+| `developers` | array |  |  |  | Developers: Developer page URLs (https://apps.apple.com/us/developer/supercell/id488106216), numeric developer ids, or exact developer names as shown on the App Store. |
+| `maxResults` | integer |  | 0 | 0– | Max apps per search / chart / developer / similar: 0 = everything the App Store lists (search up to 200, charts up to 100). |
+| `includeFullDetails` | boolean |  | false |  | Full details for every listed app: Search, charts, developer and similar modes return an app card by default. Turn this on to get the full App details row (ratings histogram, version history, privacy labels, ...) for each app, charged as an app detail. |
+| `includePrivacyLabels` | boolean |  | true |  | Include App Privacy labels: The app's privacy "nutrition label": data linked to you, data used to track you, and why. Free, it comes with the same request. |
+| `includeVersionHistory` | boolean |  | true |  | Include version history: Recent versions with their dates and release notes. |
+| `maxConcurrency` | integer |  | 6 | 1–20 | Parallel connections: How many IPs requests are spread over (the run's own IP plus proxy sessions). More is faster for very large review pulls. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "input": "top free iphone · all apps",
+  "rank": 1,
+  "appId": "632064380",
+  "bundleId": "lt.manodrabuziai.fr",
+  "url": "https://apps.apple.com/us/app/vinted-pre-loved-marketplace/id632064380",
+  "title": "Vinted: Pre-loved marketplace",
+  "subtitle": "Sell & buy second-hand clothes",
+  "developer": "Vinted Limited",
+  "developerId": "554164035",
+  "score": 4.9,
+  "ratings": 581190,
+  "genre": "Shopping",
+  "free": true,
+  "price": 0,
+  "currency": "USD",
+  "priceText": "Free",
+  "inAppPurchases": false,
+  "contentRating": "4+",
+  "releasedAt": "2013-04-11",
+  "description": "The idea is simple: you sell your pre-loved stuff to other members who’ll love it again. They get the thrill of unboxing a great find, you get more space at home. It's look-good, do-good, feel-good, for everyone. \n\nSelling is easy and free\n…",
+  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d3/cd/83/d3cd83d1-4d21-6390-1c53-4e1557fdf70d/VintedAppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.png",
+  "country": "US",
+  "language": null,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# App Store Reviews Scraper: All Reviews, No 500 Cap
+
+`wulfcare/app-store-reviews-scraper`: Scrape every Apple App Store review of any app, with no 500 cap: any country, newest/helpful/critical sort, star and date filters, developer replies and app versions. $0.10 per 1,000 reviews, no start fee, errors free.
+
+**Use it for:**
+- all Apple App Store reviews of an app (more than 500, any country)
+
+- Store page: https://apify.com/wulfcare/app-store-reviews-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~app-store-reviews-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/app-store-reviews-scraper`
+
+**Price:**
+- $0.0001 per review (review): One App Store review with stars, title, text, date, the developer reply and (for recent reviews) the app version. Not-found apps and failed requests are never charged.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~app-store-reviews-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"appIds": ["324684580"], "countries": ["us"], "maxReviewsPerApp": 1000}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/app-store-reviews-scraper").call(run_input={"appIds": ["324684580"], "countries": ["us"], "maxReviewsPerApp": 1000})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `appIds` | array | yes |  |  | Apps: App Store URLs (https://apps.apple.com/us/app/.../id324684580), numeric app ids (324684580) or bundle ids (com.spotify.client). Every review of each app is fetched, up to the limit below. |
+| `countries` | array |  | ["us"] |  | Countries: Two-letter App Store country codes (us, gb, de, jp, br, ...). Each country is its own store with its own reviews, prices, charts and search results; add several to cover them all in one run. Every row says which country it came from. |
+| `maxReviewsPerApp` | integer |  | 100 | 0– | Max reviews per app: 0 = every review the App Store has for the app in each country (no 500 cap). With a star filter, this counts only reviews with those stars. |
+| `reviewsSort` | string |  | "newest" | `newest` (Newest first), `helpful` (Most helpful (App Store default)), `favorable` (Most favorable (5 stars first)), `critical` (Most critical (1 star first)) | Sort reviews by: Newest first is best for monitoring and date cutoffs. Most critical is the fastest way to get complaints. |
+| `reviewStars` | array |  |  |  | Only these star ratings: Leave empty for all ratings. You're only charged for reviews with these stars. Tip: with Most critical (or Most favorable) the run stops as soon as it's past the stars you picked. |
+| `reviewsSince` | string |  |  |  | Only reviews since: Skip reviews older than this, e.g. 2026-09-01 or "30 days". With Newest first the run stops as soon as it reaches older reviews. |
+| `includeReviewerNames` | boolean |  | false |  | Include reviewer nicknames: Off by default. The App Store shows a nickname for each reviewer; no other reviewer data is collected. |
+| `maxConcurrency` | integer |  | 6 | 1–20 | Parallel connections: How many IPs requests are spread over (the run's own IP plus proxy sessions). More is faster for very large review pulls. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "appId": "324684580",
+  "appTitle": "Spotify: Music and Podcasts",
+  "reviewId": "14709146123",
+  "score": 1,
+  "title": "Ads ruined it",
+  "text": "I’ve been using Spotify for almost 5 years and never rlly had much of a problem. Ads would come on every like 3-4 songs and I just accepted that bc it seemed fair. But the past 2 weeks there’s 3 ads after EVERY song to a point where I’ve go…",
+  "date": "2026-10-25T11:17:54Z",
+  "isEdited": false,
+  "appVersion": "9.1.94",
+  "replyText": null,
+  "replyDate": null,
+  "userName": null,
+  "appUrl": "https://apps.apple.com/us/app/id324684580",
+  "country": "US",
+  "language": null,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Google Play Scraper: Reviews, App Details, Search & Charts
+
+`wulfcare/google-play-scraper`: Scrape Google Play reviews (unlimited, any country and language, star and date filters), full app details with data safety and developer contacts, search results, top charts, developer apps and similar apps. Missing apps never crash a run.
+
+**Use it for:**
+- Google Play app details incl. data safety, installs, developer contacts
+- Google Play search results, top charts, developer apps, similar apps
+- Google Play reviews together with app data
+
+- Store page: https://apify.com/wulfcare/google-play-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~google-play-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/google-play-scraper`
+
+**Price:**
+- $0.0001 per review (review): One Google Play review with stars, text, date, helpful votes, app version and the developer reply. Not-found apps and failed requests are never charged.
+- $0.0005 per app details (app-details): Full details of one app: ratings histogram, installs, price, developer contact, permissions, data safety, version and more.
+- $0.0002 per app in a list (app-list-item): One app from a search, top chart, developer page or similar-apps list, with title, rating, installs, price and category.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~google-play-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"mode": "apps", "appIds": ["com.spotify.music"]}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/google-play-scraper").call(run_input={"mode": "apps", "appIds": ["com.spotify.music"]})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `mode` | string | yes | "reviews" | `reviews` (Reviews of apps), `apps` (App details (full)), `search` (Search results), `charts` (Top charts), `developer` (Apps by developer), `similar` (Similar apps) | What to scrape: Each run returns one kind of row, so your dataset always has the same columns. Reviews and App details use the app list below; the other modes use their own section. |
+| `appIds` | array |  |  |  | Apps: Package names (com.spotify.music) or Google Play URLs (https://play.google.com/store/apps/details?id=com.spotify.music). Used by Reviews, App details and Similar apps. |
+| `country` | string |  | "us" |  | Country: Two-letter country code (us, gb, de, in, ng, br, ...). Prices, availability, charts and search results follow this country. |
+| `language` | string |  | "en" |  | Language: Language code (en, de, es, pt-BR, ...). Google Play returns reviews written in this language, and app texts in it when the developer provides a translation. |
+| `maxReviewsPerApp` | integer |  | 100 | 0– | Max reviews per app: 0 = every review Google Play has (it pages through them all). With a star filter the limit applies to each star rating separately. |
+| `reviewsSort` | string |  | "newest" | `newest` (Newest first), `relevant` (Most relevant (Play default)) | Sort reviews by: Newest first is best for monitoring and date cutoffs. |
+| `reviewStars` | array |  |  |  | Only these star ratings: Leave empty for all ratings. Filtering happens on Google Play's side, so asking for 1-star reviews doesn't cost you the others. |
+| `reviewsSince` | string |  |  |  | Only reviews since: Stop at reviews older than this date, e.g. 2026-09-01 or "30 days". Fastest with "Newest first". |
+| `includeReviewerNames` | boolean |  | false |  | Include reviewer display names: Off by default. Reviewer ids and profile pictures are never collected. |
+| `searchQueries` | array |  |  |  | Search terms: One search per line, e.g. "budget tracker". Google Play's website shows up to about 30 apps per search. |
+| `chartCollections` | array |  | ["topselling_free"] |  | Charts: Which top charts to fetch (up to 200 apps each). |
+| `chartCategories` | array |  | ["APPLICATION"] |  | Chart categories: Every chart is fetched for every category picked here. |
+| `developers` | array |  |  |  | Developers: Developer names exactly as on Google Play ("Spotify AB"), numeric developer ids, or developer page URLs. |
+| `maxResults` | integer |  | 0 | 0– | Max apps per search / chart / developer: 0 = everything Google Play shows (search ~30, charts 200, similar ~50). |
+| `includeFullDetails` | boolean |  | false |  | Full details for every listed app: Search, charts, developer and similar modes return a compact card by default. Turn this on to get the full App details row (ratings histogram, developer contact, data safety, ...) for each app, charged as an app detail. |
+| `includeDataSafety` | boolean |  | true |  | Include data safety section: What data the app collects and shares, for what purpose, and its security practices. Free, it comes with the same request. |
+| `includeDescriptionHtml` | boolean |  | false |  | Also include description HTML: The plain-text description is always included. Turn on to also get the original HTML. |
+| `maxConcurrency` | integer |  | 5 | 1–20 | Parallel requests: How many apps or searches are fetched at the same time. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "input": "Top free · APPLICATION",
+  "rank": 1,
+  "appId": "com.facebook.aura",
+  "url": "https://play.google.com/store/apps/details?id=com.facebook.aura&hl=en&gl=us",
+  "title": "Muse from Meta",
+  "developer": "Meta Platforms, Inc.",
+  "score": 4.7098,
+  "genre": "Productivity",
+  "installs": "5,000,000+",
+  "free": true,
+  "price": 0,
+  "currency": "USD",
+  "priceText": "Free",
+  "inAppPurchasesRange": "$0.99 - $1,049.00 per item",
+  "contentRating": "Teen",
+  "summary": null,
+  "description": "Muse is your personal AI agent that gets things done, always working on what matters to you. It manages email, books dinners, tracks budgets, and finds deals, with your approval.\n\nPERSONAL PRODUCTIVITY\nMuse takes the the busywork off your p…",
+  "icon": "https://play-lh.googleusercontent.com/qDQUfohqN-eZh_a_YuWYlTsBPwjgrayoh2-Nf9o49kzN5Yjwk4yTyNUIFRI3o3PYks5lVAgEPrEPvFRYqxLP",
+  "screenshots": [
+    "https://play-lh.googleusercontent.com/R7pQ9kQjhDBbsreE7p2M4D91O7AuoRgmy91lKrPQ24Ey6dTQUjB32a7pPndF6PR2MYQBxGOi2IOuU-1iatSRCg",
+    "https://play-lh.googleusercontent.com/9BJlFbPodn5h9R76V0DfLqGmN42U8-PNN5--xisQXBpwApN_RPXTTXD7IRl0e0bC0NQFslddPE97YWNhMtCIIcg",
+    "https://play-lh.googleusercontent.com/YXf_qd3bM_bOLBiQhXwkt2aV4UB8wbXxlhiRY16uVCdtMHMZqnyy0Lx-Lhnr4Q9MuwY2iBMZjbfIeLcE6vnUfQ",
+    "… 5 more"
+  ],
+  "country": "US",
+  "language": "en",
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Google Play Reviews Scraper: All Reviews, No Cap
+
+`wulfcare/google-play-reviews-scraper`: Scrape every Google Play review of any app, with no 150/1,000 cap: newest or most relevant, star and date filters, helpful votes, app versions and developer replies, any country and language. $0.10 per 1,000 reviews, no start fee, errors free.
+
+**Use it for:**
+- all Google Play reviews of an app, any country and language
+
+- Store page: https://apify.com/wulfcare/google-play-reviews-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~google-play-reviews-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/google-play-reviews-scraper`
+
+**Price:**
+- $0.0001 per review (review): One Google Play review with stars, text, date, helpful votes, the app version and the developer reply. Not-found apps and failed requests are never charged.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~google-play-reviews-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"appIds": ["com.spotify.music"], "country": "us", "maxReviewsPerApp": 1000}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/google-play-reviews-scraper").call(run_input={"appIds": ["com.spotify.music"], "country": "us", "maxReviewsPerApp": 1000})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `appIds` | array | yes |  |  | Apps: Package names (com.spotify.music) or Google Play URLs (https://play.google.com/store/apps/details?id=com.spotify.music). Every review of each app is fetched, up to the limit below. |
+| `country` | string |  | "us" |  | Country: Two-letter country code (us, gb, de, in, ng, br, ...). Prices, availability, charts and search results follow this country. |
+| `language` | string |  | "en" |  | Language: Language code (en, de, es, pt-BR, ...). Google Play returns reviews written in this language, and app texts in it when the developer provides a translation. |
+| `maxReviewsPerApp` | integer |  | 100 | 0– | Max reviews per app: 0 = every review Google Play has (it pages through them all). With a star filter the limit applies to each star rating separately. |
+| `reviewsSort` | string |  | "newest" | `newest` (Newest first), `relevant` (Most relevant (Play default)) | Sort reviews by: Newest first is best for monitoring and date cutoffs. |
+| `reviewStars` | array |  |  |  | Only these star ratings: Leave empty for all ratings. Filtering happens on Google Play's side, so asking for 1-star reviews doesn't cost you the others. |
+| `reviewsSince` | string |  |  |  | Only reviews since: Stop at reviews older than this date, e.g. 2026-09-01 or "30 days". Fastest with "Newest first". |
+| `includeReviewerNames` | boolean |  | false |  | Include reviewer display names: Off by default. Reviewer ids and profile pictures are never collected. |
+| `maxConcurrency` | integer |  | 5 | 1–20 | Parallel requests: How many apps or searches are fetched at the same time. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "appId": "com.spotify.music",
+  "appTitle": "Spotify: Music and Podcasts",
+  "reviewId": "dfe3987b-e7ce-4cae-a7d0-d4988e3b848b",
+  "reviewUrl": "https://play.google.com/store/apps/details?id=com.spotify.music&reviewId=dfe3987b-e7ce-4cae-a7d0-d4988e3b848b&hl=en&gl=us",
+  "score": 4,
+  "text": "If you have Spotify Premium, this is a great app; unlimited downloads, no ads, and a monthly hour rate to listen to many audiobooks free. Great for music, podcasts, ASMR, etc. However, without Spotify Premium there is an unattractive amount…",
+  "date": "2026-10-24T09:52:29Z",
+  "thumbsUp": 0,
+  "appVersion": "9.1.92.3058",
+  "replyText": null,
+  "replyDate": null,
+  "country": "US",
+  "language": "en",
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# ChatGPT Search Scraper & AI Brand Visibility Tracker
+
+`wulfcare/chatgpt-search-scraper`: Ask ChatGPT (with web search) your prompts for $0.05 per answer (Apify's own scraper: $0.20). Get the full answer, every cited source, every brand and product ChatGPT recommends (price, rating, reviews), its follow-up questions, and a free brand rank and citation report. No login.
+
+**Use it for:**
+- what ChatGPT (with web search) answers to a prompt, with cited sources and recommended products
+- whether ChatGPT mentions / recommends / cites a brand vs competitors
+
+- Store page: https://apify.com/wulfcare/chatgpt-search-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~chatgpt-search-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/chatgpt-search-scraper`
+
+**Price:**
+- $0.05 per chatgpt answer (answer): One ChatGPT answer to one prompt, with every cited source and the brand report. Prompts ChatGPT didn't answer are never charged.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~chatgpt-search-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/chatgpt-search-scraper").call(run_input={"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `prompts` | array | yes |  |  | Prompts: What to ask ChatGPT, one prompt per line. Write them the way your customers would ask, e.g. "best accounting software for a plumber". Each prompt is asked in a new, logged-out ChatGPT chat. |
+| `yourBrand` | string |  |  |  | Your brand: Optional. Your brand name, then any other names and your website, separated by commas: "HubSpot, HubSpot CRM, hubspot.com". Every answer then says whether it mentions you, your rank against the competitors below, and whether it cites your site. |
+| `competitors` | array |  |  |  | Competitors: Optional. Other brands to track, one per line, in the same format: name, other names, website. |
+| `repeats` | integer |  | 1 | 1–10 | Ask each prompt this many times: ChatGPT words its answer differently each time, and the brands it names can change too. Ask the same prompt 3-5 times to get your share of mentions instead of a single snapshot. Every answer is its own row (and its own charge). |
+| `webSearch` | boolean |  | true |  | Use web search: On (recommended): ChatGPT searches the web and cites sources, like it does for most product questions. Off: ChatGPT decides for itself whether to search. |
+| `maxConcurrency` | integer |  | 2 | 1–4 | Prompts at a time: How many chats run in parallel. 2 is a safe default; 3-4 is faster but needs 4 GB of memory. |
+| `language` | string |  |  |  | Browser language: Optional, e.g. en-GB, de-DE, fr-FR (default en-US). ChatGPT usually answers in the language of the prompt anyway. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "prompt": "What is the best CRM for a small business?",
+  "repeat": 1,
+  "yourBrand": "HubSpot",
+  "yourBrandMentioned": true,
+  "yourBrandRank": 1,
+  "yourBrandCited": true,
+  "brandsMentioned": [
+    "HubSpot",
+    "Zoho CRM"
+  ],
+  "brands": [
+    {
+      "brand": "HubSpot",
+      "mentioned": true,
+      "mentions": 4,
+      "rank": 1,
+      "firstMention": "For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.hubspot.com/products/crm",
+        "https://www.hubspot.com/pricing"
+      ]
+    },
+    {
+      "brand": "Salesforce",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "Zoho CRM",
+      "mentioned": true,
+      "mentions": 5,
+      "rank": 2,
+      "firstMention": "For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.zoho.com/crm/",
+        "https://www.zoho.com/crm/zohocrm-pricing.html"
+      ]
+    }
+  ],
+  "recommendedBrands": [
+    {
+      "rank": 1,
+      "name": "HubSpot CRM",
+      "category": "software",
+      "description": "Customer relationship management software"
+    },
+    {
+      "rank": 2,
+      "name": "Zoho CRM",
+      "category": "software",
+      "description": "Customer relationship management software"
+    },
+    {
+      "rank": 3,
+      "name": "Pipedrive",
+      "category": "software",
+      "description": "Sales-focused CRM software"
+    },
+    "… 2 more"
+  ],
+  "productCount": 0,
+  "products": [],
+  "followUpQuestions": [
+    {
+      "question": "1. What kind of business do you run?",
+      "options": [
+        "Service business (consulting, agency, contractor, etc.)",
+        "Professional services (accounting, legal, real estate, etc.)",
+        "E-commerce or retail",
+        "… 2 more"
+      ]
+    },
+    {
+      "question": "2. How many people will use the CRM?",
+      "options": [
+        "Just me",
+        "2–5 people",
+        "6–20 people",
+        "… 1 more"
+      ]
+    },
+    {
+      "question": "3. What's your monthly budget?",
+      "options": [
+        "Free only",
+        "Under $50/month",
+        "$50–$150/month",
+        "… 1 more"
+      ]
+    },
+    "… 1 more"
+  ],
+  "answerText": "The best CRM for a small business depends on how you find customers, manage sales, and follow up with leads. For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive. They cover different needs, and the most expensive optio…",
+  "answer": "The best CRM for a small business depends on how you find customers, manage sales, and follow up with leads. For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive. They cover different needs, and the most expensive optio…",
+  "sources": [
+    {
+      "title": null,
+      "url": "https://www.hubspot.com/products/crm",
+      "domain": "hubspot.com",
+      "siteName": null,
+      "citedInline": true
+    },
+    {
+      "title": null,
+      "url": "https://www.hubspot.com/pricing",
+      "domain": "hubspot.com",
+      "siteName": null,
+      "citedInline": true
+    },
+    {
+      "title": null,
+      "url": "https://www.zoho.com/crm/",
+      "domain": "zoho.com",
+      "siteName": null,
+      "citedInline": true
+    },
+    "… 6 more"
+  ],
+  "sourceCount": 9,
+  "citedDomains": [
+    "hubspot.com",
+    "zoho.com",
+    "pipedrive.com",
+    "… 2 more"
+  ],
+  "webSearch": true,
+  "location": "US",
+  "askedAt": "2026-10-25T22:50:55Z",
+  "seconds": 29.2,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Gemini Search Scraper & AI Brand Visibility Tracker ($1/1k)
+
+`wulfcare/gemini-search-scraper`: Ask Google Gemini your prompts: get the full answer (tables and steps included), every cited source, products with prices, and a brand report: mentioned or not, rank vs competitors, own site cited. No login, API key or browser. $1 per 1,000 answers, the lowest Gemini price on Apify.
+
+**Use it for:**
+- what Google Gemini answers to a prompt, with sources, and whether it mentions a brand
+
+- Store page: https://apify.com/wulfcare/gemini-search-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~gemini-search-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/gemini-search-scraper`
+
+**Price:**
+- $0.001 per gemini answer (gemini-answer): One Gemini answer to one prompt, with every source, products and the brand report. Prompts Gemini didn't answer are never charged.
+- $0.002 per residential proxy (per answer) (residential-proxy-answer): Extra per answer only when you turn on Apify Proxy with the Residential group, to cover its bandwidth.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~gemini-search-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/gemini-search-scraper").call(run_input={"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `prompts` | array | yes |  |  | Prompts: What to ask Gemini, one prompt per line. Write them the way your customers would ask, e.g. "best accounting software for a plumber". Each prompt is asked in a new, logged-out Gemini chat. |
+| `yourBrand` | string |  |  |  | Your brand: Optional. Your brand name, then any other names and your website, separated by commas: "HubSpot, HubSpot CRM, hubspot.com". Every answer then says whether it mentions you, your rank against the competitors below, and whether it cites your site. |
+| `competitors` | array |  |  |  | Competitors: Optional. Other brands to track, one per line, in the same format: name, other names, website. |
+| `repeats` | integer |  | 1 | 1–10 | Ask each prompt this many times: Gemini words its answer differently each time, and the brands it names can change too. Ask the same prompt 3-5 times to get your share of mentions instead of a single snapshot. Every answer is its own row (and its own charge). |
+| `maxConcurrency` | integer |  | 4 | 1–10 | Prompts at a time: How many questions run in parallel. 4 is a safe default; up to 10 is faster. |
+| `language` | string |  | "en" |  | Language: Interface language code, e.g. en, de, fr, es, ja (default en). Gemini usually answers in the language of the prompt anyway. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "prompt": "What is the best CRM for a small business?",
+  "repeat": 1,
+  "answer": "Finding the \"best\" CRM for a small business depends entirely on your budget, team size, and whether your primary focus is sales pipelines, marketing, or customer support. \n\n---\n\n### 1. HubSpot CRM — Best for Beginners & Inbound Marketing\n* …",
+  "answerText": "Finding the \"best\" CRM for a small business depends entirely on your budget, team size, and whether your primary focus is sales pipelines, marketing, or customer support.\n\n---\n\n1. HubSpot CRM — Best for Beginners & Inbound Marketing\n- Best …",
+  "sources": [
+    {
+      "title": "The Best CRM for Small Business in 2026: An Honest Comparison",
+      "url": "https://1crm.com/best-crm-for-small-business/",
+      "domain": "1crm.com",
+      "siteName": null,
+      "citedInline": true
+    },
+    {
+      "title": "10 Best CRM Tools for Small Businesses in 2026 - Helpmonks",
+      "url": "https://helpmonks.com/blog/best-crm-tools-small-businesses-2026/",
+      "domain": "helpmonks.com",
+      "siteName": null,
+      "citedInline": true
+    },
+    {
+      "title": "Best small business CRM of 2026 - TechRadar",
+      "url": "https://www.techradar.com/best/best-crm-for-small-business",
+      "domain": "techradar.com",
+      "siteName": null,
+      "citedInline": true
+    },
+    "… 3 more"
+  ],
+  "sourceCount": 6,
+  "citedDomains": [
+    "1crm.com",
+    "helpmonks.com",
+    "techradar.com",
+    "… 2 more"
+  ],
+  "products": [],
+  "yourBrand": "HubSpot",
+  "yourBrandMentioned": true,
+  "yourBrandRank": 1,
+  "yourBrandCited": false,
+  "brandsMentioned": [
+    "HubSpot",
+    "Pipedrive",
+    "Salesforce"
+  ],
+  "brands": [
+    {
+      "brand": "HubSpot",
+      "mentioned": true,
+      "mentions": 4,
+      "rank": 1,
+      "firstMention": "HubSpot CRM — Best for Beginners & Inbound Marketing",
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "Salesforce",
+      "mentioned": true,
+      "mentions": 4,
+      "rank": 3,
+      "firstMention": "The Catch: Advanced custom workflows and deep enterprise configurations are more limited than competitors like Salesforce or Zoho.",
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "Pipedrive",
+      "mentioned": true,
+      "mentions": 3,
+      "rank": 2,
+      "firstMention": "Pipedrive — Best for Sales-Driven Teams",
+      "cited": false,
+      "citedUrls": []
+    }
+  ],
+  "language": "en",
+  "askedAt": "2026-10-25T09:52:20Z",
+  "seconds": 12.2,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Google AI Mode Scraper & AI Brand Visibility Tracker
+
+`wulfcare/google-ai-mode-scraper`: Ask Google AI Mode your prompts: get the full answer (tables included), every cited source, and a brand report: mentioned or not, rank vs competitors, own site cited. Any country. No login, API key or proxy needed.
+
+**Use it for:**
+- what Google AI Mode answers to a prompt, with sources, and whether it mentions a brand
+
+- Store page: https://apify.com/wulfcare/google-ai-mode-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~google-ai-mode-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/google-ai-mode-scraper`
+
+**Price:**
+- $0.0045 per ai mode answer (ai-mode-answer): One Google AI Mode answer to one prompt, with every source and the brand report. Prompts AI Mode didn't answer are never charged.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~google-ai-mode-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/google-ai-mode-scraper").call(run_input={"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `prompts` | array | yes |  |  | Prompts: What to ask Google AI Mode, one prompt per line. Write them the way your customers would search, e.g. "best accounting software for a plumber". Each prompt is asked in a new, logged-out AI Mode search. |
+| `yourBrand` | string |  |  |  | Your brand: Optional. Your brand name, then any other names and your website, separated by commas: "HubSpot, HubSpot CRM, hubspot.com". Every answer then says whether it mentions you, your rank against the competitors below, and whether it cites your site. |
+| `competitors` | array |  |  |  | Competitors: Optional. Other brands to track, one per line, in the same format: name, other names, website. |
+| `repeats` | integer |  | 1 | 1–10 | Ask each prompt this many times: AI Mode words its answer differently each time, and the brands it names can change too. Ask the same prompt 3-5 times to get your share of mentions instead of a single snapshot. Every answer is its own row (and its own charge). |
+| `maxConcurrency` | integer |  | 2 | 1–5 | Prompts at a time: How many questions run in parallel (each is a browser tab). 2 is the safe default: Google slows down busy IP addresses. |
+| `language` | string |  | "en" |  | Language: Google interface language (hl), e.g. en, de, fr, es, ja. Default en. |
+| `country` | string |  | "US" | `US` (United States), `GB` (United Kingdom), `CA` (Canada), `AU` (Australia), `NZ` (New Zealand), `IE` (Ireland), `IN` (India), `DE` (Germany), `FR` (France), `ES` (Spain), `IT` (Italy), `NL` (Netherlands), `JP` (Japan), `BR` (Brazil), `MX` (Mexico), `SG` (Singapore), `ZA` (South Africa) | Country: Google country (gl) for the search. AI Mode leans on that country's sites and shops for local questions. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "prompt": "What is the best CRM for a small business?",
+  "repeat": 1,
+  "answer": "Finding the best CRM for a small business depends heavily on your team's specific goals, technical comfort level, and budget. Because there is no one-size-fits-all solution, small business CRMs generally fall into a few distinct categories—…",
+  "answerText": "Finding the best CRM for a small business depends heavily on your team's specific goals, technical comfort level, and budget. Because there is no one-size-fits-all solution, small business CRMs generally fall into a few distinct categories—…",
+  "sources": [
+    {
+      "title": "The Best Small Business CRM Software We've Tested for 2026 | PCMag",
+      "url": "https://www.pcmag.com/picks/the-best-small-business-crm-software",
+      "domain": "pcmag.com",
+      "siteName": "PCMag",
+      "citedInline": true
+    },
+    {
+      "title": null,
+      "url": "https://www.hubspot.com/products/crm/ai-crm",
+      "domain": "hubspot.com",
+      "siteName": null,
+      "citedInline": true
+    },
+    {
+      "title": "The Best CRM Software for Small Businesses",
+      "url": "https://www.zoho.com/crm/small-business-crm-software/",
+      "domain": "zoho.com",
+      "siteName": "Zoho",
+      "citedInline": true
+    },
+    "… 9 more"
+  ],
+  "sourceCount": 12,
+  "citedDomains": [
+    "pcmag.com",
+    "hubspot.com",
+    "zoho.com",
+    "… 9 more"
+  ],
+  "yourBrand": "HubSpot",
+  "yourBrandMentioned": true,
+  "yourBrandRank": 1,
+  "yourBrandCited": true,
+  "brandsMentioned": [
+    "HubSpot",
+    "Pipedrive"
+  ],
+  "brands": [
+    {
+      "brand": "HubSpot",
+      "mentioned": true,
+      "mentions": 5,
+      "rank": 1,
+      "firstMention": "HubSpot CRM - Ease of Use & Growth - Smohest user interface; excellent free tier.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.hubspot.com/products/crm/ai-crm"
+      ]
+    },
+    {
+      "brand": "Salesforce",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "Pipedrive",
+      "mentioned": true,
+      "mentions": 3,
+      "rank": 2,
+      "firstMention": "Pipedrive - Sales-Focused Teams - Visual, intuitive deal pipelines that teams pick up instantly.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.pipedrive.com/"
+      ]
+    }
+  ],
+  "country": "US",
+  "language": "en",
+  "askedAt": "2026-10-25T09:57:02Z",
+  "seconds": 7.3,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# Microsoft Copilot Search Scraper & AI Brand Visibility Tracker
+
+`wulfcare/copilot-search-scraper`: Ask Microsoft Copilot Search (Bing) your prompts: get the full answer as markdown, every cited source with title and snippet, and a brand report: mentioned or not, rank vs competitors, own site cited. No login or API key.
+
+**Use it for:**
+- what Microsoft Copilot Search (Bing) answers to a prompt, with sources, and whether it mentions a brand
+
+- Store page: https://apify.com/wulfcare/copilot-search-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~copilot-search-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/copilot-search-scraper`
+
+**Price:**
+- $0.008 per copilot answer (copilot-answer): One Microsoft Copilot answer to one prompt, with every source and the brand report. Prompts Copilot didn't answer are never charged.
+- $0.008 per residential proxy (per answer) (residential-proxy-answer): Extra per answer only when it went through Apify's residential proxy (Bing refused the server's IP address, or you chose a country), to cover its bandwidth.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~copilot-search-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/copilot-search-scraper").call(run_input={"prompts": ["What is the best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com", "competitors": ["Salesforce, salesforce.com", "Pipedrive, pipedrive.com"]})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `prompts` | array | yes |  |  | Prompts: What to ask Copilot, one prompt per line. Write them the way your customers would ask, e.g. "best accounting software for a plumber". Each prompt is asked in a new, logged-out Copilot Search. |
+| `yourBrand` | string |  |  |  | Your brand: Optional. Your brand name, then any other names and your website, separated by commas: "HubSpot, HubSpot CRM, hubspot.com". Every answer then says whether it mentions you, your rank against the competitors below, and whether it cites your site. |
+| `competitors` | array |  |  |  | Competitors: Optional. Other brands to track, one per line, in the same format: name, other names, website. |
+| `repeats` | integer |  | 1 | 1–10 | Ask each prompt this many times: Copilot words its answer differently each time, and the brands it names can change too. Ask the same prompt 3-5 times to get your share of mentions instead of a single snapshot. Every answer is its own row (and its own charge). |
+| `maxConcurrency` | integer |  | 3 | 1–8 | Prompts at a time: How many questions run in parallel (each is a browser tab). 3 is a safe default. |
+| `language` | string |  | "en" |  | Language: Interface language code, e.g. en, de, fr, es, ja (default en). Copilot usually answers in the language of the prompt anyway. |
+| `useResidentialProxy` | boolean |  | false |  | Always use residential proxy: Off (recommended): questions go out from the Apify server's own IP address (in the US), and the run switches to Apify residential proxy by itself only if Bing starts asking for captchas. Turn on to ask from a home IP in the country below, e.g. to see what Copilot tells people in that country. Answers through residential proxy cost an extra residential-proxy-answer event (it covers the bandwidth). |
+| `proxyCountry` | string |  | "US" | `US` (United States), `GB` (United Kingdom), `CA` (Canada), `AU` (Australia), `DE` (Germany), `FR` (France), `ES` (Spain), `IT` (Italy), `NL` (Netherlands), `IN` (India), `JP` (Japan), `BR` (Brazil), `MX` (Mexico) | Residential proxy country: Where residential-proxy questions come from. Copilot tailors local answers (shops, prices, places) to it. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "prompt": "What is the best CRM for a small business?",
+  "repeat": 1,
+  "answer": "The **best overall CRM for most small businesses is HubSpot CRM**, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools [2].\n\n**If you want the simplest setup:** Bigin by Zoho CRM\n**If you want visual p…",
+  "answerText": "The best overall CRM for most small businesses is HubSpot CRM, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools.\n\nIf you want the simplest setup: Bigin by Zoho CRM\nIf you want visual pipelines: mond…",
+  "sources": [
+    {
+      "title": "10 Best Small Business CRM Software Of 2026 - Forbes",
+      "url": "https://www.forbes.com/advisor/business/software/best-crm-small-business/",
+      "domain": "forbes.com",
+      "siteName": "Forbes",
+      "citedInline": true,
+      "number": 1,
+      "snippet": "To find the best small business CRMs, we evaluated 41 providers and ranked 33 features and tools that have the biggest impact on SMBs."
+    },
+    {
+      "title": "12 Best Small Business CRM Tools",
+      "url": "https://fitsmallbusiness.com/best-crm-for-small-business/",
+      "domain": "fitsmallbusiness.com",
+      "siteName": "Fit Small Business",
+      "citedInline": true,
+      "number": 2,
+      "snippet": "Compare the 12 best CRM tools for small business. Our 2026 top picks are HubSpot CRM, Bigin by Zoho CRM, and monday CRM to drive sales and growth."
+    }
+  ],
+  "sourceCount": 2,
+  "citedDomains": [
+    "forbes.com",
+    "fitsmallbusiness.com"
+  ],
+  "yourBrand": "HubSpot",
+  "yourBrandMentioned": true,
+  "yourBrandRank": 1,
+  "yourBrandCited": false,
+  "brandsMentioned": [
+    "HubSpot",
+    "Pipedrive"
+  ],
+  "brands": [
+    {
+      "brand": "HubSpot",
+      "mentioned": true,
+      "mentions": 4,
+      "rank": 1,
+      "firstMention": "The best overall CRM for most small businesses is HubSpot CRM, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools.",
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "Salesforce",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "Pipedrive",
+      "mentioned": true,
+      "mentions": 3,
+      "rank": 2,
+      "firstMention": "If you want deep email marketing: Pipedrive",
+      "cited": false,
+      "citedUrls": []
+    }
+  ],
+  "language": "en",
+  "proxy": "residential-US",
+  "askedAt": "2026-10-25T09:53:11Z",
+  "seconds": 21,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# AI Visibility Tracker: ChatGPT, Gemini & Google AI Overviews
+
+`wulfcare/ai-visibility-tracker`: See whether ChatGPT, Gemini and Google AI Overviews recommend your brand or your competitors. Get a visibility score, share of voice, the prompts you're missing from, the sites AI cites, and a white-label HTML report. $0.04 per answer, report free. No API keys.
+
+**Use it for:**
+- AI visibility / share of voice of a brand across ChatGPT, Gemini and Google AI Overviews in one run, with HTML report
+
+- Store page: https://apify.com/wulfcare/ai-visibility-tracker
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~ai-visibility-tracker/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/ai-visibility-tracker`
+
+**Price:**
+- $0.04 per ai answer (ai-answer): One answer from one AI engine (ChatGPT, Gemini or Google AI Overview) to one prompt, with its brand analysis. Searches with no AI Overview, failed prompts and the report are never charged.
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~ai-visibility-tracker/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"yourBrand": "Pipedrive, pipedrive.com", "competitors": ["HubSpot, hubspot.com", "Salesforce, salesforce.com"], "category": "CRM for small business", "promptCount": 5}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/ai-visibility-tracker").call(run_input={"yourBrand": "Pipedrive, pipedrive.com", "competitors": ["HubSpot, hubspot.com", "Salesforce, salesforce.com"], "category": "CRM for small business", "promptCount": 5})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `yourBrand` | string |  |  |  | Your brand: Your brand name, then any other names and your website, separated by commas: "Pipedrive, Pipedrive CRM, pipedrive.com". The report scores how often and how high AI recommends you, and whether it cites your site. Leave empty to just see who AI recommends. |
+| `competitors` | array |  |  |  | Competitors: The brands you compete with, one per line, in the same format: name, other names, website. Their scores and share of voice sit next to yours in the report. |
+| `category` | string |  |  |  | Category (writes the prompts for you): What you sell, the way a customer would put it: "CRM for small business", "dentist in Brisbane", "running shoes for flat feet". The Actor writes the buyer questions people ask AI ("What is the best ...?", "Which ... would you recommend?", "alternatives to "). Use it, your own prompts below, or both. |
+| `promptCount` | integer |  | 10 | 1–50 | Number of prompts to write: How many questions to write from the category (1-50). Each is asked once on every engine you pick. |
+| `prompts` | array |  |  |  | Your own prompts: Optional. Exact questions to ask, one per line, e.g. "best CRM for a real estate agency". Prompts that name a tracked brand ("Is HubSpot good?") are answered and shown, but left out of the scores, since they name the brand whatever its visibility. |
+| `engines` | array |  | ["chatgpt", "gemini", "google_ai_overview"] |  | AI engines: Where to ask. Every engine is asked as a new, logged-out visitor, so you see what your customers see, not an API answer. |
+| `country` | string |  | "US" | `US` (United States), `GB` (United Kingdom), `AU` (Australia), `CA` (Canada), `NZ` (New Zealand), `IE` (Ireland), `IN` (India), `SG` (Singapore), `ZA` (South Africa), `DE` (Germany), `FR` (France), `ES` (Spain), `IT` (Italy), `NL` (Netherlands), `SE` (Sweden), `PL` (Poland), `BR` (Brazil), `MX` (Mexico), `JP` (Japan), `AE` (United Arab Emirates) | Country: Where your customers are. Google AI Overviews are searched for this country. ChatGPT is asked through a residential IP address in this country when it isn't the US (this uses your Apify residential proxy). Gemini doesn't localise logged-out answers by country. |
+| `language` | string |  | "en" |  | Language: Two-letter language code for Google and the browser (en, de, fr, es, ...). Write your prompts in the same language. |
+| `repeats` | integer |  | 1 | 1–5 | Ask each prompt this many times: AI answers change between askings. Asking each prompt 2-3 times gives steadier scores. Every answer is its own row and its own charge. |
+| `maxRunMinutes` | integer |  |  | 1–600 | Stop asking after (minutes): When time is up, no more prompts are asked and the report is written from the answers so far. Leave empty to ask everything. The run also stops in time before its own timeout. |
+| `projectName` | string |  |  |  | Project name (tracks changes over time): Optional. Give the brand or client a name, e.g. "acme-weekly", and schedule this Actor (weekly is typical). Each run is saved under the name in your account, and the report shows the score trend and the prompts you gained or lost since the last run. |
+| `reportTitle` | string |  |  |  | Report title: Optional. Heading of the HTML report (default: "AI Visibility Report: "). |
+| `agencyName` | string |  |  |  | Prepared by (agency name): Optional. Shown on the HTML report as "Prepared by ...", for agencies sending it to clients. The report carries no Apify branding. |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "prompt": "What is the best CRM for small business?",
+  "engine": "google_ai_overview",
+  "engineName": "Google AI Overview",
+  "repeat": 1,
+  "status": "answered",
+  "brandedPrompt": false,
+  "yourBrand": "Pipedrive",
+  "yourBrandMentioned": true,
+  "yourBrandRank": 3,
+  "yourBrandCited": false,
+  "brandsMentioned": [
+    "HubSpot",
+    "Zoho CRM",
+    "Pipedrive"
+  ],
+  "brands": [
+    {
+      "brand": "Pipedrive",
+      "mentioned": true,
+      "mentions": 2,
+      "rank": 3,
+      "firstMention": "Pipedrive",
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "HubSpot",
+      "mentioned": true,
+      "mentions": 2,
+      "rank": 1,
+      "firstMention": "HubSpot CRM",
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "brand": "Salesforce",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
+      "cited": false,
+      "citedUrls": []
+    },
+    "… 1 more"
+  ],
+  "answerText": "The best CRM (Customer Relationship Management) software for small businesses depends on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM\n\nBest for: Inbound marketing, ease of use, and getting started on a fre…",
+  "answer": "The best CRM (Customer Relationship Management) software for small businesses depends on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM\n\nBest for: Inbound marketing, ease of use, and getting started on a fre…",
+  "sources": [
+    {
+      "title": "10 Free or Low-Cost CRM Tools for Small Businesses",
+      "url": "https://www.uschamber.com/co/start/strategy/low-cost-crm-tools",
+      "domain": "uschamber.com",
+      "siteName": "U.S. Chamber of Commerce",
+      "citedInline": true
+    },
+    {
+      "title": "The Best Small Business CRM Software We've Tested for 2026 | PCMag",
+      "url": "https://www.pcmag.com/picks/the-best-small-business-crm-software",
+      "domain": "pcmag.com",
+      "siteName": "PCMag",
+      "citedInline": true
+    },
+    {
+      "title": "The 11 Best CRMs for Small Business in 2026 | Zapier",
+      "url": "https://zapier.com/blog/best-crms-for-small-business/",
+      "domain": "zapier.com",
+      "siteName": "Zapier",
+      "citedInline": true
+    },
+    "… 5 more"
+  ],
+  "sourceCount": 8,
+  "citedDomains": [
+    "uschamber.com",
+    "pcmag.com",
+    "zapier.com",
+    "… 5 more"
+  ],
+  "country": "US",
+  "askedAt": "2026-10-25T09:52:32Z",
+  "seconds": 9.3,
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.
+
+---
+
+# AI Training Jobs: Mercor, Outlier, DataAnnotation, Alignerr +11
+
+`wulfcare/ai-training-jobs-scraper`: AI trainer, AI tutor and data-annotation jobs from 15 platforms: Mercor, Alignerr, Outlier, DataAnnotation, Mindrift, Meridial (Invisible), Turing, micro1, Welo Data, OneForma, xAI, Handshake AI, Appen and more. Pay as numbers, location, date, apply link. Only-new-jobs mode.
+
+**Use it for:**
+- AI training, AI tutor and data annotation job listings (Mercor, Outlier, DataAnnotation, Alignerr, Turing and more)
+
+- Store page: https://apify.com/wulfcare/ai-training-jobs-scraper
+- OpenAPI spec: https://api.apify.com/v2/acts/wulfcare~ai-training-jobs-scraper/builds/default/openapi.json
+- MCP: `https://mcp.apify.com?tools=wulfcare/ai-training-jobs-scraper`
+
+**Price:**
+- Free (only Apify platform usage, usually fractions of a cent)
+
+## Call it
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/wulfcare~ai-training-jobs-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"keywords": ["python"], "minHourlyRate": 30}'
+```
+
+```python
+from apify_client import ApifyClient
+client = ApifyClient(APIFY_TOKEN)
+run = client.actor("wulfcare/ai-training-jobs-scraper").call(run_input={"keywords": ["python"], "minHourlyRate": 30})
+dataset_id = run["defaultDatasetId"] if isinstance(run, dict) else run.default_dataset_id  # apify-client 1-2 vs 3+
+items = list(client.dataset(dataset_id).iterate_items())
+```
+
+## Input
+
+| Field | Type | Required | Default | Allowed values | Description |
+|---|---|---|---|---|---|
+| `platforms` | array |  | ["mercor", "alignerr", "micro1", "xai", "handshake", "appen", "remotasks", "humansignal", "outlier", "dataannotation", "mindrift", "meridial", "welo", "turing", "oneforma"] |  | Platforms: Which AI-training platforms to read. Leave empty for all of them. |
+| `keywords` | array |  |  |  | Keywords: Return only jobs that mention at least one of these in the title, category, skills or client name (e.g. 'law', 'medicine', 'python', 'spanish'). Whole words: 'law' does not match 'lawn'. End a word with * to allow endings ('math*' matches math and mathematics). Leave empty for every job. |
+| `excludeKeywords` | array |  |  |  | Exclude keywords: Drop jobs whose title, category or skills mention any of these (e.g. 'audio', 'transcription'). |
+| `searchDescriptions` | boolean |  | false |  | Also search job descriptions: Match keywords inside the full job description too. Finds more jobs but also loose matches (a physics job that mentions 'laws of motion' would match 'law'). |
+| `minHourlyRate` | integer |  |  | 0– | Minimum hourly pay (USD): Keep only hourly jobs whose top rate is at least this much. Jobs paid per task, one-off or without a stated rate are dropped when this is set. |
+| `remoteOnly` | boolean |  | false |  | Remote only: Keep only jobs listed as remote. |
+| `postedWithin` | string |  |  |  | Posted within: Only jobs first posted in this period, e.g. '24 hours', '7 days', '2 weeks', or since a date like 2026-09-01. Alignerr dates come from each job page (needs 'Full job details'). |
+| `onlyNewJobs` | boolean |  | false |  | Only new jobs (for schedules): Return, and charge for, only jobs that earlier runs with the same filters have not returned yet. Perfect for a daily schedule that feeds Slack, email or a sheet. The list of seen jobs is kept in a key-value store named 'ai-training-jobs-monitor' in your own account. |
+| `monitorName` | string |  |  |  | Monitor name: Optional. Runs with the same monitor name share one 'already seen' list. By default the list is tied to your platform and filter choices. |
+| `maxJobs` | integer |  | 1000 | 0– | Maximum jobs: Stop after this many jobs (newest first). 0 = no limit. All platforms together have about 1,350 distinct jobs (about 6,400 with every Alignerr city listing). |
+| `includeDescriptions` | boolean |  | true |  | Include job descriptions: Full job description text in each row. Turn off for smaller rows. |
+| `fullDetails` | boolean |  | true |  | Full job details (Alignerr, micro1): Open the page of each returned Alignerr and micro1 job. Alignerr's list has only a short summary and no date; micro1's list has no description or number of openings. Turn off for a faster run with less detail. |
+| `alignerrAllLocations` | boolean |  | false |  | Every Alignerr city listing: Alignerr lists most remote roles once per city (one role can have 300+ identical copies). By default you get one row per role, with the number of copies in 'openings'. Turn on to get every copy as its own row (about 5,600). |
+
+## Output: one dataset item (real run, long values trimmed)
+
+```json
+{
+  "platform": "Mindrift",
+  "jobId": "1CF04FF2E4",
+  "title": "$110 for 90 Minutes of Conversation: Paid Research Study",
+  "company": "Mindrift",
+  "category": "Paid research study",
+  "skills": null,
+  "payMin": 110,
+  "payMax": 110,
+  "payCurrency": "USD",
+  "payPeriod": "one-time",
+  "payText": "$110 for 90 Minutes of Conversation: Paid Research Study",
+  "hoursPerWeek": null,
+  "commitment": "Part-time",
+  "workArrangement": "onsite",
+  "location": "San Mateo, California, United States",
+  "eligibleCountries": [
+    "United States"
+  ],
+  "postedAt": "2026-10-25T00:00:00Z",
+  "url": "https://apply.workable.com/j/1CF04FF2E4",
+  "description": "About the study\nMindrift is conducting an in-person research study exploring how people communicate and interact in everyday group conversations.\nWe're looking for adults in the Santa Clara Valley (South Bay) area to join a paid, guided con…",
+  "referralBonus": null,
+  "openings": null,
+  "isNew": null,
+  "scrapedAt": "2026-10-25T15:07:22Z",
+  "error": null
+}
+```
+
+Results are what the source showed at run time and can contain errors; check anything important before relying on it.

@@ -2,6 +2,8 @@
 
 Ready-to-run scrapers for data that has no good official API, with Python examples, a pytrends replacement and one-line setup for AI agents (MCP). Each one runs on [Apify](https://apify.com/wulfcare), so you don't manage proxies, IP blocks or rate limits: you send JSON, you get JSON.
 
+**AI agents:** start with [AGENTS.md](AGENTS.md) (which scraper for which request, one curl call each). Machine-readable: [catalog.json](catalog.json), [llms.txt](llms.txt), [llms-full.txt](llms-full.txt), full input reference per scraper in [reference/](reference), OpenAPI spec per scraper at `https://api.apify.com/v2/acts/wulfcare~<name>/builds/default/openapi.json`.
+
 **Common problems these fix:**
 
 - `pytrends` **429 Too Many Requests** / `TooManyRequestsError` → [google-trends](google-trends) (drop-in `TrendReq`, plus more than 5 keywords on one scale and daily data for any range)
