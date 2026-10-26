@@ -1,0 +1,2 @@
+apify-client>=1.7
+pandas>=1.5  # only for google-trends/pytrends_alternative.py
