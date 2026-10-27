@@ -7,7 +7,7 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 **Common problems these fix:**
 
 - `pytrends` **429 Too Many Requests** / `TooManyRequestsError` → [google-trends](google-trends) (drop-in `TrendReq`, plus more than 5 keywords on one scale and daily data for any range)
-- `youtube-transcript-api` **RequestBlocked / IpBlocked: YouTube is blocking requests from your IP** → [youtube-transcripts](youtube-transcripts)
+- `youtube-transcript-api` **RequestBlocked / IpBlocked: YouTube is blocking requests from your IP** → `pip install youtube-transcript-unblocked` and change one import ([package](packages/youtube-transcript-unblocked)), or call the Actor directly: [youtube-transcripts](youtube-transcripts)
 - Paying **$0.01–$0.05 per transcript** on another Apify YouTube transcript Actor → [same input and output for $0.003](youtube-transcripts/README.md#switching-from-another-apify-transcript-actor) (change only the Actor id)
 - YouTube Data API **quotaExceeded** (about 100 searches a day) → [youtube](youtube) (free)
 - App Store reviews stuck at **500 per app** (RSS feed cap) → [app-store](app-store)

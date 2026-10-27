@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "youtube-transcript-unblocked"
+version = "0.1.0"
+description = "Drop-in for youtube-transcript-api that doesn't get IpBlocked / RequestBlocked on AWS, GCP, Azure or in bulk: same API, change one import."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "Wulfcare Data" }]
+dependencies = ["youtube-transcript-api>=1.0", "requests>=2.25"]
+keywords = ["youtube", "transcript", "subtitles", "captions", "youtube-transcript-api", "IpBlocked", "RequestBlocked", "proxy", "apify", "llm", "rag"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Multimedia :: Video",
+  "Topic :: Internet :: WWW/HTTP",
+  "Intended Audience :: Developers",
+]
+
+[project.urls]
+Homepage = "https://github.com/wulfcare/scrapers/tree/main/packages/youtube-transcript-unblocked"
+Source = "https://github.com/wulfcare/scrapers/tree/main/packages/youtube-transcript-unblocked"
+"Apify Actor" = "https://apify.com/wulfcare/youtube-transcript-scraper"

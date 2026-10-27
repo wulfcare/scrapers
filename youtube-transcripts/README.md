@@ -13,6 +13,16 @@ YouTube is blocking requests from your IP. This usually is due to one of the fol
 
 (or its subclass `IpBlocked`). YouTube blocks cloud IPs and any IP that asks for many transcripts.
 
+**Quickest fix, same code:** [`pip install youtube-transcript-unblocked`](../packages/youtube-transcript-unblocked) ([PyPI](https://pypi.org/project/youtube-transcript-unblocked/)) and change one line:
+
+```python
+# from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_unblocked import YouTubeTranscriptApi   # same fetch(), same objects and exceptions
+transcript = YouTubeTranscriptApi().fetch("UF8uR6Z6KLc")         # needs APIFY_TOKEN
+```
+
+Or call the Actor directly:
+
 The [YouTube Transcript Scraper on Apify](https://apify.com/wulfcare/youtube-transcript-scraper) fetches transcripts through Apify's proxies and handles blocks and retries for you. It also takes **whole channels, playlists and searches**, not just single video IDs.
 
 ```python
