@@ -39,7 +39,31 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 
 Failed requests and empty results are never charged. Apify's free plan includes $5 of credit every month.
 
-## Quick start (Python)
+## YouTube transcripts in Python (easiest)
+
+1. Get a free Apify token: sign up at https://console.apify.com/sign-up, then **Settings → API & Integrations → copy the token** ($5 free credit every month).
+2. Install and set the token:
+
+```bash
+pip install youtube-transcript-unblocked
+export APIFY_TOKEN=apify_api_...        # Windows PowerShell: $env:APIFY_TOKEN="apify_api_..."
+```
+
+3. Get a transcript:
+
+```python
+from youtube_transcript_unblocked import YouTubeTranscriptApi
+
+transcript = YouTubeTranscriptApi().fetch("https://www.youtube.com/watch?v=UF8uR6Z6KLc")
+
+print(" ".join(s.text for s in transcript))   # the whole transcript as text
+for s in transcript:                           # or line by line with timestamps
+    print(f"{s.start:7.1f}s  {s.text}")
+```
+
+Other languages: `fetch(video, languages=["es", "en"])` (Spanish, else English). Many videos in one go: `fetch_many([...])`. Already using `youtube-transcript-api`? Only the import changes; your existing code keeps working, including on AWS/GCP/Azure where YouTube blocks it. Cost: $0.003 per transcript, videos without captions free. Details: [packages/youtube-transcript-unblocked](packages/youtube-transcript-unblocked).
+
+## Quick start (Python, any scraper)
 
 ```bash
 pip install apify-client
