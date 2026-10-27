@@ -1,5 +1,7 @@
 # YouTube transcript API that doesn't get IP-blocked
 
+**Already using an Apify transcript Actor?** Jump to [Switching from another Apify transcript Actor](#switching-from-another-apify-transcript-actor): same input, same output, change one line, pay $0.003 per transcript.
+
 Using [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) from a server or in bulk, you'll eventually hit:
 
 ```
@@ -39,3 +41,46 @@ curl:
 curl -X POST "https://api.apify.com/v2/acts/wulfcare~youtube-transcript-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
   -H "Content-Type: application/json" -d '{"urls": ["https://www.youtube.com/watch?v=UF8uR6Z6KLc"]}'
 ```
+
+## Switching from another Apify transcript Actor
+
+`wulfcare/youtube-transcript-scraper` accepts the two input styles most YouTube transcript / subtitle Actors use and returns their field names, so **only the Actor id changes** in your code.
+
+**Style 1: `startUrls` + `timestamps`** (e.g. "YouTube Subtitle Scraper AI")
+
+```python
+run = client.actor("wulfcare/youtube-transcript-scraper").call(run_input={
+    "startUrls": ["https://www.youtube.com/watch?v=UF8uR6Z6KLc"],
+    "timestamps": True,
+})
+# item: videoUrl, videoId, videoTitle, channelName, views, language, text
+# text = "[00:00:07.470] This program is brought to you by Stanford University.\n[00:00:10.470] ..."
+```
+
+**Style 2: `videoUrl` + `targetLanguage`** (e.g. "YouTube Transcript Scraper" by pintostudio)
+
+```python
+run = client.actor("wulfcare/youtube-transcript-scraper").call(run_input={
+    "videoUrl": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+    "targetLanguage": "en",
+})
+# item["data"] = [{"start": "7.470", "dur": "2.899", "text": "This program is brought to you by Stanford University."}, ...]
+```
+
+Checked on 2026-10-28 against both Actors' own output for the same video: identical `text` (plain and timestamped), identical `data` (all 244 lines), identical `videoUrl` / `videoId` / `videoTitle` / `channelName` / `language`. Each item also carries the extra fields above (`segments`, `srt`, `publishedAt`, `durationSeconds`, `availableLanguages`, ...), which you can ignore.
+
+| | Price per transcript | Videos without captions |
+|---|---|---|
+| wulfcare/youtube-transcript-scraper | **$0.003** | free (row with `error`) |
+| pintostudio/youtube-transcript-scraper | $0.01 | |
+| entertained_rattlesnake/youtube-subtitle-scraper-ai | $0.05 | |
+
+Prices from each Actor's public Apify Store pricing on 2026-10-28; check the Store for current ones.
+
+**Reliability for one-video-per-call pipelines** (measured 2026-10-28: 150 separate runs, one video each, 4 at a time, a mix of podcasts, gaming, news, tutorials, sports, music and lectures):
+
+- 149 of 149 videos that have captions returned a transcript; 0 runs failed. The 150th video has no captions and returned a free `error` row.
+- Median run time 6.8 s (12 s wall clock including API start-up), 90% under 17 s. Multi-hour streams with 100k+ words take longer (one 184k-word stream took 4.6 min).
+- Platform usage per single-video run: median $0.00016, on top of the $0.003 transcript price.
+
+If YouTube refuses Apify's datacenter IPs, the run switches to Apify's residential proxy by itself instead of failing. A video that has no captions returns a free row with `error` set, never a crash.

@@ -70,7 +70,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "developer": "Vinted Limited",
   "developerId": "554164035",
   "score": 4.9,
-  "ratings": 581190,
+  "ratings": 588910,
   "genre": "Shopping",
   "free": true,
   "price": 0,
@@ -80,7 +80,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "contentRating": "4+",
   "releasedAt": "2013-04-11",
   "description": "The idea is simple: you sell your pre-loved stuff to other members who’ll love it again. They get the thrill of unboxing a great find, you get more space at home. It's look-good, do-good, feel-good, for everyone. \n\nSelling is easy and free\n…",
-  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d3/cd/83/d3cd83d1-4d21-6390-1c53-4e1557fdf70d/VintedAppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.png",
+  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/81/0b/2a/810b2a07-fa9c-ea26-e916-b33572ade916/VintedAppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.png",
   "country": "US",
   "language": null,
   "error": null

@@ -64,37 +64,42 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "title": "Learn Python in Less than 10 Minutes for Beginners (Fast & Easy)",
-  "id": "fWjsdhR3z3c",
-  "url": "https://www.youtube.com/watch?v=fWjsdhR3z3c",
+  "title": "Paris Jackson: Love, Loss, & Listening to Your Intuition",
+  "id": "jR8-dzLECUE",
+  "url": "https://www.youtube.com/watch?v=jR8-dzLECUE",
   "type": "video",
-  "thumbnailUrl": "https://i.ytimg.com/vi/fWjsdhR3z3c/hqdefault.jpg",
-  "viewCount": 1870725,
-  "likes": 39074,
-  "commentsCount": 989,
-  "date": "2021-05-26T12:32:40Z",
-  "dateText": "May 26, 2021",
-  "duration": "00:10:30",
-  "durationSeconds": 630,
-  "text": "In this crash course I'll be teaching you the basics of Python in less than 10 minutes. Python is super easy to learn compared to the other languages!\n\nDownload Python: https://www.python.org/\nDownload PyCharm: https://www.jetbrains.com/pyc…",
+  "thumbnailUrl": "https://i.ytimg.com/vi/jR8-dzLECUE/hqdefault.jpg",
+  "viewCount": 2001565,
+  "likes": 19082,
+  "commentsCount": 2326,
+  "date": "2026-08-12T09:00:11Z",
+  "dateText": "Aug 12, 2026",
+  "duration": "01:11:53",
+  "durationSeconds": 4313,
+  "text": "Join Alex in the studio for an interview with Paris Jackson. Paris gets real with Alex about growing up quickly with the entire world watching. She opens up about her journey with sobriety, the relationships that have shaped her, ending her…",
   "descriptionLinks": [
     {
-      "url": "https://www.python.org/",
-      "text": "https://www.python.org/"
+      "url": "https://www.instagram.com/callherdaddy",
+      "text": "https://www.instagram.com/callherdaddy"
     },
     {
-      "url": "https://www.jetbrains.com/pycharm/download/",
-      "text": "https://www.jetbrains.com/pycharm/download/"
-    }
+      "url": "https://www.tiktok.com/@callherdaddy",
+      "text": "https://www.tiktok.com/@callherdaddy"
+    },
+    {
+      "url": "https://www.x.com/callherdaddy",
+      "text": "https://www.x.com/callherdaddy"
+    },
+    "… 7 more"
   ],
   "hashtags": [],
-  "location": null,
-  "category": "Education",
+  "location": "Call Her Daddy Podcast",
+  "category": "Entertainment",
   "keywords": [
-    "code palace",
-    "cde palace",
-    "code palce",
-    "… 1 more"
+    "Call her daddy",
+    "chd",
+    "daddy gang",
+    "… 12 more"
   ],
   "isLive": false,
   "commentsTurnedOff": false,
@@ -107,32 +112,37 @@ items = list(client.dataset(dataset_id).iterate_items())
   "subtitles": null,
   "translatedTitle": null,
   "translatedText": null,
-  "channelName": "Indently",
-  "channelId": "UCuudpdbKmQWq2PPzYgVCWlA",
-  "channelUrl": "https://www.youtube.com/@Indently",
-  "channelUsername": "Indently",
-  "numberOfSubscribers": 369000,
+  "channelName": "Call Her Daddy",
+  "channelId": "UCyGi3eCuxko37WB6uUr7LjA",
+  "channelUrl": "https://www.youtube.com/@callherdaddy",
+  "channelUsername": "callherdaddy",
+  "numberOfSubscribers": 2240000,
   "isChannelVerified": true,
-  "channelAvatarUrl": "https://yt3.googleusercontent.com/68ZQuFvv8mZTJQD65biYl2BWjKKMxkDS5k_sIdAGpRY9-p1vYsqwE1jNMTDEveZoSpkfOpKG=s900-c-k-c0x00ffffff-no-rj",
-  "channelBannerUrl": "https://yt3.googleusercontent.com/V5C-vDux-5HHfGj_r8vnRHKuA9ACkkhELk2L-mudI1EJHKABL0P7qGnqz_dcEWTKyXjW1S8W=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-  "channelDescription": "Simple is better than complex_\n",
+  "channelAvatarUrl": "https://yt3.googleusercontent.com/y1Tv3SSm7StmkXkkpcf26050VemOiAw2j-M--eVZWMxc1sSb7396DrZ-FRXYbWN-9dC959gGcw=s900-c-k-c0x00ffffff-no-rj",
+  "channelBannerUrl": "https://yt3.googleusercontent.com/JUWggyTTAfw4EILHN7CHGmXf3tp2GqvtwLOQIaAAGEdXVyUQks59LClmUJ6CK0gQYig6FP_5llc=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+  "channelDescription": "The most-listened to podcast by women, Alex Cooper’s Call Her Daddy has been creating conversation since 2018. From deep, honest discussions to laugh-out-loud moments, Cooper cuts through the BS with exciting guests and bold topics. New epi…",
   "channelDescriptionLinks": [
     {
-      "text": "Indently.io",
-      "url": "https://www.indently.io/"
+      "text": "Instagram",
+      "url": "https://www.instagram.com/callherdaddy/"
     },
     {
-      "text": "Instagram",
-      "url": "https://www.instagram.com/indentlyreels/"
-    }
+      "text": "Apple Podcasts",
+      "url": "https://podcasts.apple.com/us/podcast/call-her-daddy/id1418960261"
+    },
+    {
+      "text": "Spotify Podcasts",
+      "url": "https://open.spotify.com/show/7bnjJ7Va1nM07Um4Od55dW?si=fe12535b3c27470f"
+    },
+    "… 3 more"
   ],
   "channelLocation": "United States",
-  "channelJoinedDate": "2019-09-01",
-  "channelTotalVideos": 1055,
-  "channelTotalViews": 48698877,
-  "input": "python tutorial",
-  "fromYTUrl": "https://www.youtube.com/results?search_query=python%20tutorial&sp=EgIQAQ%3D%3D",
-  "order": 1,
+  "channelJoinedDate": "2019-01-10",
+  "channelTotalVideos": 695,
+  "channelTotalViews": 359084196,
+  "input": "podcast interview",
+  "fromYTUrl": "https://www.youtube.com/results?search_query=podcast%20interview&sp=EgIQAQ%3D%3D",
+  "order": 2,
   "error": null
 }
 ```

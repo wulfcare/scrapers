@@ -53,7 +53,8 @@ items = list(client.dataset(dataset_id).iterate_items())
   "yourBrandCited": true,
   "brandsMentioned": [
     "HubSpot",
-    "Zoho CRM"
+    "Zoho CRM",
+    "Salesforce"
   ],
   "brands": [
     {
@@ -61,32 +62,32 @@ items = list(client.dataset(dataset_id).iterate_items())
       "mentioned": true,
       "mentions": 4,
       "rank": 1,
-      "firstMention": "For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive.",
+      "firstMention": "For most small businesses, I’d recommend HubSpot CRM as the best place to start.",
       "cited": true,
       "citedUrls": [
-        "https://www.hubspot.com/products/crm",
-        "https://www.hubspot.com/pricing"
+        "https://www.hubspot.com/products/crm"
       ]
     },
     {
       "brand": "Salesforce",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
+      "mentioned": true,
+      "mentions": 3,
+      "rank": 3,
+      "firstMention": "Salesforce",
+      "cited": true,
+      "citedUrls": [
+        "https://www.salesforce.com/small-business/"
+      ]
     },
     {
       "brand": "Zoho CRM",
       "mentioned": true,
-      "mentions": 5,
+      "mentions": 3,
       "rank": 2,
-      "firstMention": "For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive.",
+      "firstMention": "Zoho CRM",
       "cited": true,
       "citedUrls": [
-        "https://www.zoho.com/crm/",
-        "https://www.zoho.com/crm/zohocrm-pricing.html"
+        "https://www.zoho.com/crm/"
       ]
     }
   ],
@@ -95,19 +96,19 @@ items = list(client.dataset(dataset_id).iterate_items())
       "rank": 1,
       "name": "HubSpot CRM",
       "category": "software",
-      "description": "Customer relationship management software"
+      "description": "customer relationship management platform"
     },
     {
       "rank": 2,
-      "name": "Zoho CRM",
+      "name": "Pipedrive",
       "category": "software",
-      "description": "Customer relationship management software"
+      "description": "sales-focused CRM platform"
     },
     {
       "rank": 3,
-      "name": "Pipedrive",
+      "name": "Zoho CRM",
       "category": "software",
-      "description": "Sales-focused CRM software"
+      "description": null
     },
     "… 2 more"
   ],
@@ -115,7 +116,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "products": [],
   "followUpQuestions": [
     {
-      "question": "1. What kind of business do you run?",
+      "question": "1. What type of business do you run?",
       "options": [
         "Service business (consulting, agency, contractor, etc.)",
         "Professional services (accounting, legal, real estate, etc.)",
@@ -128,7 +129,7 @@ items = list(client.dataset(dataset_id).iterate_items())
       "options": [
         "Just me",
         "2–5 people",
-        "6–20 people",
+        "6–15 people",
         "… 1 more"
       ]
     },
@@ -143,8 +144,8 @@ items = list(client.dataset(dataset_id).iterate_items())
     },
     "… 1 more"
   ],
-  "answerText": "The best CRM for a small business depends on how you find customers, manage sales, and follow up with leads. For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive. They cover different needs, and the most expensive optio…",
-  "answer": "The best CRM for a small business depends on how you find customers, manage sales, and follow up with leads. For most small businesses, I'd start with HubSpot, Zoho CRM, or Pipedrive. They cover different needs, and the most expensive optio…",
+  "answerText": "For most small businesses, I’d recommend HubSpot CRM as the best place to start. It’s relatively easy to learn, has a useful free plan, and can bring your contacts, sales opportunities, follow-ups, and marketing activities into one place. D…",
+  "answer": "For most small businesses, I’d recommend HubSpot CRM as the best place to start. It’s relatively easy to learn, has a useful free plan, and can bring your contacts, sales opportunities, follow-ups, and marketing activities into one place. D…",
   "sources": [
     {
       "title": null,
@@ -155,8 +156,8 @@ items = list(client.dataset(dataset_id).iterate_items())
     },
     {
       "title": null,
-      "url": "https://www.hubspot.com/pricing",
-      "domain": "hubspot.com",
+      "url": "https://www.pipedrive.com/",
+      "domain": "pipedrive.com",
       "siteName": null,
       "citedInline": true
     },
@@ -167,19 +168,19 @@ items = list(client.dataset(dataset_id).iterate_items())
       "siteName": null,
       "citedInline": true
     },
-    "… 6 more"
+    "… 2 more"
   ],
-  "sourceCount": 9,
+  "sourceCount": 5,
   "citedDomains": [
     "hubspot.com",
-    "zoho.com",
     "pipedrive.com",
+    "zoho.com",
     "… 2 more"
   ],
   "webSearch": true,
   "location": "US",
-  "askedAt": "2026-10-25T22:50:55Z",
-  "seconds": 29.2,
+  "askedAt": "2026-10-26T22:51:00Z",
+  "seconds": 32,
   "error": null
 }
 ```

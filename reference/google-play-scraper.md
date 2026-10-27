@@ -59,30 +59,165 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "input": "Top free · APPLICATION",
-  "rank": 1,
-  "appId": "com.facebook.aura",
-  "url": "https://play.google.com/store/apps/details?id=com.facebook.aura&hl=en&gl=us",
-  "title": "Muse from Meta",
-  "developer": "Meta Platforms, Inc.",
-  "score": 4.7098,
-  "genre": "Productivity",
-  "installs": "5,000,000+",
+  "input": "com.spotify.music",
+  "rank": null,
+  "appId": "com.spotify.music",
+  "url": "https://play.google.com/store/apps/details?id=com.spotify.music&hl=en&gl=us",
+  "title": "Spotify: Music and Podcasts",
+  "summary": "Listen to songs, play podcasts, create playlists and discover music you'll love",
+  "description": "With the Spotify music and podcast app, you can play millions of songs, albums and original podcasts for free. We have even added audiobooks, so you can enjoy thousands of stories wherever you are!\n\nStream music and podcasts, listen to audi…",
+  "descriptionHtml": null,
+  "score": 4.3492,
+  "ratings": 36544130,
+  "reviews": 1857350,
+  "histogram": {
+    "1": 3715583,
+    "2": 1066810,
+    "3": 1307845,
+    "4": 3104700,
+    "5": 27349176
+  },
+  "installs": "1,000,000,000+",
+  "minInstalls": 1000000000,
+  "realInstalls": 3173851392,
   "free": true,
   "price": 0,
   "currency": "USD",
   "priceText": "Free",
-  "inAppPurchasesRange": "$0.99 - $1,049.00 per item",
-  "contentRating": "Teen",
-  "summary": null,
-  "description": "Muse is your personal AI agent that gets things done, always working on what matters to you. It manages email, books dinners, tracks budgets, and finds deals, with your approval.\n\nPERSONAL PRODUCTIVITY\nMuse takes the the busywork off your p…",
-  "icon": "https://play-lh.googleusercontent.com/qDQUfohqN-eZh_a_YuWYlTsBPwjgrayoh2-Nf9o49kzN5Yjwk4yTyNUIFRI3o3PYks5lVAgEPrEPvFRYqxLP",
-  "screenshots": [
-    "https://play-lh.googleusercontent.com/R7pQ9kQjhDBbsreE7p2M4D91O7AuoRgmy91lKrPQ24Ey6dTQUjB32a7pPndF6PR2MYQBxGOi2IOuU-1iatSRCg",
-    "https://play-lh.googleusercontent.com/9BJlFbPodn5h9R76V0DfLqGmN42U8-PNN5--xisQXBpwApN_RPXTTXD7IRl0e0bC0NQFslddPE97YWNhMtCIIcg",
-    "https://play-lh.googleusercontent.com/YXf_qd3bM_bOLBiQhXwkt2aV4UB8wbXxlhiRY16uVCdtMHMZqnyy0Lx-Lhnr4Q9MuwY2iBMZjbfIeLcE6vnUfQ",
-    "… 5 more"
+  "inAppPurchases": true,
+  "inAppPurchasesRange": "$4.99 - $203.88 per item",
+  "containsAds": true,
+  "genre": "Music & Audio",
+  "genreId": "MUSIC_AND_AUDIO",
+  "categories": [
+    {
+      "name": "Music & Audio",
+      "id": "MUSIC_AND_AUDIO"
+    }
   ],
+  "contentRating": "Teen",
+  "contentRatingDescription": null,
+  "interactiveElements": "In-App Purchases",
+  "developer": "Spotify AB",
+  "developerId": "6523013212965523194",
+  "developerUrl": "https://play.google.com/store/apps/developer?id=Spotify+AB",
+  "developerWebsite": "https://www.spotify.com",
+  "developerEmail": "support@spotify.com",
+  "developerLegalName": "Spotify AB",
+  "developerLegalEmail": "support@spotify.com",
+  "developerAddress": "Regeringsgatan 19\n111 53 Stockholm\nSweden",
+  "developerPhone": "+46 10 334 03 65",
+  "privacyPolicy": "https://www.spotify.com/legal/privacy-policy/",
+  "released": "May 27, 2014",
+  "releasedAt": "2014-05-27T13:12:17Z",
+  "updatedAt": "2026-10-23T12:37:22Z",
+  "version": "Varies with device",
+  "minAndroidVersion": "Varies with device",
+  "minSdk": null,
+  "targetSdk": 35,
+  "recentChanges": "We’re always making changes and improvements to Spotify. To make sure you don’t miss a thing, just keep your Updates turned on.",
+  "chartRank": 1,
+  "chartName": "top free music & audio",
+  "icon": "https://play-lh.googleusercontent.com/IzQgYCcnCFCD08GR-3bdtcT8xzOvrNkC84avGT5CwTX2VIqmTmKKJcP_Cd4JoBOdmCMlTndlOzV6hrthg2fOWA",
+  "headerImage": "https://play-lh.googleusercontent.com/WdedaGD6EAXZgy88wZM97aIcenQ5Cqzu_IUWBMMalkZmVe2lhv_3YqIUh-6pFqLv27kZ44cQX3qxyZTXHH-S91Q",
+  "screenshots": [
+    "https://play-lh.googleusercontent.com/c1jnjL-9CIFlwlTMX3xNyeo8aEH39sNuC5zpTHhfW8keGxQE3TBMRX9Rm3VqM3E03Cyl9AqtnxuKvxJpcW0WCA",
+    "https://play-lh.googleusercontent.com/YxWsaNLSEBvLh04geMOADhSq6Ln5LmRrpa51ixZ7YkcEwmPQ-wdtnvoZDjVAgufbi2et0IlTVDAsvCCmlsJYnNA",
+    "https://play-lh.googleusercontent.com/RevDecVUzkc8iYhVazBoXb0O0Amy3_w6MNzzABHyAlyZjEYBq3xl-UxuxL5PGB6xTZpuxV7tET3pg1rp6weFWAY",
+    "… 37 more"
+  ],
+  "video": null,
+  "videoImage": null,
+  "permissions": [
+    {
+      "group": "Identity",
+      "permissions": [
+        "find accounts on the device"
+      ]
+    },
+    {
+      "group": "Contacts",
+      "permissions": [
+        "find accounts on the device"
+      ]
+    },
+    {
+      "group": "Location",
+      "permissions": [
+        "approximate location (network-based)",
+        "precise location (GPS and network-based)"
+      ]
+    },
+    "… 8 more"
+  ],
+  "dataSafety": {
+    "sharedData": [
+      {
+        "category": "Device or other IDs",
+        "type": "Device or other IDs",
+        "optional": false,
+        "purposes": [
+          "Advertising or marketing",
+          "Fraud prevention, security, and compliance"
+        ]
+      },
+      {
+        "category": "Location",
+        "type": "Approximate location",
+        "optional": false,
+        "purposes": [
+          "Analytics",
+          "Advertising or marketing"
+        ]
+      },
+      {
+        "category": "Personal info",
+        "type": "Other info",
+        "optional": false,
+        "purposes": [
+          "Analytics"
+        ]
+      }
+    ],
+    "sharedSummary": null,
+    "collectedData": [
+      {
+        "category": "Device or other IDs",
+        "type": "Device or other IDs",
+        "optional": false,
+        "purposes": [
+          "App functionality",
+          "Analytics",
+          "Developer communications",
+          "… 3 more"
+        ]
+      },
+      {
+        "category": "Audio",
+        "type": "Voice or sound recordings",
+        "optional": true,
+        "purposes": [
+          "App functionality",
+          "Fraud prevention, security, and compliance"
+        ]
+      },
+      {
+        "category": "Photos and videos",
+        "type": "Photos",
+        "optional": true,
+        "purposes": [
+          "App functionality",
+          "Fraud prevention, security, and compliance"
+        ]
+      },
+      "… 16 more"
+    ],
+    "collectedSummary": null,
+    "securityPractices": [
+      "Data is encrypted in transit",
+      "You can request that data be deleted"
+    ]
+  },
   "country": "US",
   "language": "en",
   "error": null

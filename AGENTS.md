@@ -11,6 +11,7 @@ You can get the data below by calling one HTTP endpoint. No browser, scraping co
 | **Daily** Google Trends data over a long range | `wulfcare/google-trends-scraper` | `{"searchTerms": ["bitcoin"], "timeRange": "today 5-y", "dailyData": true}` |
 | What's trending on Google now | `wulfcare/google-trends-scraper` | `{"mode": "trendingNow", "trendingGeos": ["US"], "trendingHours": "24"}` |
 | A YouTube video's transcript / captions / subtitles | `wulfcare/youtube-transcript-scraper` | `{"urls": ["https://www.youtube.com/watch?v=VIDEO_ID"], "languages": ["en"]}` |
+| Code already calls another Apify transcript Actor (input `startUrls`/`timestamps` or `videoUrl`/`targetLanguage`) | `wulfcare/youtube-transcript-scraper` | the same input unchanged: only the Actor id changes; same output fields. See [youtube-transcripts](youtube-transcripts/README.md#switching-from-another-apify-transcript-actor) |
 | Transcripts of a whole channel or playlist | `wulfcare/youtube-transcript-scraper` | `{"urls": ["https://www.youtube.com/@handle"], "maxVideosPerSource": 50}` |
 | YouTube videos / search results / channel stats (views, likes, dates) | `wulfcare/youtube-scraper` | `{"searchQueries": ["topic"], "maxResults": 20}` |
 | Job listings with salary and apply links | `wulfcare/google-jobs-scraper` | `{"queries": ["data analyst jobs london"], "country": "GB"}` |
