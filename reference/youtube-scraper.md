@@ -1,4 +1,4 @@
-# Free YouTube Scraper: Videos, Shorts, Channels & Search
+# YouTube Scraper: Videos, Shorts, Channels & Search
 
 `wulfcare/youtube-scraper`: Free YouTube scraper: videos, Shorts and streams from searches (all filters), channels, playlists and hashtags. Views, likes, comments count, exact publish time, duration, description, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper.
 
@@ -13,6 +13,7 @@
 
 **Price:**
 - Free (only Apify platform usage, usually fractions of a cent)
+- From 2026-11-18: $0.0009 per video (video): One YouTube video, Short or stream row with all its details. Errors and not-found inputs are never charged. No start fee.
 
 ## Call it
 
@@ -64,42 +65,47 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "title": "Paris Jackson: Love, Loss, & Listening to Your Intuition",
-  "id": "jR8-dzLECUE",
-  "url": "https://www.youtube.com/watch?v=jR8-dzLECUE",
+  "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+  "id": "dQw4w9WgXcQ",
+  "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "type": "video",
-  "thumbnailUrl": "https://i.ytimg.com/vi/jR8-dzLECUE/hqdefault.jpg",
-  "viewCount": 2001565,
-  "likes": 19082,
-  "commentsCount": 2326,
-  "date": "2026-08-12T09:00:11Z",
-  "dateText": "Aug 12, 2026",
-  "duration": "01:11:53",
-  "durationSeconds": 4313,
-  "text": "Join Alex in the studio for an interview with Paris Jackson. Paris gets real with Alex about growing up quickly with the entire world watching. She opens up about her journey with sobriety, the relationships that have shaped her, ending her…",
+  "thumbnailUrl": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+  "viewCount": 1833429343,
+  "likes": 19491500,
+  "commentsCount": 2461285,
+  "date": "2009-10-25T06:57:33Z",
+  "dateText": "Oct 24, 2009",
+  "duration": "00:03:33",
+  "durationSeconds": 213,
+  "text": "The official video for “Never Gonna Give You Up” by Rick Astley. \n\nNever: The Autobiography 📚 OUT NOW! \nFollow this link to get your copy and listen to Rick’s ‘Never’ playlist ❤️ #RickAstleyNever\nhttps://linktr.ee/rickastleynever\n\n“Never Go…",
   "descriptionLinks": [
     {
-      "url": "https://www.instagram.com/callherdaddy",
-      "text": "https://www.instagram.com/callherdaddy"
+      "url": "https://linktr.ee/rickastleynever",
+      "text": "https://linktr.ee/rickastleynever"
     },
     {
-      "url": "https://www.tiktok.com/@callherdaddy",
-      "text": "https://www.tiktok.com/@callherdaddy"
+      "url": "https://RickAstley.lnk.to/YTSubID",
+      "text": "https://RickAstley.lnk.to/YTSubID"
     },
     {
-      "url": "https://www.x.com/callherdaddy",
-      "text": "https://www.x.com/callherdaddy"
+      "url": "https://RickAstley.lnk.to/FBFollowID",
+      "text": "https://RickAstley.lnk.to/FBFollowID"
     },
-    "… 7 more"
+    "… 8 more"
   ],
-  "hashtags": [],
-  "location": "Call Her Daddy Podcast",
-  "category": "Entertainment",
+  "hashtags": [
+    "#OfficialMusicVideo",
+    "#NeverGonnaGiveYouUp",
+    "#RickAstleyNever",
+    "… 2 more"
+  ],
+  "location": null,
+  "category": "Music",
   "keywords": [
-    "Call her daddy",
-    "chd",
-    "daddy gang",
-    "… 12 more"
+    "rick astley",
+    "Never Gonna Give You Up",
+    "nggyu",
+    "… 24 more"
   ],
   "isLive": false,
   "commentsTurnedOff": false,
@@ -112,37 +118,37 @@ items = list(client.dataset(dataset_id).iterate_items())
   "subtitles": null,
   "translatedTitle": null,
   "translatedText": null,
-  "channelName": "Call Her Daddy",
-  "channelId": "UCyGi3eCuxko37WB6uUr7LjA",
-  "channelUrl": "https://www.youtube.com/@callherdaddy",
-  "channelUsername": "callherdaddy",
-  "numberOfSubscribers": 2240000,
+  "channelName": "Rick Astley",
+  "channelId": "UCuAXFkgsw1L7xaCfnd5JJOw",
+  "channelUrl": "https://www.youtube.com/@RickAstleyYT",
+  "channelUsername": "RickAstleyYT",
+  "numberOfSubscribers": 4560000,
   "isChannelVerified": true,
-  "channelAvatarUrl": "https://yt3.googleusercontent.com/y1Tv3SSm7StmkXkkpcf26050VemOiAw2j-M--eVZWMxc1sSb7396DrZ-FRXYbWN-9dC959gGcw=s900-c-k-c0x00ffffff-no-rj",
-  "channelBannerUrl": "https://yt3.googleusercontent.com/JUWggyTTAfw4EILHN7CHGmXf3tp2GqvtwLOQIaAAGEdXVyUQks59LClmUJ6CK0gQYig6FP_5llc=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-  "channelDescription": "The most-listened to podcast by women, Alex Cooper’s Call Her Daddy has been creating conversation since 2018. From deep, honest discussions to laugh-out-loud moments, Cooper cuts through the BS with exciting guests and bold topics. New epi…",
+  "channelAvatarUrl": "https://yt3.googleusercontent.com/_ShEGOdg-t5YGJse14Ooq6FYBZqX_QSlhaTNjG06miYusm5lWm1UroLyVxnYtahADfRTVLtuVQ=s900-c-k-c0x00ffffff-no-rj",
+  "channelBannerUrl": "https://yt3.googleusercontent.com/pi1YBgcetxpQG-xtEKHBLwe3nUxoo-cT1AKYfqLxh8krCgnkpZZM5zOtP2VlFfSFnRFi8EyA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+  "channelDescription": "Rick Astley’s Swinging Christmas 2026 🎄 Dec 9th, Royal Albert Hall. SOLD OUT ❤️\n",
   "channelDescriptionLinks": [
     {
-      "text": "Instagram",
-      "url": "https://www.instagram.com/callherdaddy/"
+      "text": "Swinging Christmas tickets",
+      "url": "https://lnk.to/RASC26"
     },
     {
-      "text": "Apple Podcasts",
-      "url": "https://podcasts.apple.com/us/podcast/call-her-daddy/id1418960261"
+      "text": "New single 'Raindrops'",
+      "url": "https://rickastley.lnk.to/Raindrops"
     },
     {
-      "text": "Spotify Podcasts",
-      "url": "https://open.spotify.com/show/7bnjJ7Va1nM07Um4Od55dW?si=fe12535b3c27470f"
+      "text": "Website",
+      "url": "https://www.rickastley.co.uk/"
     },
-    "… 3 more"
+    "… 8 more"
   ],
-  "channelLocation": "United States",
-  "channelJoinedDate": "2019-01-10",
-  "channelTotalVideos": 695,
-  "channelTotalViews": 359084196,
-  "input": "podcast interview",
-  "fromYTUrl": "https://www.youtube.com/results?search_query=podcast%20interview&sp=EgIQAQ%3D%3D",
-  "order": 2,
+  "channelLocation": "United Kingdom",
+  "channelJoinedDate": "2015-02-01",
+  "channelTotalVideos": 439,
+  "channelTotalViews": 2596229655,
+  "input": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "fromYTUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "order": 1,
   "error": null
 }
 ```

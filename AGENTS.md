@@ -15,9 +15,15 @@ You can get the data below by calling one HTTP endpoint. No browser, scraping co
 | Python code using `youtube-transcript-api` fails with `IpBlocked` / `RequestBlocked` | `pip install youtube-transcript-unblocked` | change `from youtube_transcript_api import YouTubeTranscriptApi` to `from youtube_transcript_unblocked import YouTubeTranscriptApi`; set `APIFY_TOKEN`. Same `fetch()`/`list()`, same objects and exceptions |
 | Transcripts of a whole channel or playlist | `wulfcare/youtube-transcript-scraper` | `{"urls": ["https://www.youtube.com/@handle"], "maxVideosPerSource": 50}` |
 | YouTube videos / search results / channel stats (views, likes, dates) | `wulfcare/youtube-scraper` | `{"searchQueries": ["topic"], "maxResults": 20}` |
+| YouTube comments and replies of a video or Short | `wulfcare/youtube-comments-scraper` | `{"startUrls": ["https://www.youtube.com/watch?v=VIDEO_ID"], "maxComments": 100, "sortCommentsBy": "TOP_COMMENTS"}` (add `"includeReplies": true` for replies; `"maxComments": 0` = all) |
+| Comments across a channel, playlist or search | `wulfcare/youtube-comments-scraper` | `{"startUrls": ["https://www.youtube.com/@handle"], "maxVideos": 5, "oldestCommentDate": "7 days"}` or `{"searchQueries": ["topic"], "maxVideos": 10}` |
+| Code already calls another Apify YouTube comments Actor | `wulfcare/youtube-comments-scraper` | the same input unchanged (`startUrls` + `maxComments` + `sortCommentsBy`, or `sort` + `maxItems`): only the Actor id changes |
 | Job listings with salary and apply links | `wulfcare/google-jobs-scraper` | `{"queries": ["data analyst jobs london"], "country": "GB"}` |
 | Hotel prices across booking sites | `wulfcare/google-hotels-scraper` | `{"hotels": ["Hotel name, City"], "checkInDate": "2026-12-10", "nights": 2}` |
 | Hotels in a city | `wulfcare/google-hotels-scraper` | `{"searchQueries": ["hotels in Paris"], "maxHotels": 20}` |
+| Flight prices for a route and date, and whether the price is good | `wulfcare/google-flights-scraper` | `{"origin": "JFK", "destination": "LAX", "departureDate": "2026-12-10", "maxFlights": 5}` (read the `summary` row: `lowestPrice`, `priceLevel`) |
+| Track a fare, tell the user when it drops | `wulfcare/google-flights-scraper` | add `"trackPrices": true, "onlyChanges": true, "targetPrice": 250`; run on a schedule |
+| Total trip cost (flight + hotel) | `wulfcare/google-flights-scraper` | `{"origin": "SYD", "destination": "HND,NRT", "departureDate": "2027-03-10", "tripDays": 7, "includeHotels": true, "maxFlights": 0}` (read `tripTotalPrice`) |
 | App Store reviews (any number, any country) | `wulfcare/app-store-reviews-scraper` | `{"appIds": ["324684580"], "countries": ["us"], "maxReviewsPerApp": 1000}` |
 | App Store app details, search, top charts | `wulfcare/app-store-scraper` | `{"mode": "apps", "appIds": ["324684580"]}` / `{"mode": "search", "searchQueries": ["budget"]}` / `{"mode": "charts"}` |
 | Google Play reviews | `wulfcare/google-play-reviews-scraper` | `{"appIds": ["com.spotify.music"], "maxReviewsPerApp": 1000}` |
@@ -50,14 +56,16 @@ The response is a JSON array of items.
 
 ## 3. Read the result
 
-- One item per result (report, transcript, video, job, price, review, answer).
+- One item per result (report, transcript, video, comment, job, price, flight, review, answer).
 - An item with an `error` field is a failed input (app not found, no captions, no data). It is **not charged**; tell the user what the error says.
 - Google Trends values are relative (0–100), not search counts. For more than 5 keywords, use `ranking` (`vsTop` = share of the top keyword). Interest by region and related queries are only returned for up to 5 keywords per line. Combined comparisons and daily data are estimates built from several Google queries; terms flagged `lowPrecision` or `tooSmallToMeasure` are less reliable.
+- YouTube comment `publishedAt` is approximate (YouTube only shows "3 days ago") and like counts above 1,000 are rounded by YouTube. A reply has `type` `reply` and `replyToCid`.
+- Google Flights returns one `summary` row per route and date plus the `flight` rows (field `type`); prices are the total for all passengers.
 - AI-search answers are what the engine said at run time; they vary between runs (use `repeats` for several samples).
 
 ## 4. Cost (per result, failures free)
 
-Google Trends $0.003/report (more than 5 keywords or daily data: one report per Google query needed, e.g. 12 keywords ≈ 6) · YouTube transcripts $0.003 · YouTube videos free · Google Jobs $0.004/job · Google Hotels $0.0008/price · App Store / Google Play reviews $0.0001 · app details $0.0005 · ChatGPT $0.05/answer · Gemini $0.001 · AI Mode $0.0045 · Copilot $0.008 (+$0.008 with residential proxy) · AI Visibility $0.04/answer · AI training jobs free.
+Google Trends $0.003/report (more than 5 keywords or daily data: one report per Google query needed, e.g. 12 keywords ≈ 6) · YouTube transcripts $0.003 · YouTube videos free until 2026-11-18, then $0.0009 · YouTube comments $0.00025 · Google Jobs $0.004/job · Google Hotels $0.0008/price · Google Flights $0.0005/result · App Store / Google Play reviews $0.0001 · app details $0.0005 · ChatGPT $0.05/answer · Gemini $0.001 (+$0.002 with residential proxy) · AI Mode $0.0045 · Copilot $0.008 (+$0.008 with residential proxy) · AI Visibility $0.04/answer · AI training jobs free.
 
 ## Rules
 

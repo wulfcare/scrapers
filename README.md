@@ -1,4 +1,4 @@
-# Wulfcare Data scrapers: Google Trends, YouTube, App Store, Google Play, Google Jobs, Hotels and AI search APIs
+# Wulfcare Data scrapers: Google Trends, YouTube, App Store, Google Play, Google Jobs, Hotels, Flights and AI search APIs
 
 Ready-to-run scrapers for data that has no good official API, with Python examples, a pytrends replacement and one-line setup for AI agents (MCP). Each one runs on [Apify](https://apify.com/wulfcare), so you don't manage proxies, IP blocks or rate limits: you send JSON, you get JSON.
 
@@ -9,11 +9,14 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 - `pytrends` **429 Too Many Requests** / `TooManyRequestsError` → [google-trends](google-trends) (drop-in `TrendReq`, plus more than 5 keywords on one scale and daily data for any range)
 - `youtube-transcript-api` **RequestBlocked / IpBlocked: YouTube is blocking requests from your IP** → `pip install youtube-transcript-unblocked` and change one import ([package](packages/youtube-transcript-unblocked)), or call the Actor directly: [youtube-transcripts](youtube-transcripts)
 - Paying **$0.01–$0.05 per transcript** on another Apify YouTube transcript Actor → [same input and output for $0.003](youtube-transcripts/README.md#switching-from-another-apify-transcript-actor) (change only the Actor id)
-- YouTube Data API **quotaExceeded** (about 100 searches a day) → [youtube](youtube) (free)
+- YouTube Data API **quotaExceeded** (about 100 searches a day) → [youtube](youtube)
+- YouTube comments and replies with **no API key or quota** → [youtube-comments](youtube-comments)
+- Paying more on the most used Apify YouTube comments Actor → [same input and output field names for $0.25 per 1,000](youtube-comments) (change only the Actor id)
 - App Store reviews stuck at **500 per app** (RSS feed cap) → [app-store](app-store)
 - Google Play Developer API only returns **your own apps' reviews from the last week** → [google-play](google-play)
 - No official **Google Jobs API** → [google-jobs](google-jobs)
 - No official **Google Hotels API** → [google-hotels](google-hotels)
+- No official **Google Flights API** → [google-flights](google-flights) (prices, price tracking, total trip cost)
 - No API for what **ChatGPT search, Gemini, Copilot and Google AI Mode** actually tell users about your brand → [ai-search](ai-search)
 - AI training job listings spread over 15 sites → [ai-training-jobs](ai-training-jobs) (free)
 
@@ -23,15 +26,17 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 |---|---|---|---|
 | Google Trends | [`wulfcare/google-trends-scraper`](https://apify.com/wulfcare/google-trends-scraper) | Interest over time, by region, related queries, Trending Now; up to 100 keywords on one scale; daily data for any range | $0.003 / report |
 | YouTube transcripts | [`wulfcare/youtube-transcript-scraper`](https://apify.com/wulfcare/youtube-transcript-scraper) | Transcripts as text, timestamped segments or SRT for videos, channels, playlists, searches; drop-in input/output for other transcript Actors | $3 / 1,000 |
-| YouTube | [`wulfcare/youtube-scraper`](https://apify.com/wulfcare/youtube-scraper) | Videos, Shorts, streams from searches, channels, playlists, hashtags; views, likes, comments count, channel stats | Free |
+| YouTube | [`wulfcare/youtube-scraper`](https://apify.com/wulfcare/youtube-scraper) | Videos, Shorts, streams from searches, channels, playlists, hashtags; views, likes, comments count, channel stats | Free until 2026-11-18, then $0.90 / 1,000 |
+| YouTube comments | [`wulfcare/youtube-comments-scraper`](https://apify.com/wulfcare/youtube-comments-scraper) | Comments and replies with likes, reply counts, creator hearts, pinned flags and dates; videos, Shorts, channels, playlists, searches | $0.25 / 1,000 |
 | Google Jobs | [`wulfcare/google-jobs-scraper`](https://apify.com/wulfcare/google-jobs-scraper) | Title, company, salary, description, every apply link; 27 countries | $0.004 / job |
 | Google Hotels | [`wulfcare/google-hotels-scraper`](https://apify.com/wulfcare/google-hotels-scraper) | Every booking site's price per hotel and date; hotel searches | $0.80 / 1,000 prices |
+| Google Flights | [`wulfcare/google-flights-scraper`](https://apify.com/wulfcare/google-flights-scraper) | Flights, prices and Google's low / typical / high verdict; price tracking between runs; total trip cost with a hotel | $0.50 / 1,000 |
 | App Store | [`wulfcare/app-store-scraper`](https://apify.com/wulfcare/app-store-scraper) | Reviews (no 500 cap), app details, privacy labels, search, charts | $0.10 / 1,000 reviews |
 | App Store reviews | [`wulfcare/app-store-reviews-scraper`](https://apify.com/wulfcare/app-store-reviews-scraper) | Every review of any app, any country | $0.10 / 1,000 |
 | Google Play | [`wulfcare/google-play-scraper`](https://apify.com/wulfcare/google-play-scraper) | Reviews, app details with data safety, search, charts | $0.10 / 1,000 reviews |
 | Google Play reviews | [`wulfcare/google-play-reviews-scraper`](https://apify.com/wulfcare/google-play-reviews-scraper) | Every review of any app, any country and language | $0.10 / 1,000 |
 | ChatGPT search | [`wulfcare/chatgpt-search-scraper`](https://apify.com/wulfcare/chatgpt-search-scraper) | Answer, cited sources, recommended products, brand rank | $0.05 / answer |
-| Gemini | [`wulfcare/gemini-search-scraper`](https://apify.com/wulfcare/gemini-search-scraper) | Answer, sources, products, brand rank | $1 / 1,000 |
+| Gemini | [`wulfcare/gemini-search-scraper`](https://apify.com/wulfcare/gemini-search-scraper) | Answer, sources, products, brand rank | $1 / 1,000 (+ proxy) |
 | Google AI Mode | [`wulfcare/google-ai-mode-scraper`](https://apify.com/wulfcare/google-ai-mode-scraper) | Answer, sources, brand rank | $4.50 / 1,000 |
 | Microsoft Copilot | [`wulfcare/copilot-search-scraper`](https://apify.com/wulfcare/copilot-search-scraper) | Answer, sources, brand rank | $8 / 1,000 (+ proxy) |
 | AI visibility | [`wulfcare/ai-visibility-tracker`](https://apify.com/wulfcare/ai-visibility-tracker) | ChatGPT + Gemini + AI Overviews: visibility score, share of voice, HTML report | $0.04 / answer |
@@ -95,7 +100,7 @@ Give Claude, Cursor, VS Code or any MCP client these scrapers as tools with [Api
 Hosted (sign in with OAuth, or send `Authorization: Bearer <APIFY_TOKEN>`):
 
 ```
-https://mcp.apify.com?tools=wulfcare/google-trends-scraper,wulfcare/youtube-transcript-scraper,wulfcare/youtube-scraper,wulfcare/google-jobs-scraper,wulfcare/google-hotels-scraper,wulfcare/app-store-scraper,wulfcare/google-play-scraper,wulfcare/chatgpt-search-scraper,wulfcare/gemini-search-scraper,wulfcare/google-ai-mode-scraper
+https://mcp.apify.com?tools=wulfcare/google-trends-scraper,wulfcare/youtube-transcript-scraper,wulfcare/youtube-scraper,wulfcare/youtube-comments-scraper,wulfcare/google-jobs-scraper,wulfcare/google-hotels-scraper,wulfcare/google-flights-scraper,wulfcare/app-store-scraper,wulfcare/google-play-scraper,wulfcare/chatgpt-search-scraper,wulfcare/gemini-search-scraper,wulfcare/google-ai-mode-scraper
 ```
 
 Local (`claude_desktop_config.json`, `.cursor/mcp.json`, ...):
@@ -106,7 +111,7 @@ Local (`claude_desktop_config.json`, `.cursor/mcp.json`, ...):
     "wulfcare": {
       "command": "npx",
       "args": ["-y", "@apify/actors-mcp-server", "--tools",
-               "wulfcare/google-trends-scraper,wulfcare/youtube-transcript-scraper,wulfcare/youtube-scraper,wulfcare/google-jobs-scraper,wulfcare/google-hotels-scraper,wulfcare/app-store-scraper,wulfcare/google-play-scraper,wulfcare/chatgpt-search-scraper,wulfcare/gemini-search-scraper,wulfcare/google-ai-mode-scraper"],
+               "wulfcare/google-trends-scraper,wulfcare/youtube-transcript-scraper,wulfcare/youtube-scraper,wulfcare/youtube-comments-scraper,wulfcare/google-jobs-scraper,wulfcare/google-hotels-scraper,wulfcare/google-flights-scraper,wulfcare/app-store-scraper,wulfcare/google-play-scraper,wulfcare/chatgpt-search-scraper,wulfcare/gemini-search-scraper,wulfcare/google-ai-mode-scraper"],
       "env": { "APIFY_TOKEN": "your_token" }
     }
   }

@@ -53,16 +53,15 @@ items = list(client.dataset(dataset_id).iterate_items())
   "yourBrandCited": true,
   "brandsMentioned": [
     "HubSpot",
-    "Zoho CRM",
-    "Salesforce"
+    "Zoho CRM"
   ],
   "brands": [
     {
       "brand": "HubSpot",
       "mentioned": true,
-      "mentions": 4,
+      "mentions": 5,
       "rank": 1,
-      "firstMention": "For most small businesses, I’d recommend HubSpot CRM as the best place to start.",
+      "firstMention": "My overall recommendation is HubSpot CRM.",
       "cited": true,
       "citedUrls": [
         "https://www.hubspot.com/products/crm"
@@ -70,19 +69,17 @@ items = list(client.dataset(dataset_id).iterate_items())
     },
     {
       "brand": "Salesforce",
-      "mentioned": true,
-      "mentions": 3,
-      "rank": 3,
-      "firstMention": "Salesforce",
-      "cited": true,
-      "citedUrls": [
-        "https://www.salesforce.com/small-business/"
-      ]
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
+      "cited": false,
+      "citedUrls": []
     },
     {
       "brand": "Zoho CRM",
       "mentioned": true,
-      "mentions": 3,
+      "mentions": 5,
       "rank": 2,
       "firstMention": "Zoho CRM",
       "cited": true,
@@ -96,17 +93,17 @@ items = list(client.dataset(dataset_id).iterate_items())
       "rank": 1,
       "name": "HubSpot CRM",
       "category": "software",
-      "description": "customer relationship management platform"
+      "description": null
     },
     {
       "rank": 2,
-      "name": "Pipedrive",
+      "name": "Zoho CRM",
       "category": "software",
-      "description": "sales-focused CRM platform"
+      "description": null
     },
     {
       "rank": 3,
-      "name": "Zoho CRM",
+      "name": "Pipedrive",
       "category": "software",
       "description": null
     },
@@ -114,38 +111,9 @@ items = list(client.dataset(dataset_id).iterate_items())
   ],
   "productCount": 0,
   "products": [],
-  "followUpQuestions": [
-    {
-      "question": "1. What type of business do you run?",
-      "options": [
-        "Service business (consulting, agency, contractor, etc.)",
-        "Professional services (accounting, legal, real estate, etc.)",
-        "E-commerce or retail",
-        "… 2 more"
-      ]
-    },
-    {
-      "question": "2. How many people will use the CRM?",
-      "options": [
-        "Just me",
-        "2–5 people",
-        "6–15 people",
-        "… 1 more"
-      ]
-    },
-    {
-      "question": "3. What's your monthly budget?",
-      "options": [
-        "Free only",
-        "Under $50/month",
-        "$50–$150/month",
-        "… 1 more"
-      ]
-    },
-    "… 1 more"
-  ],
-  "answerText": "For most small businesses, I’d recommend HubSpot CRM as the best place to start. It’s relatively easy to learn, has a useful free plan, and can bring your contacts, sales opportunities, follow-ups, and marketing activities into one place. D…",
-  "answer": "For most small businesses, I’d recommend HubSpot CRM as the best place to start. It’s relatively easy to learn, has a useful free plan, and can bring your contacts, sales opportunities, follow-ups, and marketing activities into one place. D…",
+  "followUpQuestions": [],
+  "answerText": "Best CRM for a small business (2026)\n\nMy overall recommendation is HubSpot CRM. It offers a strong combination of ease of use, customer management, sales tracking, automation, and a free starting plan.\n\nHowever, the best CRM depends on how …",
+  "answer": "# Best CRM for a small business (2026)\n\nMy overall recommendation is HubSpot CRM. It offers a strong combination of ease of use, customer management, sales tracking, automation, and a free starting plan.\n\nHowever, the best CRM depends on ho…",
   "sources": [
     {
       "title": null,
@@ -156,15 +124,15 @@ items = list(client.dataset(dataset_id).iterate_items())
     },
     {
       "title": null,
-      "url": "https://www.pipedrive.com/",
-      "domain": "pipedrive.com",
+      "url": "https://www.zoho.com/crm/",
+      "domain": "zoho.com",
       "siteName": null,
       "citedInline": true
     },
     {
       "title": null,
-      "url": "https://www.zoho.com/crm/",
-      "domain": "zoho.com",
+      "url": "https://www.pipedrive.com/",
+      "domain": "pipedrive.com",
       "siteName": null,
       "citedInline": true
     },
@@ -173,14 +141,14 @@ items = list(client.dataset(dataset_id).iterate_items())
   "sourceCount": 5,
   "citedDomains": [
     "hubspot.com",
-    "pipedrive.com",
     "zoho.com",
+    "pipedrive.com",
     "… 2 more"
   ],
   "webSearch": true,
   "location": "US",
-  "askedAt": "2026-10-26T22:51:00Z",
-  "seconds": 32,
+  "askedAt": "2026-11-03T22:50:54Z",
+  "seconds": 33.4,
   "error": null
 }
 ```

@@ -5,7 +5,7 @@ The OpenAI, Gemini and Bing APIs don't give you what people actually see in **Ch
 | Actor | Engine | Price per 1,000 answers |
 |---|---|---|
 | [ChatGPT Search Scraper](https://apify.com/wulfcare/chatgpt-search-scraper) | ChatGPT with web search (plus recommended products and follow-up questions) | $50 |
-| [Gemini Search Scraper](https://apify.com/wulfcare/gemini-search-scraper) | Google Gemini | $1 |
+| [Gemini Search Scraper](https://apify.com/wulfcare/gemini-search-scraper) | Google Gemini | $1 (+$2 when a residential proxy is used) |
 | [Google AI Mode Scraper](https://apify.com/wulfcare/google-ai-mode-scraper) | Google AI Mode | $4.50 |
 | [Copilot Search Scraper](https://apify.com/wulfcare/copilot-search-scraper) | Microsoft Copilot Search (Bing) | $8 (+$8 when the residential proxy is needed) |
 | [AI Visibility Tracker](https://apify.com/wulfcare/ai-visibility-tracker) | ChatGPT + Gemini + Google AI Overviews in one run, with visibility score, share of voice and an HTML report | $40 |
