@@ -68,10 +68,10 @@ items = list(client.dataset(dataset_id).iterate_items())
 ```json
 {
   "type": "summary",
-  "route": "JFK-LAX",
-  "origin": "JFK",
-  "destination": "LAX",
-  "destinationCity": "Los Angeles",
+  "route": "MEL-AKL",
+  "origin": "MEL",
+  "destination": "AKL",
+  "destinationCity": "Auckland",
   "departureDate": "2026-12-04",
   "returnDate": null,
   "tripType": "one-way",
@@ -79,11 +79,11 @@ items = list(client.dataset(dataset_id).iterate_items())
   "adults": 1,
   "children": 0,
   "currency": "USD",
-  "lowestPrice": 159,
-  "priceLevel": "typical",
-  "typicalPrice": 179,
-  "typicalPriceLow": 90,
-  "typicalPriceHigh": 320,
+  "lowestPrice": 233,
+  "priceLevel": "low",
+  "typicalPrice": 310,
+  "typicalPriceLow": 240,
+  "typicalPriceHigh": 475,
   "targetPrice": null,
   "belowTargetPrice": null,
   "previousLowestPrice": null,
@@ -95,19 +95,19 @@ items = list(client.dataset(dataset_id).iterate_items())
   "trackedRuns": null,
   "changes": null,
   "cheapestFlight": {
-    "price": 159,
+    "price": 233,
     "airlines": [
-      "JetBlue"
+      "Jetstar"
     ],
     "flightNumbers": [
-      "B6 223"
+      "JQ 217"
     ],
-    "departureTime": "2026-12-04T10:00",
-    "arrivalTime": "2026-12-04T13:19",
-    "durationMinutes": 379,
+    "departureTime": "2026-12-04T23:55",
+    "arrivalTime": "2026-12-05T05:30",
+    "durationMinutes": 215,
     "stops": 0
   },
-  "flightsFound": 103,
+  "flightsFound": 96,
   "hotelName": null,
   "hotelRating": null,
   "hotelStars": null,
@@ -119,21 +119,21 @@ items = list(client.dataset(dataset_id).iterate_items())
   "tripTotalPrice": null,
   "priceHistory": [
     {
+      "date": "2026-09-04",
+      "price": 220
+    },
+    {
       "date": "2026-09-05",
-      "price": 199
+      "price": 235
     },
     {
       "date": "2026-09-06",
-      "price": 174
-    },
-    {
-      "date": "2026-09-07",
-      "price": 174
+      "price": 235
     },
     "… 58 more"
   ],
-  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+LAX+from+JFK+on+2026-12-04+one+way&hl=en&curr=USD",
-  "scrapedAt": "2026-11-04T07:50:34+00:00",
+  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+AKL+from+MEL+on+2026-12-04+one+way&hl=en&curr=USD",
+  "scrapedAt": "2026-11-04T07:56:02+00:00",
   "error": null
 }
 ```

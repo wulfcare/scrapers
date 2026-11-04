@@ -66,41 +66,20 @@ items = list(client.dataset(dataset_id).iterate_items())
 {
   "searchTerms": [
     "coffee",
-    "tea",
-    "matcha",
-    "… 4 more"
+    "tea"
   ],
   "geo": "US",
   "timeRange": "today 12-m",
   "category": 0,
   "property": "web",
-  "trendsUrl": "https://trends.google.com/trends/explore?q=coffee%2Ctea%2Cmatcha%2Cespresso%2Clatte&date=today+12-m&hl=en-US&geo=US",
+  "trendsUrl": "https://trends.google.com/trends/explore?q=coffee%2Ctea&date=today+12-m&hl=en-US&geo=US",
   "interestOverTime": [
-    {
-      "date": "2025-10-26T00:00:00+00:00",
-      "label": "Oct 26 – Nov 1, 2025",
-      "values": {
-        "coffee": 58,
-        "tea": 29,
-        "matcha": 4,
-        "espresso": 7,
-        "latte": 5,
-        "chai": 2.6429,
-        "kombucha": 1.0714
-      },
-      "isPartial": false
-    },
     {
       "date": "2025-11-02T00:00:00+00:00",
       "label": "Nov 2 – 8, 2025",
       "values": {
-        "coffee": 69,
-        "tea": 32,
-        "matcha": 5,
-        "espresso": 7,
-        "latte": 6,
-        "chai": 3.3571,
-        "kombucha": 0.8571
+        "coffee": 65,
+        "tea": 32
       },
       "isPartial": false
     },
@@ -108,73 +87,153 @@ items = list(client.dataset(dataset_id).iterate_items())
       "date": "2025-11-09T00:00:00+00:00",
       "label": "Nov 9 – 15, 2025",
       "values": {
-        "coffee": 69,
-        "tea": 33,
-        "matcha": 5,
-        "espresso": 8,
-        "latte": 6,
-        "chai": 3.4286,
-        "kombucha": 0.9286
+        "coffee": 73,
+        "tea": 34
+      },
+      "isPartial": false
+    },
+    {
+      "date": "2025-11-16T00:00:00+00:00",
+      "label": "Nov 16 – 22, 2025",
+      "values": {
+        "coffee": 71,
+        "tea": 35
       },
       "isPartial": false
     },
     "… 50 more"
   ],
   "averages": {
-    "coffee": 75.6981,
-    "tea": 35.3774,
-    "matcha": 6.0377,
-    "espresso": 9.3774,
-    "latte": 5.1132,
-    "chai": 2.9218,
-    "kombucha": 1.0553
+    "coffee": 77,
+    "tea": 37
   },
-  "ranking": [
+  "interestByRegion": [
     {
-      "rank": 1,
-      "term": "coffee",
-      "average": 75.6981,
-      "vsTop": 1,
-      "lowPrecision": false,
-      "tooSmallToMeasure": false
+      "geoCode": "US-WY",
+      "geoName": "Wyoming",
+      "values": {
+        "coffee": 69,
+        "tea": 31
+      },
+      "hasData": true
     },
     {
-      "rank": 2,
-      "term": "tea",
-      "average": 35.3774,
-      "vsTop": 0.4673,
-      "lowPrecision": false,
-      "tooSmallToMeasure": false
+      "geoCode": "US-HI",
+      "geoName": "Hawaii",
+      "values": {
+        "coffee": 70,
+        "tea": 30
+      },
+      "hasData": true
     },
     {
-      "rank": 3,
-      "term": "espresso",
-      "average": 9.3774,
-      "vsTop": 0.1239,
-      "lowPrecision": false,
-      "tooSmallToMeasure": false
+      "geoCode": "US-KS",
+      "geoName": "Kansas",
+      "values": {
+        "coffee": 69,
+        "tea": 31
+      },
+      "hasData": true
     },
-    "… 4 more"
+    "… 48 more"
   ],
-  "stitch": {
-    "method": "anchor chain (any number of terms)",
-    "googleQueries": 4,
-    "groups": [
-      [
-        "coffee",
-        "tea",
-        "espresso",
-        "… 2 more"
+  "relatedQueries": {
+    "coffee": {
+      "top": [
+        {
+          "query": "coffee near me",
+          "value": 100,
+          "formattedValue": "100",
+          "link": "https://trends.google.com/trends/explore?q=coffee+near+me&date=today+12-m&geo=US"
+        },
+        {
+          "query": "coffee shop",
+          "value": 85,
+          "formattedValue": "85",
+          "link": "https://trends.google.com/trends/explore?q=coffee+shop&date=today+12-m&geo=US"
+        },
+        {
+          "query": "coffee maker",
+          "value": 81,
+          "formattedValue": "81",
+          "link": "https://trends.google.com/trends/explore?q=coffee+maker&date=today+12-m&geo=US"
+        },
+        "… 22 more"
       ],
-      [
-        "latte",
-        "chai",
-        "kombucha"
+      "rising": [
+        {
+          "query": "home workout routines",
+          "value": 6200,
+          "formattedValue": "Breakout",
+          "link": "https://trends.google.com/trends/explore?q=home+workout+routines&date=today+12-m&geo=US",
+          "isBreakout": true
+        },
+        {
+          "query": "sports scores today",
+          "value": 6000,
+          "formattedValue": "Breakout",
+          "link": "https://trends.google.com/trends/explore?q=sports+scores+today&date=today+12-m&geo=US",
+          "isBreakout": true
+        },
+        {
+          "query": "top songs this week",
+          "value": 5950,
+          "formattedValue": "Breakout",
+          "link": "https://trends.google.com/trends/explore?q=top+songs+this+week&date=today+12-m&geo=US",
+          "isBreakout": true
+        },
+        "… 22 more"
       ]
-    ],
-    "lowPrecisionTerms": []
+    },
+    "tea": {
+      "top": [
+        {
+          "query": "green tea",
+          "value": 100,
+          "formattedValue": "100",
+          "link": "https://trends.google.com/trends/explore?q=green+tea&date=today+12-m&geo=US"
+        },
+        {
+          "query": "black tea",
+          "value": 43,
+          "formattedValue": "43",
+          "link": "https://trends.google.com/trends/explore?q=black+tea&date=today+12-m&geo=US"
+        },
+        {
+          "query": "coffee",
+          "value": 41,
+          "formattedValue": "41",
+          "link": "https://trends.google.com/trends/explore?q=coffee&date=today+12-m&geo=US"
+        },
+        "… 22 more"
+      ],
+      "rising": [
+        {
+          "query": "loaded tea shop",
+          "value": 2100,
+          "formattedValue": "+2,100%",
+          "link": "https://trends.google.com/trends/explore?q=loaded+tea+shop&date=today+12-m&geo=US",
+          "isBreakout": false
+        },
+        {
+          "query": "how to make cold brew tea",
+          "value": 2000,
+          "formattedValue": "+2,000%",
+          "link": "https://trends.google.com/trends/explore?q=how+to+make+cold+brew+tea&date=today+12-m&geo=US",
+          "isBreakout": false
+        },
+        {
+          "query": "the loaded tea shop",
+          "value": 1900,
+          "formattedValue": "+1,900%",
+          "link": "https://trends.google.com/trends/explore?q=the+loaded+tea+shop&date=today+12-m&geo=US",
+          "isBreakout": false
+        },
+        "… 22 more"
+      ]
+    }
   },
-  "scrapedAt": "2026-10-26T16:37:27+00:00"
+  "scrapedAt": "2026-11-04T08:10:15+00:00"
 }
 ```
 

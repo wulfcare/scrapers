@@ -1,6 +1,6 @@
 # YouTube Scraper: Videos, Shorts, Channels & Search
 
-`wulfcare/youtube-scraper`: Free YouTube scraper: videos, Shorts and streams from searches (all filters), channels, playlists and hashtags. Views, likes, comments count, exact publish time, duration, description, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper.
+`wulfcare/youtube-scraper`: YouTube scraper: videos, Shorts and streams from searches, channels, playlists and hashtags. Views, likes, comments count, publish time, duration, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper. Free until Nov 18, then $0.90 per 1,000.
 
 **Use it for:**
 - YouTube video metadata (views, likes, comment count, publish date, duration, tags) from searches, channels, playlists, hashtags
@@ -70,9 +70,9 @@ items = list(client.dataset(dataset_id).iterate_items())
   "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "type": "video",
   "thumbnailUrl": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
-  "viewCount": 1833429343,
-  "likes": 19491500,
-  "commentsCount": 2461285,
+  "viewCount": 1833568982,
+  "likes": 19491138,
+  "commentsCount": 2461305,
   "date": "2009-10-25T06:57:33Z",
   "dateText": "Oct 24, 2009",
   "duration": "00:03:33",
@@ -122,7 +122,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "channelId": "UCuAXFkgsw1L7xaCfnd5JJOw",
   "channelUrl": "https://www.youtube.com/@RickAstleyYT",
   "channelUsername": "RickAstleyYT",
-  "numberOfSubscribers": 4560000,
+  "numberOfSubscribers": 4550000,
   "isChannelVerified": true,
   "channelAvatarUrl": "https://yt3.googleusercontent.com/_ShEGOdg-t5YGJse14Ooq6FYBZqX_QSlhaTNjG06miYusm5lWm1UroLyVxnYtahADfRTVLtuVQ=s900-c-k-c0x00ffffff-no-rj",
   "channelBannerUrl": "https://yt3.googleusercontent.com/pi1YBgcetxpQG-xtEKHBLwe3nUxoo-cT1AKYfqLxh8krCgnkpZZM5zOtP2VlFfSFnRFi8EyA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
@@ -144,8 +144,8 @@ items = list(client.dataset(dataset_id).iterate_items())
   ],
   "channelLocation": "United Kingdom",
   "channelJoinedDate": "2015-02-01",
-  "channelTotalVideos": 439,
-  "channelTotalViews": 2596229655,
+  "channelTotalVideos": 440,
+  "channelTotalViews": 2597476965,
   "input": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "fromYTUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "order": 1,

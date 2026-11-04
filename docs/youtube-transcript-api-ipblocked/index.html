@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>youtube-transcript-api RequestBlocked / IpBlocked: how to fix it</title>
+<meta name="description" content="Why youtube-transcript-api raises RequestBlocked or IpBlocked, especially on AWS, GCP and Azure, and three ways to fix it, including a one-line import change.">
+<link rel="canonical" href="https://wulfcare.github.io/scrapers/youtube-transcript-api-ipblocked/">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "youtube-transcript-api RequestBlocked / IpBlocked: how to fix it", "description": "Why youtube-transcript-api raises RequestBlocked or IpBlocked, especially on AWS, GCP and Azure, and three ways to fix it, including a one-line import change.", "dateModified": "2026-11-04", "url": "https://wulfcare.github.io/scrapers/youtube-transcript-api-ipblocked/", "author": {"@type": "Organization", "name": "Wulfcare Data"}}</script>
+</head>
+<body>
+<header><a href="../">Wulfcare Data guides</a></header>
+<main>
+<h1>youtube-transcript-api RequestBlocked / IpBlocked: how to fix it</h1>
+<p>If your Python code stops with this error, YouTube has blocked the IP address your code runs from:</p>
+<pre><code>youtube_transcript_api._errors.RequestBlocked:
+Could not retrieve a transcript for the video ...
+YouTube is blocking requests from your IP.
+</code></pre>
+<p><code>IpBlocked</code> is a subclass of <code>RequestBlocked</code>, so both mean the same thing and both are fixed the same way.</p>
+<h2>Why it happens</h2>
+<p>The library's own error message gives two causes:</p>
+<ul>
+<li><strong>You made too many requests</strong> and YouTube blocked your IP.</li>
+<li><strong>Your code runs on a cloud provider</strong> such as AWS, Google Cloud or Azure. Most of their IP addresses are blocked, which is why code that works on your laptop can fail as soon as you deploy it.</li>
+</ul>
+<p>Adding <code>sleep()</code> or retries won't help on a cloud server, because the address itself is blocked.</p>
+<h2>Fix 1: change one import</h2>
+<p><a href="https://pypi.org/project/youtube-transcript-unblocked/"><code>youtube-transcript-unblocked</code></a> keeps the same <code>fetch()</code> and <code>list()</code> calls and the same objects, but gets each transcript through a hosted scraper, so YouTube never sees your IP.</p>
+<pre><code class="language-bash">pip install youtube-transcript-unblocked
+export APIFY_TOKEN=apify_api_...
+</code></pre>
+<pre><code class="language-python"># from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_unblocked import YouTubeTranscriptApi
+
+transcript = YouTubeTranscriptApi().fetch(&quot;https://www.youtube.com/watch?v=UF8uR6Z6KLc&quot;)
+print(&quot; &quot;.join(s.text for s in transcript))
+</code></pre>
+<p>You need a free <a href="https://console.apify.com/sign-up">Apify account</a> for the token (Settings → API &amp; Integrations). It costs $0.003 per transcript, videos without captions are free, and Apify's free plan includes $5 of credit a month.</p>
+<h2>Fix 2: use rotating residential proxies</h2>
+<p>This is what the <a href="https://github.com/jdepoix/youtube-transcript-api#working-around-ip-bans-requestblocked-or-ipblocked-exception">youtube-transcript-api README</a> recommends. YouTube bans static proxies after extended use, so the library's author suggests rotating residential ones. It keeps the original library, but you set up and pay for a proxy service yourself.</p>
+<h2>Fix 3: call the scraper directly</h2>
+<p>If you aren't using Python, or want a whole channel or playlist, call the <a href="https://apify.com/wulfcare/youtube-transcript-scraper">YouTube Transcript Scraper</a> over HTTP:</p>
+<pre><code class="language-bash">curl -X POST &quot;https://api.apify.com/v2/acts/wulfcare~youtube-transcript-scraper/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer $APIFY_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;urls&quot;: [&quot;https://www.youtube.com/watch?v=UF8uR6Z6KLc&quot;], &quot;languages&quot;: [&quot;en&quot;]}'
+</code></pre>
+<p>For a channel, pass its URL and add <code>"maxVideosPerSource": 50</code>.</p>
+<h2>Which should you use?</h2>
+<p>For a working codebase on a cloud server, Fix 1 is the smallest change. If you already pay for residential proxies, Fix 2 keeps you on the original library. For a few videos on your own machine, waiting for the block to lift may be enough.</p>
+</main>
+<footer>
+<p>Updated 2026-11-04. Wulfcare Data makes the scrapers mentioned on this site. Results and prices can change, so check anything important.</p>
+<p><a href="https://github.com/wulfcare/scrapers">GitHub</a> · <a href="https://apify.com/wulfcare">All scrapers on Apify</a></p>
+</footer>
+</body>
+</html>

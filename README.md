@@ -20,6 +20,8 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 - No API for what **ChatGPT search, Gemini, Copilot and Google AI Mode** actually tell users about your brand → [ai-search](ai-search)
 - AI training job listings spread over 15 sites → [ai-training-jobs](ai-training-jobs) (free)
 
+**Guides:** [youtube-transcript-api IpBlocked](https://wulfcare.github.io/scrapers/youtube-transcript-api-ipblocked/) · [pytrends 429](https://wulfcare.github.io/scrapers/pytrends-429-fix/) · [YouTube quotaExceeded](https://wulfcare.github.io/scrapers/youtube-api-quota-exceeded/) · [export YouTube comments to CSV](https://wulfcare.github.io/scrapers/export-youtube-comments-csv/) · [YouTube comments scrapers compared](https://wulfcare.github.io/scrapers/youtube-comments-scrapers-compared/)
+
 ## All scrapers
 
 | Scraper | Apify Actor | What you get | Price |

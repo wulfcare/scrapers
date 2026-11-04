@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube comments scrapers on Apify compared (November 2026)</title>
+<meta name="description" content="Prices, usage and ratings for the most used YouTube comments scrapers on Apify, with the cost of 10,000 comments on each, checked 2026-11-04.">
+<link rel="canonical" href="https://wulfcare.github.io/scrapers/youtube-comments-scrapers-compared/">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "YouTube comments scrapers on Apify compared (November 2026)", "description": "Prices, usage and ratings for the most used YouTube comments scrapers on Apify, with the cost of 10,000 comments on each, checked 2026-11-04.", "dateModified": "2026-11-04", "url": "https://wulfcare.github.io/scrapers/youtube-comments-scrapers-compared/", "author": {"@type": "Organization", "name": "Wulfcare Data"}}</script>
+</head>
+<body>
+<header><a href="../">Wulfcare Data guides</a></header>
+<main>
+<h1>YouTube comments scrapers on Apify compared (November 2026)</h1>
+<p><strong>Disclosure:</strong> we make one of these, the Wulfcare scraper. It launched this week, so it has no track record yet. All prices, user counts and ratings below come from the Apify Store on 2026-11-04 and can change, so check each page before you commit.</p>
+<p>This compares the five most used dedicated YouTube comments Actors plus ours.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Actor</th>
+<th>Users (30 days)</th>
+<th>Rating</th>
+<th>Per 1,000, free plan</th>
+<th>Lowest per 1,000 on paid plans</th>
+<th>Per-run fee</th>
+<th>10,000 comments, free plan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://apify.com/streamers/youtube-comments-scraper">streamers</a></td>
+<td>3,795</td>
+<td>4.9 (42)</td>
+<td>$2.00</td>
+<td>$0.30 (Diamond)</td>
+<td>none listed</td>
+<td>$20.00</td>
+</tr>
+<tr>
+<td><a href="https://apify.com/apidojo/youtube-comments-scraper">apidojo</a></td>
+<td>1,195</td>
+<td>4.8 (12)</td>
+<td>$0.50</td>
+<td>$0.50</td>
+<td>$0.001 per query</td>
+<td>$5.00</td>
+</tr>
+<tr>
+<td><a href="https://apify.com/supreme_coder/youtube-comment-scraper">supreme_coder</a></td>
+<td>218</td>
+<td>5.0 (3)</td>
+<td>$0.25</td>
+<td>$0.20 (Bronze)</td>
+<td>$0.0005</td>
+<td>$2.50</td>
+</tr>
+<tr>
+<td><a href="https://apify.com/solidcode/youtube-comments-scraper">solidcode</a></td>
+<td>157</td>
+<td>5.0 (2)</td>
+<td>$0.35</td>
+<td>$0.24 (Gold)</td>
+<td>$0.00005</td>
+<td>$3.50</td>
+</tr>
+<tr>
+<td><a href="https://apify.com/api-ninja/youtube-comments-scraper">api-ninja</a></td>
+<td>70</td>
+<td>5.0 (8)</td>
+<td>$4.00</td>
+<td>$0.40 (Bronze)</td>
+<td>$0.01</td>
+<td>$40.01</td>
+</tr>
+<tr>
+<td><a href="https://apify.com/wulfcare/youtube-comments-scraper">Wulfcare (ours)</a></td>
+<td>new</td>
+<td>none yet</td>
+<td>$0.25</td>
+<td>$0.20 (Gold)</td>
+<td>none</td>
+<td>$2.50</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fees are rounded to the cent in the last column. Ours includes Apify platform usage. For the others, check each Actor's page for whether platform usage is extra.</p>
+<h2>How to choose</h2>
+<ul>
+<li><strong>You want the safest choice:</strong> streamers has by far the most users and reviews. It costs eight times the cheapest options on the free plan, and still 50% more on Diamond ($0.30 against $0.20).</li>
+<li><strong>You're on Apify's free plan:</strong> ours and supreme_coder tie at $0.25 per 1,000. Ours has no per-run fee, which only matters if you make a lot of small runs.</li>
+<li><strong>You're on a Bronze or Silver plan:</strong> supreme_coder is slightly cheaper per comment ($0.20, against our $0.225 and $0.2125).</li>
+<li><strong>You run high volume:</strong> test your real workload, because speed and failure rates matter more than a few cents, and this page doesn't measure those for the others.</li>
+</ul>
+<h2>What ours does</h2>
+<ul>
+<li>Works from video and Shorts URLs, video IDs, channels, playlists, search URLs and plain search terms</li>
+<li>Returns replies on request, each right after its comment</li>
+<li>Sorts by top or newest, with an optional date cut-off</li>
+<li>Includes likes, reply count, creator heart, pinned and edited flags, and the video's exact comment total</li>
+<li>Uses the same input and output field names as streamers, so switching means changing the Actor id</li>
+<li>Doesn't charge for errors or videos with comments turned off</li>
+</ul>
+<p>In our tests, a default run of 100 comments took 3–9 seconds, and 2,000 comments with replies took 54 seconds. We haven't benchmarked the others, so this isn't a speed comparison.</p>
+<p>Want to try one? See <a href="../export-youtube-comments-csv/">how to export YouTube comments to CSV</a>.</p>
+</main>
+<footer>
+<p>Updated 2026-11-04. Wulfcare Data makes the scrapers mentioned on this site. Results and prices can change, so check anything important.</p>
+<p><a href="https://github.com/wulfcare/scrapers">GitHub</a> · <a href="https://apify.com/wulfcare">All scrapers on Apify</a></p>
+</footer>
+</body>
+</html>

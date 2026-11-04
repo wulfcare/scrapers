@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pytrends 429 TooManyRequestsError: how to fix it</title>
+<meta name="description" content="Why pytrends fails with 429 Too Many Requests, why retries rarely help, and a drop-in TrendReq replacement that keeps your existing code.">
+<link rel="canonical" href="https://wulfcare.github.io/scrapers/pytrends-429-fix/">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "pytrends 429 TooManyRequestsError: how to fix it", "description": "Why pytrends fails with 429 Too Many Requests, why retries rarely help, and a drop-in TrendReq replacement that keeps your existing code.", "dateModified": "2026-11-04", "url": "https://wulfcare.github.io/scrapers/pytrends-429-fix/", "author": {"@type": "Organization", "name": "Wulfcare Data"}}</script>
+</head>
+<body>
+<header><a href="../">Wulfcare Data guides</a></header>
+<main>
+<h1>pytrends 429 TooManyRequestsError: how to fix it</h1>
+<p>This is the error nearly everyone using <a href="https://github.com/GeneralMills/pytrends">pytrends</a> eventually hits:</p>
+<pre><code>pytrends.exceptions.TooManyRequestsError: The request failed: Google returned a response with code 429
+</code></pre>
+<h2>Why it happens</h2>
+<p>pytrends sends every request from your own IP address. Google Trends rate-limits an IP after a handful of requests, then answers everything with HTTP 429.</p>
+<p><code>sleep()</code>, <code>retries=</code> and <code>backoff_factor=</code> only slow you down, so they rarely solve it. The pytrends repository is also archived on GitHub, so a fix isn't coming from there.</p>
+<h2>Fix 1: swap the import</h2>
+<p><a href="https://github.com/wulfcare/scrapers/blob/main/google-trends/pytrends_alternative.py"><code>pytrends_alternative.py</code></a> keeps the pytrends interface but runs each query on a hosted <a href="https://apify.com/wulfcare/google-trends-scraper">Google Trends Scraper</a>, which spreads requests over many IPs.</p>
+<pre><code class="language-bash">pip install apify-client pandas
+export APIFY_TOKEN=apify_api_...
+</code></pre>
+<p>Copy the file next to your code, then change one line:</p>
+<pre><code class="language-python"># from pytrends.request import TrendReq
+from pytrends_alternative import TrendReq
+
+pytrends = TrendReq(hl=&quot;en-US&quot;, tz=360)
+pytrends.build_payload([&quot;coffee&quot;, &quot;tea&quot;], timeframe=&quot;today 12-m&quot;, geo=&quot;US&quot;)
+
+df = pytrends.interest_over_time()   # date index, one column per keyword, isPartial
+</code></pre>
+<p><code>interest_by_region()</code> and <code>related_queries()</code> work the same way. It costs $0.003 per report, and Apify's free plan includes $5 of credit a month. Get a token from a free <a href="https://console.apify.com/sign-up">Apify account</a> under Settings → API &amp; Integrations.</p>
+<h2>Fix 2: rotate proxies yourself</h2>
+<p>pytrends accepts a <code>proxies</code> list, so you can bring your own pool and keep using it. You'll need to find proxies Google isn't already limiting, and replace them as they get blocked.</p>
+<h2>Fix 3: use less data</h2>
+<p>For a one-off job, you may only need to spread a few requests out over a longer time, or download the CSV from the <a href="https://trends.google.com/trends/">Google Trends website</a> by hand.</p>
+<h2>Two things pytrends can't do</h2>
+<ul>
+<li><strong>More than 5 keywords on one scale.</strong> Google compares at most 5 terms at a time. The scraper takes up to 100 and puts them on one 0–100 scale.</li>
+<li><strong>Daily data for long ranges.</strong> Add <code>daily=True</code> to <code>build_payload()</code> in the alternative file. The <a href="https://github.com/wulfcare/scrapers/tree/main/google-trends">folder guide</a> shows how.</li>
+</ul>
+<p>These combined figures are estimates built from several Google queries, so treat small terms with care.</p>
+</main>
+<footer>
+<p>Updated 2026-11-04. Wulfcare Data makes the scrapers mentioned on this site. Results and prices can change, so check anything important.</p>
+<p><a href="https://github.com/wulfcare/scrapers">GitHub</a> · <a href="https://apify.com/wulfcare">All scrapers on Apify</a></p>
+</footer>
+</body>
+</html>

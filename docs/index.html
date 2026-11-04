@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wulfcare Data guides</title>
+<meta name="description" content="Short, tested fixes for pytrends 429, youtube-transcript-api IpBlocked, YouTube quotaExceeded and exporting YouTube comments.">
+<link rel="canonical" href="https://wulfcare.github.io/scrapers/">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Wulfcare Data guides", "description": "Short, tested fixes for pytrends 429, youtube-transcript-api IpBlocked, YouTube quotaExceeded and exporting YouTube comments.", "dateModified": "2026-11-04", "url": "https://wulfcare.github.io/scrapers/", "author": {"@type": "Organization", "name": "Wulfcare Data"}}</script>
+</head>
+<body>
+<header><a href="./">Wulfcare Data guides</a></header>
+<main>
+<h1>Guides to common scraping errors</h1>
+<p>Short fixes for the YouTube and Google Trends problems people hit most, with code we have run. See the <a href="https://github.com/wulfcare/scrapers">GitHub repo</a> for every scraper.</p>
+<ul class="guides">
+<li><a href="youtube-transcript-api-ipblocked/">youtube-transcript-api RequestBlocked / IpBlocked: how to fix it</a><p>Why youtube-transcript-api raises RequestBlocked or IpBlocked, especially on AWS, GCP and Azure, and three ways to fix it, including a one-line import change.</p></li>
+<li><a href="pytrends-429-fix/">pytrends 429 TooManyRequestsError: how to fix it</a><p>Why pytrends fails with 429 Too Many Requests, why retries rarely help, and a drop-in TrendReq replacement that keeps your existing code.</p></li>
+<li><a href="youtube-api-quota-exceeded/">YouTube Data API quotaExceeded: why it happens and how to fix it</a><p>What the YouTube Data API quotaExceeded 403 error means, the current limits for search.list and other methods, when quota resets, and your options.</p></li>
+<li><a href="export-youtube-comments-csv/">How to export YouTube comments to CSV</a><p>Three ways to get a YouTube video&#x27;s comments into a CSV file: no code, one curl command, or Python, with the columns you get and what it costs.</p></li>
+<li><a href="youtube-comments-scrapers-compared/">YouTube comments scrapers on Apify compared (November 2026)</a><p>Prices, usage and ratings for the most used YouTube comments scrapers on Apify, with the cost of 10,000 comments on each, checked 2026-11-04.</p></li>
+</ul>
+</main>
+<footer>
+<p>Updated 2026-11-04. Wulfcare Data makes the scrapers mentioned on this site. Results and prices can change, so check anything important.</p>
+<p><a href="https://github.com/wulfcare/scrapers">GitHub</a> · <a href="https://apify.com/wulfcare">All scrapers on Apify</a></p>
+</footer>
+</body>
+</html>

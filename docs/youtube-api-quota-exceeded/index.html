@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Data API quotaExceeded: why it happens and how to fix it</title>
+<meta name="description" content="What the YouTube Data API quotaExceeded 403 error means, the current limits for search.list and other methods, when quota resets, and your options.">
+<link rel="canonical" href="https://wulfcare.github.io/scrapers/youtube-api-quota-exceeded/">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "YouTube Data API quotaExceeded: why it happens and how to fix it", "description": "What the YouTube Data API quotaExceeded 403 error means, the current limits for search.list and other methods, when quota resets, and your options.", "dateModified": "2026-11-04", "url": "https://wulfcare.github.io/scrapers/youtube-api-quota-exceeded/", "author": {"@type": "Organization", "name": "Wulfcare Data"}}</script>
+</head>
+<body>
+<header><a href="../">Wulfcare Data guides</a></header>
+<main>
+<h1>YouTube Data API quotaExceeded: why it happens and how to fix it</h1>
+<p>When the YouTube Data API returns HTTP 403 with the reason <code>quotaExceeded</code>, your Google Cloud project has used up its daily allowance:</p>
+<pre><code>The request cannot be completed because you have exceeded your quota.
+</code></pre>
+<h2>The current limits</h2>
+<p>Google's <a href="https://developers.google.com/youtube/v3/determine_quota_cost">quota page</a> gives a new project these defaults:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Default limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>search.list</code></td>
+<td>100 calls a day</td>
+</tr>
+<tr>
+<td><code>videos.insert</code></td>
+<td>100 calls a day</td>
+</tr>
+<tr>
+<td>Everything else, combined</td>
+<td>10,000 units a day</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>videos.list</code>, <code>commentThreads.list</code> and <code>comments.list</code> each cost 1 unit a call. So search is usually the limit people hit first: 100 calls a day, in its own bucket.</p>
+<p>Older guides say a search costs 100 units out of your 10,000. That's out of date, although the practical result is much the same: about 100 searches a day.</p>
+<h2>When does it reset?</h2>
+<p>Google says daily quotas reset at <strong>midnight Pacific Time</strong>. You can see what you've used on the Quotas page in the Google Cloud console.</p>
+<h2>How to fix it</h2>
+<p><strong>1. Wait for the reset.</strong> Fine if this was a one-off.</p>
+<p><strong>2. Use fewer searches.</strong> Cache results, and once you have video IDs, fetch their details with <code>videos.list</code>, which takes a comma-separated list of IDs for 1 unit a call.</p>
+<p><strong>3. Ask Google for more.</strong> Fill in the <a href="https://support.google.com/youtube/contact/yt_api_form">quota extension form</a>. This is the right route for a real product, though you'll need to wait for Google's review.</p>
+<p><strong>4. Skip the API.</strong> The <a href="https://apify.com/wulfcare/youtube-scraper">YouTube Scraper</a> reads public YouTube pages, so it needs no API key and has no daily quota:</p>
+<pre><code class="language-bash">curl -X POST &quot;https://api.apify.com/v2/acts/wulfcare~youtube-scraper/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer $APIFY_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;searchQueries&quot;: [&quot;python tutorial&quot;], &quot;maxResults&quot;: 20}'
+</code></pre>
+<p>It's free until 2026-11-18, then $0.90 per 1,000 videos. Each video has <code>title</code>, <code>viewCount</code>, <code>likes</code>, <code>commentsCount</code>, <code>date</code>, <code>duration</code>, tags and channel stats. The official API is still the right choice if you need write access or private data for accounts you own, since a scraper only sees what's public.</p>
+</main>
+<footer>
+<p>Updated 2026-11-04. Wulfcare Data makes the scrapers mentioned on this site. Results and prices can change, so check anything important.</p>
+<p><a href="https://github.com/wulfcare/scrapers">GitHub</a> · <a href="https://apify.com/wulfcare">All scrapers on Apify</a></p>
+</footer>
+</body>
+</html>

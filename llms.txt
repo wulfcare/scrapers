@@ -29,6 +29,14 @@
 - [llms-full.txt](https://raw.githubusercontent.com/wulfcare/scrapers/main/llms-full.txt): every Actor's full input reference and sample output in one text file.
 - OpenAPI spec per Actor: https://api.apify.com/v2/acts/wulfcare~{name}/builds/default/openapi.json
 
+## Guides
+
+- [youtube-transcript-api RequestBlocked / IpBlocked fix](https://wulfcare.github.io/scrapers/youtube-transcript-api-ipblocked/)
+- [pytrends 429 TooManyRequestsError fix](https://wulfcare.github.io/scrapers/pytrends-429-fix/)
+- [YouTube Data API quotaExceeded: limits and fixes](https://wulfcare.github.io/scrapers/youtube-api-quota-exceeded/)
+- [Export YouTube comments to CSV](https://wulfcare.github.io/scrapers/export-youtube-comments-csv/)
+- [YouTube comments scrapers on Apify compared](https://wulfcare.github.io/scrapers/youtube-comments-scrapers-compared/)
+
 ## Code
 
 - [pytrends_alternative.py](https://github.com/wulfcare/scrapers/blob/main/google-trends/pytrends_alternative.py): drop-in pytrends TrendReq without 429 errors.

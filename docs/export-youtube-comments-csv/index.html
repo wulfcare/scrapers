@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to export YouTube comments to CSV</title>
+<meta name="description" content="Three ways to get a YouTube video&#x27;s comments into a CSV file: no code, one curl command, or Python, with the columns you get and what it costs.">
+<link rel="canonical" href="https://wulfcare.github.io/scrapers/export-youtube-comments-csv/">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to export YouTube comments to CSV", "description": "Three ways to get a YouTube video's comments into a CSV file: no code, one curl command, or Python, with the columns you get and what it costs.", "dateModified": "2026-11-04", "url": "https://wulfcare.github.io/scrapers/export-youtube-comments-csv/", "author": {"@type": "Organization", "name": "Wulfcare Data"}}</script>
+</head>
+<body>
+<header><a href="../">Wulfcare Data guides</a></header>
+<main>
+<h1>How to export YouTube comments to CSV</h1>
+<p>YouTube has no export button for comments. Here are three ways to get them into a CSV file that opens in Excel or Google Sheets. All three use the <a href="https://apify.com/wulfcare/youtube-comments-scraper">YouTube Comments Scraper</a>, which needs no YouTube API key.</p>
+<h2>Without code</h2>
+<ol>
+<li>Sign up for a free <a href="https://console.apify.com/sign-up">Apify account</a>. The free plan includes $5 of credit a month.</li>
+<li>Open the <a href="https://apify.com/wulfcare/youtube-comments-scraper">scraper</a> and paste your video URL into the input.</li>
+<li>Set the maximum comments per video (0 means all), and turn on replies if you want them.</li>
+<li>Click <strong>Start</strong>, then export the results as CSV.</li>
+</ol>
+<h2>With one command</h2>
+<p>Get your token under Settings → API &amp; Integrations, then run:</p>
+<pre><code class="language-bash">curl -X POST &quot;https://api.apify.com/v2/acts/wulfcare~youtube-comments-scraper/run-sync-get-dataset-items?format=csv&amp;fields=videoId,author,comment,voteCount,replyCount,publishedAt,type&amp;maxTotalChargeUsd=0.05&quot; \
+  -H &quot;Authorization: Bearer $APIFY_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;startUrls&quot;: [&quot;https://www.youtube.com/watch?v=dQw4w9WgXcQ&quot;], &quot;maxComments&quot;: 100, &quot;sortCommentsBy&quot;: &quot;TOP_COMMENTS&quot;}' \
+  -o comments.csv
+</code></pre>
+<ul>
+<li><code>format=csv</code> returns CSV. Leave out <code>fields=</code> to get every column.</li>
+<li><code>maxTotalChargeUsd</code> caps what the run can spend.</li>
+<li>Add <code>"includeReplies": true</code> to the input for replies.</li>
+<li>This call waits up to 5 minutes. For bigger jobs, start the run with <code>POST /v2/acts/wulfcare~youtube-comments-scraper/runs</code>, then download the dataset when it finishes.</li>
+</ul>
+<h2>With Python</h2>
+<pre><code class="language-python">import pandas as pd
+
+df = pd.read_csv(&quot;comments.csv&quot;)
+print(df.sort_values(&quot;voteCount&quot;, ascending=False).head(10))
+</code></pre>
+<p>Open CSV files with a real CSV parser. Comments can contain line breaks, so a 100-comment file can have more than 101 lines. That's normal.</p>
+<h2>What's in the file</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Column</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>comment</code></td>
+<td>The comment text</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>The commenter's handle</td>
+</tr>
+<tr>
+<td><code>voteCount</code></td>
+<td>Likes. YouTube rounds large numbers, such as 70K</td>
+</tr>
+<tr>
+<td><code>replyCount</code></td>
+<td>Number of replies</td>
+</tr>
+<tr>
+<td><code>publishedAt</code></td>
+<td>Approximate date, because YouTube only shows "3 days ago"</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>comment</code> or <code>reply</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Other columns include <code>hasCreatorHeart</code>, <code>isPinned</code>, <code>isEdited</code>, <code>replyToCid</code>, <code>title</code> and <code>commentsCount</code>, the video's exact comment total.</p>
+<h2>What it costs</h2>
+<p>$0.25 per 1,000 comments or replies, with no start fee, so 100 comments costs about 3 cents and 10,000 costs $2.50.</p>
+<h2>Can I use the official API instead?</h2>
+<p>Yes. If you have a Google Cloud project, <code>commentThreads.list</code> returns 1 to 100 comments per page and costs 1 unit a call out of your <a href="https://developers.google.com/youtube/v3/determine_quota_cost">10,000 daily units</a>. That's plenty for many jobs, but you'll need to set up an API key, write the paging code and build the CSV yourself.</p>
+<p>Comments can contain personal data such as names and handles, so make sure your use follows privacy laws like GDPR and YouTube's terms.</p>
+</main>
+<footer>
+<p>Updated 2026-11-04. Wulfcare Data makes the scrapers mentioned on this site. Results and prices can change, so check anything important.</p>
+<p><a href="https://github.com/wulfcare/scrapers">GitHub</a> · <a href="https://apify.com/wulfcare">All scrapers on Apify</a></p>
+</footer>
+</body>
+</html>
