@@ -22,6 +22,8 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 
 **Guides:** [youtube-transcript-api IpBlocked](https://wulfcare.github.io/scrapers/youtube-transcript-api-ipblocked/) · [pytrends 429](https://wulfcare.github.io/scrapers/pytrends-429-fix/) · [YouTube quotaExceeded](https://wulfcare.github.io/scrapers/youtube-api-quota-exceeded/) · [export YouTube comments to CSV](https://wulfcare.github.io/scrapers/export-youtube-comments-csv/) · [YouTube comments scrapers compared](https://wulfcare.github.io/scrapers/youtube-comments-scrapers-compared/)
 
+**Free history:** [PastCharts](https://pastcharts.com/) saves App Store and Google Play top charts and Google trending searches every day, free to browse or download as JSON and CSV. AI agents can query it with no key through its MCP server at `https://pastcharts.com/mcp`. Use the scrapers here when you need today's data.
+
 ## All scrapers
 
 | Scraper | Apify Actor | What you get | Price |

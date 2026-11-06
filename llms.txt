@@ -2,6 +2,10 @@
 
 > Apify Actors (hosted scrapers) for data without a good official API. Call any of them with POST https://api.apify.com/v2/acts/{owner}~{name}/run-sync-get-dataset-items?token=APIFY_TOKEN and a JSON input; the response is a JSON array of results. Or use them as MCP tools via https://mcp.apify.com?tools=wulfcare/{name}. Public, logged-out data only. Failed requests and empty results are not charged.
 
+## Free history
+
+- [PastCharts](https://pastcharts.com/): daily history of App Store and Google Play top charts and Google trending searches. No key needed. MCP server: https://pastcharts.com/mcp. Summary: https://pastcharts.com/llms.txt
+
 ## Actors
 
 - [Google Trends Scraper](https://apify.com/wulfcare/google-trends-scraper): interest over time, interest by region, related queries, Trending Now. Up to 100 keywords on one 0-100 scale; daily data for any range. Fixes pytrends 429 TooManyRequestsError. Input: {"searchTerms": ["coffee, tea"], "geo": "US", "timeRange": "today 12-m", "dailyData": false}. $0.003 per report.
