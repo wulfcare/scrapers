@@ -70,7 +70,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "developer": "TikTok Ltd.",
   "developerId": "1322881000",
   "score": 4.8,
-  "ratings": 83686,
+  "ratings": 89676,
   "genre": "Entertainment",
   "free": true,
   "price": 0,
