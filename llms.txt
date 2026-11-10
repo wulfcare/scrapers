@@ -1,6 +1,6 @@
 # Wulfcare Data scrapers
 
-> Apify Actors (hosted scrapers) for data without a good official API. Call any of them with POST https://api.apify.com/v2/acts/{owner}~{name}/run-sync-get-dataset-items?token=APIFY_TOKEN and a JSON input; the response is a JSON array of results. Or use them as MCP tools via https://mcp.apify.com?tools=wulfcare/{name}. Public, logged-out data only. Failed requests and empty results are not charged.
+> Apify Actors (hosted scrapers) for data without a good official API. Call any of them with POST https://api.apify.com/v2/acts/{owner}~{name}/run-sync-get-dataset-items?token=APIFY_TOKEN and a JSON input; the response is a JSON array of results. Or use them as MCP tools via https://mcp.apify.com?tools=wulfcare/{name} (comma-separate several), or one of the ready bundles in the official MCP Registry: io.github.wulfcare/google-flights, google-hotels, google-trends, chatgpt-gemini-copilot-search, ai-brand-visibility, app-reviews, steam-reviews, shopify-app-reviews, youtube-transcripts-comments, google-jobs. Public, logged-out data only. Failed requests and empty results are not charged.
 
 ## Free history
 
@@ -24,6 +24,12 @@
 - [Google AI Mode Scraper](https://apify.com/wulfcare/google-ai-mode-scraper): Google AI Mode answers with sources and brand report. Same input. $4.50 per 1,000.
 - [Copilot Search Scraper](https://apify.com/wulfcare/copilot-search-scraper): Microsoft Copilot Search (Bing) answers with sources and brand report. Same input. $8 per 1,000 (+$8 when the residential proxy is used).
 - [AI Visibility Tracker](https://apify.com/wulfcare/ai-visibility-tracker): ChatGPT, Gemini and Google AI Overviews in one run: visibility score, share of voice, HTML report. Input: {"yourBrand": "Pipedrive, pipedrive.com", "category": "CRM for small business", "promptCount": 10}. $0.04 per answer.
+- [Google Trends Trending Now Scraper](https://apify.com/wulfcare/google-trends-trending-now): every search trending on Google right now for any country, with search volume, % increase, start time, related searches and news. Input: {"trendingGeos": ["US"]}. $0.30 per 1,000 trends.
+- [YouTube Shorts Scraper](https://apify.com/wulfcare/youtube-shorts-scraper): Shorts from searches and channels with views, likes, comment count, date, hashtags and channel subscribers. Input: {"searchQueries": ["cooking hacks"], "maxResultsShorts": 50}. $0.50 per 1,000 Shorts.
+- [Flight Price Tracker](https://apify.com/wulfcare/flight-price-tracker): scheduled Google Flights checks; every run says which fares dropped or rose, new or gone flights, the all-time low and whether a fare is under your target. Input: {"origin": "JFK", "destination": "LAX", "departureDate": "+30 days"}. $0.15 per 1,000 flights.
+- [Steam Reviews Scraper](https://apify.com/wulfcare/steam-reviews-scraper): every Steam review of any game, no API key: text, votes, playtime, language, Steam Deck, developer replies. Input: {"appIds": ["1145360"], "maxReviewsPerApp": 200} (app id, store URL or game name). $0.10 per 1,000 reviews.
+- [Shopify App Store Reviews Scraper](https://apify.com/wulfcare/shopify-app-store-reviews-scraper): every review of any Shopify App Store app: stars, text, date, merchant store and country, time using the app, developer reply. Input: {"apps": ["judgeme"], "maxReviewsPerApp": 200}. $0.03 per 1,000 reviews.
+- [Bing Copilot Scraper](https://apify.com/wulfcare/bing-copilot-scraper): Bing Copilot answers as markdown with cited sources and whether your brand is mentioned or cited. Input: {"prompts": ["best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com"}. $3 per 1,000 answers ($10 with a residential proxy).
 - [AI Training Jobs Scraper](https://apify.com/wulfcare/ai-training-jobs-scraper): AI trainer and data-annotation jobs from Mercor, Outlier, DataAnnotation, Alignerr and 11 more platforms, pay as numbers. Input: {"keywords": ["python"], "minHourlyRate": 30}. Free.
 
 ## For agents

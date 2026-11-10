@@ -1,4 +1,4 @@
-# Wulfcare Data scrapers: Google Trends, YouTube, App Store, Google Play, Google Jobs, Hotels, Flights and AI search APIs
+# Wulfcare Data scrapers: Google Trends, YouTube, App Store, Google Play, Steam, Shopify, Google Jobs, Hotels, Flights and AI search APIs
 
 Ready-to-run scrapers for data that has no good official API, with Python examples, a pytrends replacement and one-line setup for AI agents (MCP). Each one runs on [Apify](https://apify.com/wulfcare), so you don't manage proxies, IP blocks or rate limits: you send JSON, you get JSON.
 
@@ -18,6 +18,11 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 - No official **Google Hotels API** → [google-hotels](google-hotels)
 - No official **Google Flights API** → [google-flights](google-flights) (prices, price tracking, total trip cost)
 - No API for what **ChatGPT search, Gemini, Copilot and Google AI Mode** actually tell users about your brand → [ai-search](ai-search)
+- Every **Steam review** of a game, any language, with no API key → [`wulfcare/steam-reviews-scraper`](https://apify.com/wulfcare/steam-reviews-scraper)
+- No official **Shopify App Store reviews API** → [`wulfcare/shopify-app-store-reviews-scraper`](https://apify.com/wulfcare/shopify-app-store-reviews-scraper)
+- **Flight price drop alerts** on a schedule (drops, rises, all-time low, under-target) → [`wulfcare/flight-price-tracker`](https://apify.com/wulfcare/flight-price-tracker)
+- **YouTube Shorts** views and likes from searches or channels → [`wulfcare/youtube-shorts-scraper`](https://apify.com/wulfcare/youtube-shorts-scraper)
+- Everything **trending on Google right now**, any country → [`wulfcare/google-trends-trending-now`](https://apify.com/wulfcare/google-trends-trending-now)
 - AI training job listings spread over 15 sites → [ai-training-jobs](ai-training-jobs) (free)
 
 **Guides:** [youtube-transcript-api IpBlocked](https://wulfcare.github.io/scrapers/youtube-transcript-api-ipblocked/) · [pytrends 429](https://wulfcare.github.io/scrapers/pytrends-429-fix/) · [YouTube quotaExceeded](https://wulfcare.github.io/scrapers/youtube-api-quota-exceeded/) · [export YouTube comments to CSV](https://wulfcare.github.io/scrapers/export-youtube-comments-csv/) · [YouTube comments scrapers compared](https://wulfcare.github.io/scrapers/youtube-comments-scrapers-compared/)
@@ -44,6 +49,12 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 | Google AI Mode | [`wulfcare/google-ai-mode-scraper`](https://apify.com/wulfcare/google-ai-mode-scraper) | Answer, sources, brand rank | $4.50 / 1,000 |
 | Microsoft Copilot | [`wulfcare/copilot-search-scraper`](https://apify.com/wulfcare/copilot-search-scraper) | Answer, sources, brand rank | $8 / 1,000 (+ proxy) |
 | AI visibility | [`wulfcare/ai-visibility-tracker`](https://apify.com/wulfcare/ai-visibility-tracker) | ChatGPT + Gemini + AI Overviews: visibility score, share of voice, HTML report | $0.04 / answer |
+| Google Trends Trending Now | [`wulfcare/google-trends-trending-now`](https://apify.com/wulfcare/google-trends-trending-now) | Every search trending on Google now: volume, % increase, related searches, news; 4/24/48/168 h windows | $0.30 / 1,000 trends |
+| YouTube Shorts | [`wulfcare/youtube-shorts-scraper`](https://apify.com/wulfcare/youtube-shorts-scraper) | Shorts from searches and channels: views, likes, comment count, date, hashtags, channel subscribers | $0.50 / 1,000 |
+| Flight price tracker | [`wulfcare/flight-price-tracker`](https://apify.com/wulfcare/flight-price-tracker) | Scheduled Google Flights checks: which fares dropped or rose, new/gone flights, all-time low, under-target alerts | $0.15 / 1,000 flights |
+| Steam reviews | [`wulfcare/steam-reviews-scraper`](https://apify.com/wulfcare/steam-reviews-scraper) | Every review of any game: text, votes, playtime, language, Steam Deck, developer replies | $0.10 / 1,000 |
+| Shopify App Store reviews | [`wulfcare/shopify-app-store-reviews-scraper`](https://apify.com/wulfcare/shopify-app-store-reviews-scraper) | Every review of any Shopify app: stars, text, date, merchant store and country, developer reply | $0.03 / 1,000 |
+| Bing Copilot | [`wulfcare/bing-copilot-scraper`](https://apify.com/wulfcare/bing-copilot-scraper) | Answer as markdown, cited sources, brand mentioned or cited | $3 / 1,000 ($10 with residential proxy) |
 | AI training jobs | [`wulfcare/ai-training-jobs-scraper`](https://apify.com/wulfcare/ai-training-jobs-scraper) | Jobs from Mercor, Outlier, DataAnnotation, Alignerr and 11 more | Free |
 
 Failed requests and empty results are never charged. Apify's free plan includes $5 of credit every month.
@@ -100,6 +111,23 @@ Swap the Actor name and the JSON input for any scraper above. For runs longer th
 ## Use them from AI agents (MCP)
 
 Give Claude, Cursor, VS Code or any MCP client these scrapers as tools with [Apify's MCP server](https://mcp.apify.com).
+
+**One-click bundles** (also listed in the [official MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.wulfcare/<name>`). Paste one URL into your MCP client; each scraper in it becomes one tool:
+
+| Bundle | Registry name | MCP URL |
+|---|---|---|
+| Google Flights | `io.github.wulfcare/google-flights` | `https://mcp.apify.com/?tools=wulfcare/google-flights-scraper,wulfcare/flight-price-tracker` |
+| Google Hotels | `io.github.wulfcare/google-hotels` | `https://mcp.apify.com/?tools=wulfcare/google-hotels-scraper` |
+| Google Trends | `io.github.wulfcare/google-trends` | `https://mcp.apify.com/?tools=wulfcare/google-trends-scraper,wulfcare/google-trends-trending-now` |
+| ChatGPT, Gemini, Copilot & AI Mode answers | `io.github.wulfcare/chatgpt-gemini-copilot-search` | `https://mcp.apify.com/?tools=wulfcare/chatgpt-search-scraper,wulfcare/gemini-search-scraper,wulfcare/copilot-search-scraper,wulfcare/google-ai-mode-scraper` |
+| AI Brand Visibility Tracker | `io.github.wulfcare/ai-brand-visibility` | `https://mcp.apify.com/?tools=wulfcare/ai-visibility-tracker` |
+| Google Play & App Store reviews | `io.github.wulfcare/app-reviews` | `https://mcp.apify.com/?tools=wulfcare/google-play-reviews-scraper,wulfcare/app-store-reviews-scraper,wulfcare/google-play-scraper` |
+| Steam Reviews | `io.github.wulfcare/steam-reviews` | `https://mcp.apify.com/?tools=wulfcare/steam-reviews-scraper` |
+| Shopify App Store Reviews | `io.github.wulfcare/shopify-app-reviews` | `https://mcp.apify.com/?tools=wulfcare/shopify-app-store-reviews-scraper` |
+| YouTube transcripts, comments & videos | `io.github.wulfcare/youtube-transcripts-comments` | `https://mcp.apify.com/?tools=wulfcare/youtube-transcript-scraper,wulfcare/youtube-comments-scraper,wulfcare/youtube-shorts-scraper,wulfcare/youtube-scraper` |
+| Google Jobs | `io.github.wulfcare/google-jobs` | `https://mcp.apify.com/?tools=wulfcare/google-jobs-scraper,wulfcare/ai-training-jobs-scraper` |
+
+All of them at once, or any mix you choose:
 
 Hosted (sign in with OAuth, or send `Authorization: Bearer <APIFY_TOKEN>`):
 

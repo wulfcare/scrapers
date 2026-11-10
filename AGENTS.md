@@ -26,6 +26,12 @@ For past days, try [PastCharts](https://pastcharts.com/) first: App Store and Go
 | Flight prices for a route and date, and whether the price is good | `wulfcare/google-flights-scraper` | `{"origin": "JFK", "destination": "LAX", "departureDate": "2026-12-10", "maxFlights": 5}` (read the `summary` row: `lowestPrice`, `priceLevel`) |
 | Track a fare, tell the user when it drops | `wulfcare/google-flights-scraper` | add `"trackPrices": true, "onlyChanges": true, "targetPrice": 250`; run on a schedule |
 | Total trip cost (flight + hotel) | `wulfcare/google-flights-scraper` | `{"origin": "SYD", "destination": "HND,NRT", "departureDate": "2027-03-10", "tripDays": 7, "includeHotels": true, "maxFlights": 0}` (read `tripTotalPrice`) |
+| Shopify App Store reviews of an app | `wulfcare/shopify-app-store-reviews-scraper` | `{"apps": ["judgeme"], "maxReviewsPerApp": 200}` (app handle or apps.shopify.com URL) |
+| Steam reviews of a game | `wulfcare/steam-reviews-scraper` | `{"appIds": ["1145360"], "maxReviewsPerApp": 200}` (app id, store URL or game name) |
+| Scheduled flight price checks with drop / rise / under-target flags | `wulfcare/flight-price-tracker` | `{"origin": "JFK", "destination": "LAX", "departureDate": "+30 days"}` |
+| YouTube Shorts with views and likes | `wulfcare/youtube-shorts-scraper` | `{"searchQueries": ["cooking hacks"], "maxResultsShorts": 50}` |
+| Everything trending on Google now (cheapest per trend) | `wulfcare/google-trends-trending-now` | `{"trendingGeos": ["US"]}` |
+| What Bing Copilot answers and cites for a prompt | `wulfcare/bing-copilot-scraper` | `{"prompts": ["best CRM for a small business?"], "yourBrand": "HubSpot, hubspot.com"}` (slower: ~50-75 s per answer, poll the run) |
 | App Store reviews (any number, any country) | `wulfcare/app-store-reviews-scraper` | `{"appIds": ["324684580"], "countries": ["us"], "maxReviewsPerApp": 1000}` |
 | App Store app details, search, top charts | `wulfcare/app-store-scraper` | `{"mode": "apps", "appIds": ["324684580"]}` / `{"mode": "search", "searchQueries": ["budget"]}` / `{"mode": "charts"}` |
 | Google Play reviews | `wulfcare/google-play-reviews-scraper` | `{"appIds": ["com.spotify.music"], "maxReviewsPerApp": 1000}` |
