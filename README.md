@@ -35,7 +35,7 @@ Ready-to-run scrapers for data that has no good official API, with Python exampl
 |---|---|---|---|
 | Google Trends | [`wulfcare/google-trends-scraper`](https://apify.com/wulfcare/google-trends-scraper) | Interest over time, by region, related queries, Trending Now; up to 100 keywords on one scale; daily data for any range | $0.003 / report |
 | YouTube transcripts | [`wulfcare/youtube-transcript-scraper`](https://apify.com/wulfcare/youtube-transcript-scraper) | Transcripts as text, timestamped segments or SRT for videos, channels, playlists, searches; drop-in input/output for other transcript Actors | $3 / 1,000 |
-| YouTube | [`wulfcare/youtube-scraper`](https://apify.com/wulfcare/youtube-scraper) | Videos, Shorts, streams from searches, channels, playlists, hashtags; views, likes, comments count, channel stats | Free until 2026-11-18, then $0.90 / 1,000 |
+| YouTube | [`wulfcare/youtube-scraper`](https://apify.com/wulfcare/youtube-scraper) | Videos, Shorts, streams from searches, channels, playlists, hashtags; views, likes, comments count, channel stats | $0.90 / 1,000 |
 | YouTube comments | [`wulfcare/youtube-comments-scraper`](https://apify.com/wulfcare/youtube-comments-scraper) | Comments and replies with likes, reply counts, creator hearts, pinned flags and dates; videos, Shorts, channels, playlists, searches | $0.25 / 1,000 |
 | Google Jobs | [`wulfcare/google-jobs-scraper`](https://apify.com/wulfcare/google-jobs-scraper) | Title, company, salary, description, every apply link; 27 countries | $0.004 / job |
 | Google Hotels | [`wulfcare/google-hotels-scraper`](https://apify.com/wulfcare/google-hotels-scraper) | Every booking site's price per hotel and date; hotel searches | $0.80 / 1,000 prices |

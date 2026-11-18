@@ -63,27 +63,27 @@ items = list(client.dataset(dataset_id).iterate_items())
   "origin": "JFK",
   "destination": "LAX",
   "destinationCity": "Los Angeles",
-  "departureDate": "2026-12-08",
+  "departureDate": "2026-12-17",
   "returnDate": null,
   "tripType": "one-way",
   "cabinClass": "economy",
   "adults": 1,
   "children": 0,
   "currency": "USD",
-  "lowestPrice": 164,
+  "lowestPrice": 265,
   "priceLevel": "typical",
   "typicalPrice": 179,
-  "typicalPriceLow": 105,
-  "typicalPriceHigh": 325,
+  "typicalPriceLow": 135,
+  "typicalPriceHigh": 335,
   "targetPrice": null,
   "belowTargetPrice": null,
-  "previousLowestPrice": 164,
-  "lowestPriceChange": 0,
-  "lowestPriceEver": 164,
-  "lowestPriceEverAt": "2026-11-08T13:02:34+00:00",
+  "previousLowestPrice": null,
+  "lowestPriceChange": null,
+  "lowestPriceEver": 265,
+  "lowestPriceEverAt": "2026-11-17T21:40:11+00:00",
   "isLowestEver": true,
-  "trackedSince": "2026-11-08T13:02:34+00:00",
-  "trackedRuns": 3,
+  "trackedSince": "2026-11-17T21:40:11+00:00",
+  "trackedRuns": 1,
   "changes": {
     "new": 0,
     "cheaper": 0,
@@ -91,19 +91,20 @@ items = list(client.dataset(dataset_id).iterate_items())
     "gone": 0
   },
   "cheapestFlight": {
-    "price": 164,
+    "price": 265,
     "airlines": [
-      "American"
+      "JetBlue"
     ],
     "flightNumbers": [
-      "AA 341"
+      "B6 1601",
+      "B6 201"
     ],
-    "departureTime": "2026-12-08T14:59",
-    "arrivalTime": "2026-12-08T18:16",
-    "durationMinutes": 377,
-    "stops": 0
+    "departureTime": "2026-12-17T08:00",
+    "arrivalTime": "2026-12-17T14:53",
+    "durationMinutes": 593,
+    "stops": 1
   },
-  "flightsFound": 89,
+  "flightsFound": 125,
   "hotelName": null,
   "hotelRating": null,
   "hotelStars": null,
@@ -115,21 +116,21 @@ items = list(client.dataset(dataset_id).iterate_items())
   "tripTotalPrice": null,
   "priceHistory": [
     {
-      "date": "2026-09-08",
-      "price": 169
+      "date": "2026-09-18",
+      "price": 284
     },
     {
-      "date": "2026-09-09",
-      "price": 169
+      "date": "2026-09-19",
+      "price": 284
     },
     {
-      "date": "2026-09-10",
-      "price": 169
+      "date": "2026-09-20",
+      "price": 284
     },
-    "… 59 more"
+    "… 58 more"
   ],
-  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+LAX+from+JFK+on+2026-12-08+one+way&hl=en&curr=USD",
-  "scrapedAt": "2026-11-08T13:04:58+00:00",
+  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+LAX+from+JFK+on+2026-12-17+one+way&hl=en&curr=USD",
+  "scrapedAt": "2026-11-17T21:40:11+00:00",
   "error": null
 }
 ```

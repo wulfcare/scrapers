@@ -71,175 +71,118 @@ items = list(client.dataset(dataset_id).iterate_items())
 ```json
 {
   "searchTerms": [
-    "coffee",
-    "tea"
+    "weather"
   ],
   "geo": "US",
   "timeRange": "today 12-m",
   "category": 0,
   "property": "web",
-  "trendsUrl": "https://trends.google.com/trends/explore?q=coffee%2Ctea&date=today+12-m&hl=en-US&geo=US",
+  "trendsUrl": "https://trends.google.com/trends/explore?q=weather&date=today+12-m&hl=en-US&geo=US",
   "interestOverTime": [
-    {
-      "date": "2025-11-02T00:00:00+00:00",
-      "label": "Nov 2 – 8, 2025",
-      "values": {
-        "coffee": 65,
-        "tea": 32
-      },
-      "isPartial": false
-    },
-    {
-      "date": "2025-11-09T00:00:00+00:00",
-      "label": "Nov 9 – 15, 2025",
-      "values": {
-        "coffee": 73,
-        "tea": 34
-      },
-      "isPartial": false
-    },
     {
       "date": "2025-11-16T00:00:00+00:00",
       "label": "Nov 16 – 22, 2025",
       "values": {
-        "coffee": 71,
-        "tea": 35
+        "weather": 53
+      },
+      "isPartial": false
+    },
+    {
+      "date": "2025-11-23T00:00:00+00:00",
+      "label": "Nov 23 – 29, 2025",
+      "values": {
+        "weather": 56
+      },
+      "isPartial": false
+    },
+    {
+      "date": "2025-11-30T00:00:00+00:00",
+      "label": "Nov 30 – Dec 6, 2025",
+      "values": {
+        "weather": 66
       },
       "isPartial": false
     },
     "… 50 more"
   ],
-  "averages": {
-    "coffee": 77,
-    "tea": 37
-  },
+  "averages": null,
   "interestByRegion": [
     {
-      "geoCode": "US-WY",
-      "geoName": "Wyoming",
+      "geoCode": "US-WI",
+      "geoName": "Wisconsin",
       "values": {
-        "coffee": 69,
-        "tea": 31
+        "weather": 100
       },
       "hasData": true
     },
     {
-      "geoCode": "US-HI",
-      "geoName": "Hawaii",
+      "geoCode": "US-MT",
+      "geoName": "Montana",
       "values": {
-        "coffee": 70,
-        "tea": 30
+        "weather": 97
       },
       "hasData": true
     },
     {
-      "geoCode": "US-KS",
-      "geoName": "Kansas",
+      "geoCode": "US-ME",
+      "geoName": "Maine",
       "values": {
-        "coffee": 69,
-        "tea": 31
+        "weather": 95
       },
       "hasData": true
     },
     "… 48 more"
   ],
   "relatedQueries": {
-    "coffee": {
+    "weather": {
       "top": [
         {
-          "query": "coffee near me",
+          "query": "weather tomorrow",
           "value": 100,
           "formattedValue": "100",
-          "link": "https://trends.google.com/trends/explore?q=coffee+near+me&date=today+12-m&geo=US"
+          "link": "https://trends.google.com/trends/explore?q=weather+tomorrow&date=today+12-m&geo=US"
         },
         {
-          "query": "coffee shop",
-          "value": 85,
-          "formattedValue": "85",
-          "link": "https://trends.google.com/trends/explore?q=coffee+shop&date=today+12-m&geo=US"
+          "query": "the weather",
+          "value": 46,
+          "formattedValue": "46",
+          "link": "https://trends.google.com/trends/explore?q=the+weather&date=today+12-m&geo=US"
         },
         {
-          "query": "coffee maker",
-          "value": 81,
-          "formattedValue": "81",
-          "link": "https://trends.google.com/trends/explore?q=coffee+maker&date=today+12-m&geo=US"
+          "query": "weather forecast",
+          "value": 22,
+          "formattedValue": "22",
+          "link": "https://trends.google.com/trends/explore?q=weather+forecast&date=today+12-m&geo=US"
         },
         "… 22 more"
       ],
       "rising": [
         {
-          "query": "home workout routines",
-          "value": 6200,
-          "formattedValue": "Breakout",
-          "link": "https://trends.google.com/trends/explore?q=home+workout+routines&date=today+12-m&geo=US",
-          "isBreakout": true
-        },
-        {
-          "query": "sports scores today",
-          "value": 6000,
-          "formattedValue": "Breakout",
-          "link": "https://trends.google.com/trends/explore?q=sports+scores+today&date=today+12-m&geo=US",
-          "isBreakout": true
-        },
-        {
-          "query": "top songs this week",
-          "value": 5950,
-          "formattedValue": "Breakout",
-          "link": "https://trends.google.com/trends/explore?q=top+songs+this+week&date=today+12-m&geo=US",
-          "isBreakout": true
-        },
-        "… 22 more"
-      ]
-    },
-    "tea": {
-      "top": [
-        {
-          "query": "green tea",
-          "value": 100,
-          "formattedValue": "100",
-          "link": "https://trends.google.com/trends/explore?q=green+tea&date=today+12-m&geo=US"
-        },
-        {
-          "query": "black tea",
-          "value": 43,
-          "formattedValue": "43",
-          "link": "https://trends.google.com/trends/explore?q=black+tea&date=today+12-m&geo=US"
-        },
-        {
-          "query": "coffee",
-          "value": 41,
-          "formattedValue": "41",
-          "link": "https://trends.google.com/trends/explore?q=coffee&date=today+12-m&geo=US"
-        },
-        "… 22 more"
-      ],
-      "rising": [
-        {
-          "query": "loaded tea shop",
-          "value": 2100,
-          "formattedValue": "+2,100%",
-          "link": "https://trends.google.com/trends/explore?q=loaded+tea+shop&date=today+12-m&geo=US",
+          "query": "winter weather advisory",
+          "value": 900,
+          "formattedValue": "+900%",
+          "link": "https://trends.google.com/trends/explore?q=winter+weather+advisory&date=today+12-m&geo=US",
           "isBreakout": false
         },
         {
-          "query": "how to make cold brew tea",
-          "value": 2000,
-          "formattedValue": "+2,000%",
-          "link": "https://trends.google.com/trends/explore?q=how+to+make+cold+brew+tea&date=today+12-m&geo=US",
+          "query": "fire weather watch",
+          "value": 700,
+          "formattedValue": "+700%",
+          "link": "https://trends.google.com/trends/explore?q=fire+weather+watch&date=today+12-m&geo=US",
           "isBreakout": false
         },
         {
-          "query": "the loaded tea shop",
-          "value": 1900,
-          "formattedValue": "+1,900%",
-          "link": "https://trends.google.com/trends/explore?q=the+loaded+tea+shop&date=today+12-m&geo=US",
+          "query": "weather today near me",
+          "value": 250,
+          "formattedValue": "+250%",
+          "link": "https://trends.google.com/trends/explore?q=weather+today+near+me&date=today+12-m&geo=US",
           "isBreakout": false
         },
-        "… 22 more"
+        "… 2 more"
       ]
     }
   },
-  "scrapedAt": "2026-11-04T08:10:15+00:00"
+  "scrapedAt": "2026-11-17T22:00:26+00:00"
 }
 ```
 
@@ -302,39 +245,39 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "input": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
-  "videoId": "UF8uR6Z6KLc",
-  "url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
-  "title": "Steve Jobs' 2005 Stanford Commencement Address",
-  "channelName": "Stanford",
-  "channelId": "UC-EnprmCZ3OXyAoG7vjVNCA",
-  "channelUrl": "https://www.youtube.com/channel/UC-EnprmCZ3OXyAoG7vjVNCA",
-  "publishedAt": "2008-03-08T01:17:20Z",
-  "durationSeconds": 904,
-  "viewCount": 49372950,
+  "input": "https://www.youtube.com/@3blue1brown",
+  "videoId": "Nbwv5wHQoj0",
+  "url": "https://www.youtube.com/watch?v=Nbwv5wHQoj0",
+  "title": "The last IMO problem AI could not solve",
+  "channelName": "3Blue1Brown",
+  "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+  "channelUrl": "https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw",
+  "publishedAt": "2026-09-18T17:12:53Z",
+  "durationSeconds": 3115,
+  "viewCount": 3112877,
   "category": "Education",
   "language": "en",
-  "languageName": "English - English",
-  "isAutoGenerated": false,
-  "wordCount": 2298,
-  "text": "This program is brought to you by Stanford University. Please visit us at stanford.edu Thank You. I am honored to be with you today at your commencement from one of the finest universities in the world. Truth be told I never graduated from …",
+  "languageName": "English",
+  "isAutoGenerated": true,
+  "wordCount": 10338,
+  "text": "In 2025, over 600 teenagers from all around the world gathered in the sunshine coast of Australia to compete in the International Math Olympiad. This contest consists of six highly challenging problems. And problem number six was the hardes…",
   "segments": [
     {
-      "start": 7.47,
-      "duration": 2.899,
-      "text": "This program is brought to you by Stanford University."
+      "start": 0.08,
+      "duration": 5.04,
+      "text": "In 2025, over 600 teenagers from all"
     },
     {
-      "start": 10.47,
-      "duration": 3.973,
-      "text": "Please visit us at stanford.edu"
+      "start": 3.439,
+      "duration": 3.84,
+      "text": "around the world gathered in the"
     },
     {
-      "start": 22.492,
-      "duration": 7.527,
-      "text": "Thank You. I am honored to be with you today at your commencement"
+      "start": 5.12,
+      "duration": 4.72,
+      "text": "sunshine coast of Australia to compete"
     },
-    "… 241 more"
+    "… 1464 more"
   ],
   "srt": null,
   "availableLanguages": [
@@ -344,30 +287,30 @@ items = list(client.dataset(dataset_id).iterate_items())
       "isAutoGenerated": false
     },
     {
-      "language": "en",
-      "name": "English (auto-generated)",
-      "isAutoGenerated": true
-    },
-    {
-      "language": "en",
-      "name": "English - English",
+      "language": "bn",
+      "name": "Bangla",
       "isAutoGenerated": false
     },
-    "… 6 more"
+    {
+      "language": "hr",
+      "name": "Croatian",
+      "isAutoGenerated": false
+    },
+    "… 12 more"
   ],
   "isLive": false,
   "keywords": [
-    "apple",
-    "graduation",
-    "education",
-    "… 11 more"
+    "Mathematics",
+    "three blue one brown",
+    "3 blue 1 brown",
+    "… 4 more"
   ],
-  "description": "Drawing from some of the most pivotal points in his life, Steve Jobs, chief executive officer and co-founder of Apple Computer and of Pixar Animation Studios, urged graduates to pursue their dreams and see the opportunities in life's setbac…",
-  "thumbnail": "https://i.ytimg.com/vi/UF8uR6Z6KLc/hqdefault.jpg",
+  "description": "A beautiful puzzle that eluded AI, and the intuition it requires.\nCheck out our virtual career fair: https://3b1b.co/talent\nSee new videos early: https://3b1b.co/support\nAn equally valuable form of support is to simply share the videos.\nHom…",
+  "thumbnail": "https://i.ytimg.com/vi_webp/Nbwv5wHQoj0/sddefault.webp",
   "error": null,
-  "videoUrl": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
-  "videoTitle": "Steve Jobs' 2005 Stanford Commencement Address",
-  "views": "49372950",
+  "videoUrl": "https://www.youtube.com/watch?v=Nbwv5wHQoj0",
+  "videoTitle": "The last IMO problem AI could not solve",
+  "views": "3112877",
   "data": null
 }
 ```
@@ -378,7 +321,7 @@ Results are what the source showed at run time and can contain errors; check any
 
 # YouTube Scraper: Videos, Shorts, Channels & Search
 
-`wulfcare/youtube-scraper`: YouTube scraper: videos, Shorts and streams from searches, channels, playlists and hashtags. Views, likes, comments count, publish time, duration, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper. Free until Nov 18, then $0.90 per 1,000.
+`wulfcare/youtube-scraper`: YouTube scraper: videos, Shorts and streams from searches, channels, playlists and hashtags. Views, likes, comments count, publish time, duration, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper. $0.90 per 1,000 videos, no start fee.
 
 **Use it for:**
 - YouTube video metadata (views, likes, comment count, publish date, duration, tags) from searches, channels, playlists, hashtags
@@ -390,8 +333,7 @@ Results are what the source showed at run time and can contain errors; check any
 - MCP: `https://mcp.apify.com?tools=wulfcare/youtube-scraper`
 
 **Price:**
-- Free (only Apify platform usage, usually fractions of a cent)
-- From 2026-11-18: $0.0009 per video (video): One YouTube video, Short or stream row with all its details. Errors and not-found inputs are never charged. No start fee.
+- $0.0009 per video (video): One YouTube video, Short or stream row with all its details. Errors and not-found inputs are never charged. No start fee.
 
 ## Call it
 
@@ -443,46 +385,47 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "title": "Python for Data Analytics - Full Course for Beginners",
-  "id": "wUSDVGivd-8",
-  "url": "https://www.youtube.com/watch?v=wUSDVGivd-8",
+  "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+  "id": "dQw4w9WgXcQ",
+  "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "type": "video",
-  "thumbnailUrl": "https://i.ytimg.com/vi/wUSDVGivd-8/hqdefault.jpg",
-  "viewCount": 1651110,
-  "likes": 37906,
-  "commentsCount": 1195,
-  "date": "2024-06-07T12:01:05Z",
-  "dateText": "Jun 7, 2024",
-  "duration": "11:09:41",
-  "durationSeconds": 40181,
-  "text": "📁 FREE Course Files & Project 👉 https://lukeb.co/python_repo\n🏆 Supporter Access: Problems, Certificate, & More 👉 https://lukeb.co/python\n\nMy FREE Course to be a Data Analyst 👉 https://lukebarousse.com/5daycourse\n\n📌💬 See pinned comment for t…",
+  "thumbnailUrl": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+  "viewCount": 1838269922,
+  "likes": 19509851,
+  "commentsCount": 2462446,
+  "date": "2009-10-25T06:57:33Z",
+  "dateText": "Oct 24, 2009",
+  "duration": "00:03:33",
+  "durationSeconds": 213,
+  "text": "The official video for “Never Gonna Give You Up” by Rick Astley. \n\nNever: The Autobiography 📚 OUT NOW! \nFollow this link to get your copy and listen to Rick’s ‘Never’ playlist ❤️ #RickAstleyNever\nhttps://linktr.ee/rickastleynever\n\n“Never Go…",
   "descriptionLinks": [
     {
-      "url": "https://lukeb.co/python_repo",
-      "text": "https://lukeb.co/python_repo"
+      "url": "https://linktr.ee/rickastleynever",
+      "text": "https://linktr.ee/rickastleynever"
     },
     {
-      "url": "https://lukeb.co/python",
-      "text": "https://lukeb.co/python"
+      "url": "https://RickAstley.lnk.to/YTSubID",
+      "text": "https://RickAstley.lnk.to/YTSubID"
     },
     {
-      "url": "https://lukebarousse.com/5daycourse",
-      "text": "https://lukebarousse.com/5daycourse"
+      "url": "https://RickAstley.lnk.to/FBFollowID",
+      "text": "https://RickAstley.lnk.to/FBFollowID"
     },
-    "… 26 more"
+    "… 8 more"
   ],
   "hashtags": [
-    "#datanerd",
-    "#dataanalyst",
-    "#datascience"
+    "#OfficialMusicVideo",
+    "#NeverGonnaGiveYouUp",
+    "#RickAstleyNever",
+    "… 2 more"
   ],
   "location": null,
-  "category": "Science & Technology",
+  "category": "Music",
   "keywords": [
-    "data viz by luke",
-    "business intelligence",
-    "data science",
-    "… 15 more"
+    "rick astley",
+    "Never Gonna Give You Up",
+    "nggyu",
+    "… 24 more"
   ],
   "isLive": false,
   "commentsTurnedOff": false,
@@ -495,37 +438,37 @@ items = list(client.dataset(dataset_id).iterate_items())
   "subtitles": null,
   "translatedTitle": null,
   "translatedText": null,
-  "channelName": "Luke Barousse",
-  "channelId": "UCLLw7jmFsvfIVaUFsLs8mlQ",
-  "channelUrl": "https://www.youtube.com/@LukeBarousse",
-  "channelUsername": "LukeBarousse",
-  "numberOfSubscribers": 681000,
+  "channelName": "Rick Astley",
+  "channelId": "UCuAXFkgsw1L7xaCfnd5JJOw",
+  "channelUrl": "https://www.youtube.com/@RickAstleyYT",
+  "channelUsername": "RickAstleyYT",
+  "numberOfSubscribers": 4560000,
   "isChannelVerified": true,
-  "channelAvatarUrl": "https://yt3.googleusercontent.com/ytc/AIdro_my6YXWfudW8qM_i1Na9IWEbiIUtVgb54u0XVVmtlYQig=s900-c-k-c0x00ffffff-no-rj",
-  "channelBannerUrl": "https://yt3.googleusercontent.com/NiqHB8Sy0UaObmZgUVDE3eLrp-GZkn445VvZIj1mB1VRXRwxQGotWNNGLkTnF3LH6k9NmfCj5w=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-  "channelDescription": "What's up, Data Nerds! I'm Luke, a data analyst who loves making tutorials.\n\n❓ If you have a question, drop a comment in any video. \n\n📩 Email is for business inquiries only, please.\n\n\n",
+  "channelAvatarUrl": "https://yt3.googleusercontent.com/_ShEGOdg-t5YGJse14Ooq6FYBZqX_QSlhaTNjG06miYusm5lWm1UroLyVxnYtahADfRTVLtuVQ=s900-c-k-c0x00ffffff-no-rj",
+  "channelBannerUrl": "https://yt3.googleusercontent.com/pi1YBgcetxpQG-xtEKHBLwe3nUxoo-cT1AKYfqLxh8krCgnkpZZM5zOtP2VlFfSFnRFi8EyA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+  "channelDescription": "Rick Astley’s Swinging Christmas 2026 🎄 Dec 9th, Royal Albert Hall. SOLD OUT ❤️\n",
   "channelDescriptionLinks": [
     {
-      "text": "My FREE Data Courses",
-      "url": "https://lukebarousse.com/crash-courses"
+      "text": "Swinging Christmas tickets",
+      "url": "https://lnk.to/RASC26"
     },
     {
-      "text": "All My Courses ",
-      "url": "https://lukebarousse.com/courses"
+      "text": "New single 'Raindrops'",
+      "url": "https://rickastley.lnk.to/Raindrops"
     },
     {
-      "text": "My Job-Skills App",
-      "url": "https://datanerd.tech"
+      "text": "Website",
+      "url": "https://www.rickastley.co.uk/"
     },
-    "… 2 more"
+    "… 8 more"
   ],
-  "channelLocation": "United States",
-  "channelJoinedDate": "2020-08-03",
-  "channelTotalVideos": 172,
-  "channelTotalViews": 36148433,
-  "input": "python tutorial",
-  "fromYTUrl": "https://www.youtube.com/results?search_query=python%20tutorial&sp=EgIQAQ%3D%3D",
-  "order": 8,
+  "channelLocation": "United Kingdom",
+  "channelJoinedDate": "2015-02-01",
+  "channelTotalVideos": 442,
+  "channelTotalViews": 2600576030,
+  "input": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "fromYTUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "order": 1,
   "error": null
 }
 ```
@@ -587,20 +530,20 @@ items = list(client.dataset(dataset_id).iterate_items())
 ```json
 {
   "comment": "(comment text removed)",
-  "cid": "Ugxzbv_ZeZXNRcfwsSF4AaABAg",
+  "cid": "UgxWyyYdUgmNmSqF_ch4AaABAg",
   "author": "(name removed)",
   "videoId": "dQw4w9WgXcQ",
   "pageUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  "commentsCount": 2461305,
-  "replyCount": 726,
-  "voteCount": 293000,
+  "commentsCount": 2462448,
+  "replyCount": 0,
+  "voteCount": 0,
   "authorIsChannelOwner": false,
   "hasCreatorHeart": false,
   "type": "comment",
   "replyToCid": null,
   "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
-  "publishedTimeText": "6 years ago",
-  "publishedAt": "2020-11-05T08:15:08Z",
+  "publishedTimeText": "5 minutes ago",
+  "publishedAt": "2026-11-17T23:25:10Z",
   "isEdited": false,
   "isPinned": false,
   "replyLevel": 0,
@@ -668,62 +611,59 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "query": "remote software engineer",
-  "searchUsed": "remote software engineer",
+  "query": "nurse jobs new york",
+  "searchUsed": "nurse jobs new york",
   "country": "US",
   "position": 1,
-  "title": "Full-Stack Software Engineer (New Grad) - Remote",
-  "company": "SpruceID",
-  "location": "Anywhere",
-  "via": "ZipRecruiter",
-  "postedAgo": "8 days ago",
-  "postedAt": "2026-10-17T10:01:13+00:00",
-  "salary": "110K-140K a year",
-  "jobType": "Full-time",
-  "degree": null,
-  "otherTags": [],
+  "title": "Registered Nurse / RN - Labor and Delivery / L&D",
+  "company": "Solomon Page",
+  "location": "New York, NY",
+  "via": "LinkedIn",
+  "postedAgo": "6 hours ago",
+  "postedAt": "2026-11-17T16:10:11+00:00",
+  "salary": null,
+  "jobType": "Contractor",
+  "degree": "No Degree Mentioned",
+  "otherTags": [
+    "Dental insurance",
+    "Health insurance"
+  ],
   "applyOptions": [
     {
-      "source": "ZipRecruiter",
-      "url": "https://www.ziprecruiter.com/c/SpruceID/Job/Full-Stack-Software-Engineer-Remote/-in-Remote,US?jid=19daffea3bfe03e5",
-      "domain": "ziprecruiter.com",
+      "source": "LinkedIn",
+      "url": "https://www.linkedin.com/jobs/view/registered-nurse-rn-labor-and-delivery-l-d-at-solomon-page-4491581477",
+      "domain": "linkedin.com",
       "direct": false
     },
     {
-      "source": "Jobgether",
-      "url": "https://jobgether.com/offer/6a7bdabf490731f1e196f124-full-stack-software-engineer---remote-services",
-      "domain": "jobgether.com",
+      "source": "BeBee",
+      "url": "https://bebee.com/us/jobs/registered-nurse-labor-and-delivery-ld-rn-36-12-holy-redeemer-new-york--lensa-7428_b49d0d20db42334741408ccf256d0a195c6ca6894a7a94765fe6effec1b44942",
+      "domain": "bebee.com",
       "direct": false
-    },
-    {
-      "source": "JobLeads",
-      "url": "https://www.jobleads.com/us/job/full-stack-software-engineer-new-grad-remote--united-states--e458dc7a885af25429cd861e8c385462b",
-      "domain": "jobleads.com",
-      "direct": false
-    },
-    "… 5 more"
+    }
   ],
   "highlights": {
     "qualifications": [
-      "This is an ideal role for a recent graduate who wants to grow quickly while working on technology that matters",
-      "We're not looking for someone who already knows everything",
-      "We're looking for someone eager to learn, humble enough to ask questions, and motivated to do meaningful work",
-      "… 15 more"
+      "Current New York license",
+      "Excellent interpersonal skills including patience, empathy, and compassion",
+      "Effective communication skills, including active listening, writing, speaking and reading comprehension",
+      "… 3 more"
     ],
     "benefits": [
-      "Dedicated mentorship from senior engineers who will guide your technical development"
+      "Estimated Gross Weekly Pay: $2,837",
+      "Estimated Weekly Stipend: $1,967",
+      "Offering a comprehensive benefits package, travel nurses have immediate access to medical coverage and ReviveHealth virtual care",
+      "… 2 more"
     ],
     "responsibilities": [
-      "You'll work alongside experienced engineers and directly with state governments, public sector partners, and enterprise clients to help design, build, and deploy impactful identity solutions",
-      "You'll gain hands-on experience across the full stack, learn from senior engineers, and contribute to systems that serve millions of people",
-      "Collaborate with customer delivery leads, engineers, and UX designers on real-world deployments",
-      "… 11 more"
+      "Shift: 3x12 Nights",
+      "More job highlights"
     ]
   },
-  "description": "About SpruceID\nSpruceID builds privacy-preserving, standards-based digital identity and credentialing solutions that give individuals control of their information while enabling governments and enterprises to deliver secure, interoperable s…",
-  "googleJobId": "UsmJK6H351WAV-x4AAAAAA==",
-  "applyUrl": "https://www.monster.com/job-openings/full-stack-software-engineer-new-grad-remote-beverly-hills-ca--706c9c1e-bef1-4862-823f-d1bfce004f9a",
-  "scrapedAt": "2026-10-25T10:01:13+00:00"
+  "description": "Our client is looking to add a Registered Nurse to their team.\nJob Details:\n• Location: Bronx, New York\n• Duration: 13 Weeks\n• Start Date: 12/09/2026\n• Shift: 3x12 Nights\n• Estimated Gross Weekly Pay: $2,837\n• Estimated Weekly Stipend: $1,9…",
+  "googleJobId": "vM-UmBytgiYzR1wLAAAAAA==",
+  "applyUrl": "https://www.linkedin.com/jobs/view/registered-nurse-rn-labor-and-delivery-l-d-at-solomon-page-4491581477",
+  "scrapedAt": "2026-11-17T22:10:11+00:00"
 }
 ```
 
@@ -781,100 +721,43 @@ items = list(client.dataset(dataset_id).iterate_items())
 | `device` | string |  | "desktop" | `desktop` (Desktop), `mobile` (Mobile) | Device: Get the prices Google shows on desktop or on mobile (some sites have mobile-only rates). |
 | `language` | string |  | "en" |  | Language: Language of hotel descriptions and texts (en, fr, de, es...). |
 | `maxConcurrency` | integer |  | 6 | 1–20 | Parallel requests: Requests to Google at once. |
+| `onlyChanges` | boolean |  | false |  | Monitor: only new and changed prices: For a schedule or a task that runs every hour or day. The Actor remembers each price from the last run (in a key-value store named "google-hotels-monitor" on your own account) and outputs only prices that are new, cheaper, dearer or gone, each with change, previousPrice, priceChange and priceChangePercent. You pay only for the rows that come out. The first run outputs every price as new. If a run stops early (maximum cost reached, or blocked), the remembered prices stay as they were, so the next run reports those changes again. |
+| `minChangePercent` | integer |  | 0 | 0–100 | Ignore changes smaller than (%): With monitoring on: skip price moves smaller than this, e.g. 5 to hear only about moves of 5% or more. 0 reports every change. |
+| `onlyDrops` | boolean |  | false |  | Only price drops: With monitoring on: output only new prices and price drops (no rises, no gone rows). Good for deal alerts. |
+| `monitorName` | string |  |  |  | Monitor name (optional): With monitoring on: which saved prices to compare against. Leave empty and each different input keeps its own; set a name to keep comparing after you edit the input, or to run two monitors on the same input. |
 | `entity` | string |  |  |  | Entity (compatibility): A single hotel (entity ID, link or name): same as one line in Hotels. |
 
 ## Output: one dataset item (real run, long values trimmed)
 
 ```json
 {
-  "query": "hotels in Paris",
-  "rank": 1,
-  "name": "The Originals Boutique, Hôtel Maison Montmartre, Paris",
-  "hotelClass": 4,
-  "hotelClassText": "4-star tourist hotel",
-  "rating": 4,
-  "reviewCount": 2135,
-  "checkInDate": "2026-10-26",
-  "checkOutDate": "2026-10-27",
-  "nights": 1,
+  "hotelName": "Hôtel Atrium by HappyCulture",
+  "provider": "Agoda",
+  "isOfficial": false,
+  "price": 71,
+  "price2": 82,
   "adults": 2,
   "currency": "USD",
-  "pricePerNight": 76.03,
-  "pricePerNightWithTaxes": 102.56,
-  "totalPrice": 76.03,
-  "totalPriceWithTaxes": 102.56,
-  "priceText": "$76",
-  "dealText": "17% less than usual",
-  "cheapestProvider": null,
-  "prices": null,
-  "address": null,
-  "phone": null,
-  "website": "https://www.hotelmaisonmontmartre.com/?utm_campaign=uberall&utm_medium=organic&utm_source=googlelisting",
-  "latitude": 48.900537,
-  "longitude": 2.3362689999999997,
-  "countryCode": "FR",
-  "checkInTime": "3:00 PM",
-  "checkOutTime": "12:00 PM",
-  "description": "Hip hotel featuring a sophisticated restaurant & a cool rooftop eatery/bar with a terrace.",
-  "descriptionLong": null,
-  "ratingBreakdown": {
-    "1": 225,
-    "2": 107,
-    "3": 180,
-    "4": 497,
-    "5": 1126
-  },
-  "reviewAspects": [
-    {
-      "aspect": "Safety",
-      "mentions": 67,
-      "positive": 13,
-      "negative": 51
-    },
-    {
-      "aspect": "Bar or lounge",
-      "mentions": 60,
-      "positive": 47,
-      "negative": 6
-    },
-    {
-      "aspect": "Room entertainment",
-      "mentions": 17,
-      "positive": 8,
-      "negative": 9
-    },
-    "… 3 more"
-  ],
-  "otherRatings": null,
-  "nearbyPlaces": [
-    {
-      "name": "Aéroport de Paris-Charles de Gaulle",
-      "travelTimes": {
-        "driving": "19 min",
-        "transit": "56 min"
-      }
-    },
-    {
-      "name": "Restaurant le 365",
-      "travelTimes": {
-        "walking": "7 min"
-      }
-    }
-  ],
-  "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/AABkmLfwYtcmqfrRWvXV6Jl_jRqJ1i-gDYNxdNuhF8KnH9MlOZvxPqJR-u-L9giDhwMbyl2jRtRgs-9rCsbYPTzZdW9R1MUmqq_Z8J0e33BQSSc_Zid_ePbJWZ4YavQcgFDAQzqNBvS2=s150-w92-h150-n-k-no",
-  "photos": [
-    "https://lh3.googleusercontent.com/grass-cs/AABkmLfwYtcmqfrRWvXV6Jl_jRqJ1i-gDYNxdNuhF8KnH9MlOZvxPqJR-u-L9giDhwMbyl2jRtRgs-9rCsbYPTzZdW9R1MUmqq_Z8J0e33BQSSc_Zid_ePbJWZ4YavQcgFDAQzqNBvS2=s287-w287-h192-n-k-no-v1",
-    "https://lh3.googleusercontent.com/grass-cs/AABkmLeNZs2aEW5P2S1v2uLfL5EAo-_dNkj_vVC-0_D0Ws0CCJWKzPnPzBKN3Zluz7bAO2QpGLzK1plMg1a9n1BR2Sb9WotAg4MTqB9ZsBMKzUiIzoWDV1zSxLBbwNehjlGFN3dc3514=s287-w287-h192-n-k-no-v1",
-    "https://lh3.googleusercontent.com/grass-cs/AABkmLcIWcvK-UkQaYFjs6lLuuwBw34mD0V2f_8LabReVSEGypdwGKQqelb6A_df2oWwfF3qxM18cdiPmIaAdT4-TUVO7z4ujzRTy_TOo3mMAOs3QMrX53L7GkqpCLJIFh-HZzPv2ZM1=s287-w287-h192-n-k-no-v1",
-    "… 6 more"
-  ],
-  "googleMapsUrl": "https://www.google.com/maps?cid=11195438155682968190",
+  "checkInDate": "2026-12-17",
+  "checkOutDate": "2026-12-18",
+  "nights": 1,
+  "pricePerNight": 71.13,
+  "pricePerNightWithTaxes": 82.38,
+  "totalPrice": 71.13,
+  "totalPriceWithTaxes": 82.38,
+  "rank": 1,
+  "isCheapest": true,
+  "bookingUrl": "https://www.agoda.com/partners/partnersearch.aspx?site_id=1917614&CkInDay=17&CkInMonth=12&CkInYear=2026&CkOutDay=18&campaignid=&CkOutMonth=12&CkOutYear=2026&SearchDateType=default&NumberOfAdults=2&LT=29&NumberOfChildren=0&childages=&NumberO…",
+  "otaUrl": "https://www.google.com/travel/lodging/clk?pc=AJ0xEyhrWPnkXWOzI8HriD1qsmSs7SOHIzO06nsu5uHBzATgrjPU821OYNdEsuZckHh0dbdbS3Pk_D5HYZWRowOq1K9S2-BmYPle3v3s3xYzYlEg5jRhzdKEgF0VS1mTKuKx6chV23Q4giuDTmKsbnhmzeGwy3zKAuypgv2w9bXPhIPDr_gDqTdGPNEXq0aFSg&…",
+  "isAd": false,
+  "rooms": null,
+  "priceText": "$71",
   "googleCurrency": null,
   "exchangeRate": null,
-  "entityId": "ChoI_uTZsvz1i6-bARoNL2cvMTFmZHB6eDEwMxAB",
-  "hotelUrl": "https://www.google.com/travel/hotels/entity/ChoI_uTZsvz1i6-bARoNL2cvMTFmZHB6eDEwMxAB/prices?hl=en&gl=us&ts=CAASCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAKGBoSBwjqDxAKGBsYATICEAA",
-  "input": "hotels in Paris",
-  "scrapedAt": "2026-10-25T09:56:42+00:00",
+  "entityId": "ChcIhpronI2bp7cBGgsvZy8xdmc2dDB6NRAB",
+  "hotelUrl": "https://www.google.com/travel/hotels/entity/ChcIhpronI2bp7cBGgsvZy8xdmc2dDB6NRAB/prices?hl=en&gl=us&ts=CAASCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAMGBESBwjqDxAMGBIYATICEAA",
+  "input": "ChcIhpronI2bp7cBGgsvZy8xdmc2dDB6NRAB",
+  "scrapedAt": "2026-11-17T23:20:10+00:00",
   "error": null
 }
 ```
@@ -953,22 +836,22 @@ items = list(client.dataset(dataset_id).iterate_items())
 ```json
 {
   "type": "summary",
-  "route": "MEL-AKL",
-  "origin": "MEL",
-  "destination": "AKL",
-  "destinationCity": "Auckland",
-  "departureDate": "2026-12-04",
+  "route": "JFK-LAX",
+  "origin": "JFK",
+  "destination": "LAX",
+  "destinationCity": "Los Angeles",
+  "departureDate": "2026-12-17",
   "returnDate": null,
   "tripType": "one-way",
   "cabinClass": "economy",
   "adults": 1,
   "children": 0,
   "currency": "USD",
-  "lowestPrice": 233,
-  "priceLevel": "low",
-  "typicalPrice": 310,
-  "typicalPriceLow": 240,
-  "typicalPriceHigh": 475,
+  "lowestPrice": 265,
+  "priceLevel": "typical",
+  "typicalPrice": 179,
+  "typicalPriceLow": 135,
+  "typicalPriceHigh": 335,
   "targetPrice": null,
   "belowTargetPrice": null,
   "previousLowestPrice": null,
@@ -980,19 +863,20 @@ items = list(client.dataset(dataset_id).iterate_items())
   "trackedRuns": null,
   "changes": null,
   "cheapestFlight": {
-    "price": 233,
+    "price": 265,
     "airlines": [
-      "Jetstar"
+      "JetBlue"
     ],
     "flightNumbers": [
-      "JQ 217"
+      "B6 1601",
+      "B6 201"
     ],
-    "departureTime": "2026-12-04T23:55",
-    "arrivalTime": "2026-12-05T05:30",
-    "durationMinutes": 215,
-    "stops": 0
+    "departureTime": "2026-12-17T08:00",
+    "arrivalTime": "2026-12-17T14:53",
+    "durationMinutes": 593,
+    "stops": 1
   },
-  "flightsFound": 96,
+  "flightsFound": 125,
   "hotelName": null,
   "hotelRating": null,
   "hotelStars": null,
@@ -1004,21 +888,21 @@ items = list(client.dataset(dataset_id).iterate_items())
   "tripTotalPrice": null,
   "priceHistory": [
     {
-      "date": "2026-09-04",
-      "price": 220
+      "date": "2026-09-18",
+      "price": 284
     },
     {
-      "date": "2026-09-05",
-      "price": 235
+      "date": "2026-09-19",
+      "price": 284
     },
     {
-      "date": "2026-09-06",
-      "price": 235
+      "date": "2026-09-20",
+      "price": 284
     },
     "… 58 more"
   ],
-  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+AKL+from+MEL+on+2026-12-04+one+way&hl=en&curr=USD",
-  "scrapedAt": "2026-11-04T07:56:02+00:00",
+  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+LAX+from+JFK+on+2026-12-17+one+way&hl=en&curr=USD",
+  "scrapedAt": "2026-11-17T21:20:14+00:00",
   "error": null
 }
 ```
@@ -1099,7 +983,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "developer": "TikTok Ltd.",
   "developerId": "1322881000",
   "score": 4.8,
-  "ratings": 89676,
+  "ratings": 102202,
   "genre": "Entertainment",
   "free": true,
   "price": 0,
@@ -1109,7 +993,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "contentRating": "12+",
   "releasedAt": "2026-06-03",
   "description": "TikTok Pro - Events is a global discovery platform for videos where you can discover cool, funny, and educational short videos, as well as share important moments with your friends.\n\nEngage more with videos you love\nWith TikTok Pro - Events…",
-  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c7/e0/05/c7e00539-f686-7de1-776b-2389d4f8d3af/AppIcon_TikTok-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.png",
+  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/06/2d/12/062d12ba-6f42-bebb-94db-7860f8a333d2/AppIcon_TikTok-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.png",
   "country": "US",
   "language": null,
   "error": null
@@ -1169,13 +1053,13 @@ items = list(client.dataset(dataset_id).iterate_items())
 {
   "appId": "324684580",
   "appTitle": "Spotify: Music and Podcasts",
-  "reviewId": "14766702708",
-  "score": 5,
-  "title": "Amazing app",
-  "text": "100%",
-  "date": "2026-11-08T18:24:18Z",
+  "reviewId": "14796779639",
+  "score": 1,
+  "title": "Pagas premium y te ponen publicidad",
+  "text": "Pagar premium e igual te ponen publicidad en los podcast. Una burla.",
+  "date": "2026-11-16T08:06:55Z",
   "isEdited": false,
-  "appVersion": "9.1.94",
+  "appVersion": "9.2.0",
   "replyText": null,
   "replyDate": null,
   "userName": null,
@@ -1251,165 +1135,30 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "input": "com.spotify.music",
-  "rank": null,
-  "appId": "com.spotify.music",
-  "url": "https://play.google.com/store/apps/details?id=com.spotify.music&hl=en&gl=us",
-  "title": "Spotify: Music and Podcasts",
-  "summary": "Listen to songs, play podcasts, create playlists and discover music you'll love",
-  "description": "With the Spotify music and podcast app, you can play millions of songs, albums and original podcasts for free. We have even added audiobooks, so you can enjoy thousands of stories wherever you are!\n\nStream music and podcasts, listen to audi…",
-  "descriptionHtml": null,
-  "score": 4.3492,
-  "ratings": 36544130,
-  "reviews": 1857350,
-  "histogram": {
-    "1": 3715583,
-    "2": 1066810,
-    "3": 1307845,
-    "4": 3104700,
-    "5": 27349176
-  },
-  "installs": "1,000,000,000+",
-  "minInstalls": 1000000000,
-  "realInstalls": 3173851392,
+  "input": "Top free · APPLICATION",
+  "rank": 1,
+  "appId": "com.facebook.aura",
+  "url": "https://play.google.com/store/apps/details?id=com.facebook.aura&hl=en&gl=us",
+  "title": "Muse from Meta",
+  "developer": "Meta Platforms, Inc.",
+  "score": 4.8002,
+  "genre": "Productivity",
+  "installs": "10,000,000+",
   "free": true,
   "price": 0,
   "currency": "USD",
   "priceText": "Free",
-  "inAppPurchases": true,
-  "inAppPurchasesRange": "$4.99 - $203.88 per item",
-  "containsAds": true,
-  "genre": "Music & Audio",
-  "genreId": "MUSIC_AND_AUDIO",
-  "categories": [
-    {
-      "name": "Music & Audio",
-      "id": "MUSIC_AND_AUDIO"
-    }
-  ],
+  "inAppPurchasesRange": "$0.99 - $1,049.00 per item",
   "contentRating": "Teen",
-  "contentRatingDescription": null,
-  "interactiveElements": "In-App Purchases",
-  "developer": "Spotify AB",
-  "developerId": "6523013212965523194",
-  "developerUrl": "https://play.google.com/store/apps/developer?id=Spotify+AB",
-  "developerWebsite": "https://www.spotify.com",
-  "developerEmail": "support@spotify.com",
-  "developerLegalName": "Spotify AB",
-  "developerLegalEmail": "support@spotify.com",
-  "developerAddress": "Regeringsgatan 19\n111 53 Stockholm\nSweden",
-  "developerPhone": "+46 10 334 03 65",
-  "privacyPolicy": "https://www.spotify.com/legal/privacy-policy/",
-  "released": "May 27, 2014",
-  "releasedAt": "2014-05-27T13:12:17Z",
-  "updatedAt": "2026-10-23T12:37:22Z",
-  "version": "Varies with device",
-  "minAndroidVersion": "Varies with device",
-  "minSdk": null,
-  "targetSdk": 35,
-  "recentChanges": "We’re always making changes and improvements to Spotify. To make sure you don’t miss a thing, just keep your Updates turned on.",
-  "chartRank": 1,
-  "chartName": "top free music & audio",
-  "icon": "https://play-lh.googleusercontent.com/IzQgYCcnCFCD08GR-3bdtcT8xzOvrNkC84avGT5CwTX2VIqmTmKKJcP_Cd4JoBOdmCMlTndlOzV6hrthg2fOWA",
-  "headerImage": "https://play-lh.googleusercontent.com/WdedaGD6EAXZgy88wZM97aIcenQ5Cqzu_IUWBMMalkZmVe2lhv_3YqIUh-6pFqLv27kZ44cQX3qxyZTXHH-S91Q",
+  "summary": null,
+  "description": "Muse is your personal AI agent that gets things done, always working on what matters to you. It manages email, books dinners, tracks budgets, and finds deals, with your approval.\n\nPERSONAL PRODUCTIVITY\nMuse takes the the busywork off your p…",
+  "icon": "https://play-lh.googleusercontent.com/qDQUfohqN-eZh_a_YuWYlTsBPwjgrayoh2-Nf9o49kzN5Yjwk4yTyNUIFRI3o3PYks5lVAgEPrEPvFRYqxLP",
   "screenshots": [
-    "https://play-lh.googleusercontent.com/c1jnjL-9CIFlwlTMX3xNyeo8aEH39sNuC5zpTHhfW8keGxQE3TBMRX9Rm3VqM3E03Cyl9AqtnxuKvxJpcW0WCA",
-    "https://play-lh.googleusercontent.com/YxWsaNLSEBvLh04geMOADhSq6Ln5LmRrpa51ixZ7YkcEwmPQ-wdtnvoZDjVAgufbi2et0IlTVDAsvCCmlsJYnNA",
-    "https://play-lh.googleusercontent.com/RevDecVUzkc8iYhVazBoXb0O0Amy3_w6MNzzABHyAlyZjEYBq3xl-UxuxL5PGB6xTZpuxV7tET3pg1rp6weFWAY",
-    "… 37 more"
+    "https://play-lh.googleusercontent.com/V3hMSL8xl5edDVissfoaAPMMcbLK-YeoI_2HvXDY09SSBvnjvI-O4R20ewK_6Zoa03yuATFDrPQ9akjT-9gN",
+    "https://play-lh.googleusercontent.com/JazlMF3oMwyRnHWgRsq7lPzvJgWDzINYIgQIW6Buichuxto4fmQw4pjeZdVoltgmwQFdxKdF8CSZpA51mhQE8A",
+    "https://play-lh.googleusercontent.com/qSC2zCX9YjGsbwev-F25uEwuKqRsIJY42Hcny5y0DOeV1rMpeFkWbEJROvIk5ipAhylmTkKlRR67qZhJCPs8Gw",
+    "… 5 more"
   ],
-  "video": null,
-  "videoImage": null,
-  "permissions": [
-    {
-      "group": "Identity",
-      "permissions": [
-        "find accounts on the device"
-      ]
-    },
-    {
-      "group": "Contacts",
-      "permissions": [
-        "find accounts on the device"
-      ]
-    },
-    {
-      "group": "Location",
-      "permissions": [
-        "approximate location (network-based)",
-        "precise location (GPS and network-based)"
-      ]
-    },
-    "… 8 more"
-  ],
-  "dataSafety": {
-    "sharedData": [
-      {
-        "category": "Device or other IDs",
-        "type": "Device or other IDs",
-        "optional": false,
-        "purposes": [
-          "Advertising or marketing",
-          "Fraud prevention, security, and compliance"
-        ]
-      },
-      {
-        "category": "Location",
-        "type": "Approximate location",
-        "optional": false,
-        "purposes": [
-          "Analytics",
-          "Advertising or marketing"
-        ]
-      },
-      {
-        "category": "Personal info",
-        "type": "Other info",
-        "optional": false,
-        "purposes": [
-          "Analytics"
-        ]
-      }
-    ],
-    "sharedSummary": null,
-    "collectedData": [
-      {
-        "category": "Device or other IDs",
-        "type": "Device or other IDs",
-        "optional": false,
-        "purposes": [
-          "App functionality",
-          "Analytics",
-          "Developer communications",
-          "… 3 more"
-        ]
-      },
-      {
-        "category": "Audio",
-        "type": "Voice or sound recordings",
-        "optional": true,
-        "purposes": [
-          "App functionality",
-          "Fraud prevention, security, and compliance"
-        ]
-      },
-      {
-        "category": "Photos and videos",
-        "type": "Photos",
-        "optional": true,
-        "purposes": [
-          "App functionality",
-          "Fraud prevention, security, and compliance"
-        ]
-      },
-      "… 16 more"
-    ],
-    "collectedSummary": null,
-    "securityPractices": [
-      "Data is encrypted in transit",
-      "You can request that data be deleted"
-    ]
-  },
   "country": "US",
   "language": "en",
   "error": null
@@ -1470,13 +1219,13 @@ items = list(client.dataset(dataset_id).iterate_items())
 {
   "appId": "com.spotify.music",
   "appTitle": "Spotify: Music and Podcasts",
-  "reviewId": "f35184e9-2cd7-4be2-aa3e-4aabd9f0df4f",
-  "reviewUrl": "https://play.google.com/store/apps/details?id=com.spotify.music&reviewId=f35184e9-2cd7-4be2-aa3e-4aabd9f0df4f&hl=en&gl=us",
-  "score": 5,
-  "text": "i like it cuz it can make me relax",
-  "date": "2026-11-08T23:33:31Z",
+  "reviewId": "5f11e56a-d665-4b36-8eae-da325757f974",
+  "reviewUrl": "https://play.google.com/store/apps/details?id=com.spotify.music&reviewId=5f11e56a-d665-4b36-8eae-da325757f974&hl=en&gl=us",
+  "score": 3,
+  "text": "It's really a nice app easy to use. But I will like a new ui the current one has gotten a bit boring",
+  "date": "2026-11-16T23:36:22Z",
   "thumbsUp": 0,
-  "appVersion": null,
+  "appVersion": "9.2.0.2053",
   "replyText": null,
   "replyDate": null,
   "country": "US",
@@ -1552,7 +1301,7 @@ items = list(client.dataset(dataset_id).iterate_items())
       "mentioned": true,
       "mentions": 4,
       "rank": 1,
-      "firstMention": "For most small businesses, HubSpot CRM is the best overall choice, particularly if you want something easy to use, affordable to start, and capable of growing with your business.",
+      "firstMention": "For most small businesses, HubSpot CRM is my top recommendation.",
       "cited": true,
       "citedUrls": [
         "https://www.hubspot.com/products/crm"
@@ -1570,7 +1319,7 @@ items = list(client.dataset(dataset_id).iterate_items())
     {
       "brand": "Zoho CRM",
       "mentioned": true,
-      "mentions": 3,
+      "mentions": 4,
       "rank": 2,
       "firstMention": "Zoho CRM",
       "cited": true,
@@ -1584,7 +1333,7 @@ items = list(client.dataset(dataset_id).iterate_items())
       "rank": 1,
       "name": "HubSpot CRM",
       "category": "software",
-      "description": "Customer relationship management platform"
+      "description": null
     },
     {
       "rank": 2,
@@ -1598,13 +1347,13 @@ items = list(client.dataset(dataset_id).iterate_items())
       "category": "software",
       "description": null
     },
-    "… 3 more"
+    "… 2 more"
   ],
   "productCount": 0,
   "products": [],
   "followUpQuestions": [],
-  "answerText": "For most small businesses, HubSpot CRM is the best overall choice, particularly if you want something easy to use, affordable to start, and capable of growing with your business.\n\nHowever, the best CRM depends on how you acquire customers, …",
-  "answer": "For most small businesses, HubSpot CRM is the best overall choice, particularly if you want something easy to use, affordable to start, and capable of growing with your business.\n\nHowever, the best CRM depends on how you acquire customers, …",
+  "answerText": "For most small businesses, HubSpot CRM is my top recommendation. It offers a strong free starting point, is relatively easy to learn, and can grow with your business as you add employees, customers, and marketing activities.\n\nHowever, the b…",
+  "answer": "For most small businesses, HubSpot CRM is my top recommendation. It offers a strong free starting point, is relatively easy to learn, and can grow with your business as you add employees, customers, and marketing activities.\n\nHowever, the b…",
   "sources": [
     {
       "title": null,
@@ -1627,19 +1376,19 @@ items = list(client.dataset(dataset_id).iterate_items())
       "siteName": null,
       "citedInline": true
     },
-    "… 3 more"
+    "… 2 more"
   ],
-  "sourceCount": 6,
+  "sourceCount": 5,
   "citedDomains": [
     "hubspot.com",
     "zoho.com",
     "pipedrive.com",
-    "… 3 more"
+    "… 2 more"
   ],
   "webSearch": true,
   "location": "US",
-  "askedAt": "2026-11-09T22:50:55Z",
-  "seconds": 33.6,
+  "askedAt": "2026-11-17T22:50:59Z",
+  "seconds": 34.4,
   "error": null
 }
 ```
@@ -1694,29 +1443,29 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "prompt": "What is the best CRM for a small business?",
+  "prompt": "Which project management tool is best for a remote team?",
   "repeat": 1,
-  "answer": "Finding the \"best\" CRM for a small business depends entirely on your budget, team size, and whether your primary focus is sales pipelines, marketing, or customer support. \n\n---\n\n### 1. HubSpot CRM — Best for Beginners & Inbound Marketing\n* …",
-  "answerText": "Finding the \"best\" CRM for a small business depends entirely on your budget, team size, and whether your primary focus is sales pipelines, marketing, or customer support.\n\n---\n\n1. HubSpot CRM — Best for Beginners & Inbound Marketing\n- Best …",
+  "answer": "The \"best\" project management tool for a remote team depends entirely on your team's workflow, technical level, and how much you rely on asynchronous communication. Because remote teams cannot tap shoulders to check on progress, the ideal t…",
+  "answerText": "The \"best\" project management tool for a remote team depends entirely on your team's workflow, technical level, and how much you rely on asynchronous communication. Because remote teams cannot tap shoulders to check on progress, the ideal t…",
   "sources": [
     {
-      "title": "The Best CRM for Small Business in 2026: An Honest Comparison",
-      "url": "https://1crm.com/best-crm-for-small-business/",
-      "domain": "1crm.com",
+      "title": "7 Best Project Management Tools for Remote Teams (2026)",
+      "url": "https://kova-digital.com/work/project-management-tools",
+      "domain": "kova-digital.com",
       "siteName": null,
       "citedInline": true
     },
     {
-      "title": "10 Best CRM Tools for Small Businesses in 2026 - Helpmonks",
-      "url": "https://helpmonks.com/blog/best-crm-tools-small-businesses-2026/",
-      "domain": "helpmonks.com",
+      "title": "Best project management tools and software: My 21 top picks for 2026",
+      "url": "https://www.wrike.com/project-management-guide/faq/what-are-project-management-tools/",
+      "domain": "wrike.com",
       "siteName": null,
       "citedInline": true
     },
     {
-      "title": "Best small business CRM of 2026 - TechRadar",
-      "url": "https://www.techradar.com/best/best-crm-for-small-business",
-      "domain": "techradar.com",
+      "title": "Best project management software for 2026? : r/projectmanagers",
+      "url": "https://www.reddit.com/r/projectmanagers/comments/1q4ndn0/best_project_management_software_for_2026/",
+      "domain": "reddit.com",
       "siteName": null,
       "citedInline": true
     },
@@ -1724,53 +1473,52 @@ items = list(client.dataset(dataset_id).iterate_items())
   ],
   "sourceCount": 6,
   "citedDomains": [
-    "1crm.com",
-    "helpmonks.com",
-    "techradar.com",
-    "… 2 more"
+    "kova-digital.com",
+    "wrike.com",
+    "reddit.com",
+    "… 3 more"
   ],
   "products": [],
   "yourBrand": "HubSpot",
-  "yourBrandMentioned": true,
-  "yourBrandRank": 1,
+  "yourBrandMentioned": false,
+  "yourBrandRank": null,
   "yourBrandCited": false,
   "brandsMentioned": [
-    "HubSpot",
-    "Pipedrive",
-    "Salesforce"
+    "monday.com"
   ],
   "brands": [
     {
       "brand": "HubSpot",
-      "mentioned": true,
-      "mentions": 4,
-      "rank": 1,
-      "firstMention": "HubSpot CRM — Best for Beginners & Inbound Marketing",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
     },
     {
       "brand": "Salesforce",
-      "mentioned": true,
-      "mentions": 4,
-      "rank": 3,
-      "firstMention": "The Catch: Advanced custom workflows and deep enterprise configurations are more limited than competitors like Salesforce or Zoho.",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
     },
     {
-      "brand": "Pipedrive",
-      "mentioned": true,
-      "mentions": 3,
-      "rank": 2,
-      "firstMention": "Pipedrive — Best for Sales-Driven Teams",
+      "brand": "Zoho CRM",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
-    }
+    },
+    "… 2 more"
   ],
   "language": "en",
-  "askedAt": "2026-10-25T09:52:20Z",
-  "seconds": 12.2,
+  "askedAt": "2026-11-17T21:05:22Z",
+  "seconds": 16.4,
   "error": null
 }
 ```
@@ -1827,14 +1575,14 @@ items = list(client.dataset(dataset_id).iterate_items())
 {
   "prompt": "What is the best CRM for a small business?",
   "repeat": 1,
-  "answer": "Finding the best CRM for a small business depends heavily on your team's specific goals, technical comfort level, and budget. Because there is no one-size-fits-all solution, small business CRMs generally fall into a few distinct categories—…",
-  "answerText": "Finding the best CRM for a small business depends heavily on your team's specific goals, technical comfort level, and budget. Because there is no one-size-fits-all solution, small business CRMs generally fall into a few distinct categories—…",
+  "answer": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use. While HubSpot leads for all-in-one marketing…",
+  "answerText": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use. While HubSpot leads for all-in-one marketing…",
   "sources": [
     {
-      "title": "The Best Small Business CRM Software We've Tested for 2026 | PCMag",
-      "url": "https://www.pcmag.com/picks/the-best-small-business-crm-software",
-      "domain": "pcmag.com",
-      "siteName": "PCMag",
+      "title": "Best and inexpensive CRM for small business - Reddit",
+      "url": "https://www.reddit.com/r/CRM/comments/1e5141p/best_and_inexpensive_crm_for_small_business/",
+      "domain": "reddit.com",
+      "siteName": "Reddit",
       "citedInline": true
     },
     {
@@ -1855,7 +1603,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   ],
   "sourceCount": 12,
   "citedDomains": [
-    "pcmag.com",
+    "reddit.com",
     "hubspot.com",
     "zoho.com",
     "… 9 more"
@@ -1866,7 +1614,9 @@ items = list(client.dataset(dataset_id).iterate_items())
   "yourBrandCited": true,
   "brandsMentioned": [
     "HubSpot",
-    "Pipedrive"
+    "Pipedrive",
+    "Zoho CRM",
+    "… 1 more"
   ],
   "brands": [
     {
@@ -1874,7 +1624,7 @@ items = list(client.dataset(dataset_id).iterate_items())
       "mentioned": true,
       "mentions": 5,
       "rank": 1,
-      "firstMention": "HubSpot CRM - Ease of Use & Growth - Smohest user interface; excellent free tier.",
+      "firstMention": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use.",
       "cited": true,
       "citedUrls": [
         "https://www.hubspot.com/products/crm/ai-crm"
@@ -1882,29 +1632,32 @@ items = list(client.dataset(dataset_id).iterate_items())
     },
     {
       "brand": "Salesforce",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
-    },
-    {
-      "brand": "Pipedrive",
       "mentioned": true,
-      "mentions": 3,
-      "rank": 2,
-      "firstMention": "Pipedrive - Sales-Focused Teams - Visual, intuitive deal pipelines that teams pick up instantly.",
+      "mentions": 1,
+      "rank": 4,
+      "firstMention": "Salesforce Starter - Rapidly scaling teams - $25/user/month - No (Free trial) - Enterprise-grade scalability and deep reporting",
       "cited": true,
       "citedUrls": [
-        "https://www.pipedrive.com/"
+        "https://www.salesforce.com/crm/crm-for-small-business/"
       ]
-    }
+    },
+    {
+      "brand": "Zoho CRM",
+      "mentioned": true,
+      "mentions": 3,
+      "rank": 3,
+      "firstMention": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.zoho.com/crm/small-business-crm-software/"
+      ]
+    },
+    "… 2 more"
   ],
   "country": "US",
   "language": "en",
-  "askedAt": "2026-10-25T09:57:02Z",
-  "seconds": 7.3,
+  "askedAt": "2026-11-17T21:15:33Z",
+  "seconds": 7,
   "error": null
 }
 ```
@@ -1961,50 +1714,61 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "prompt": "What is the best CRM for a small business?",
+  "prompt": "Which project management tool is best for a remote team?",
   "repeat": 1,
-  "answer": "The **best overall CRM for most small businesses is HubSpot CRM**, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools [2].\n\n**If you want the simplest setup:** Bigin by Zoho CRM\n**If you want visual p…",
-  "answerText": "The best overall CRM for most small businesses is HubSpot CRM, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools.\n\nIf you want the simplest setup: Bigin by Zoho CRM\nIf you want visual pipelines: mond…",
+  "answer": "**The best project management tool for a remote team depends on your workflow, but current expert reviews consistently highlight *monday.com*, *Wrike*, and *ClickUp* as top choices thanks to their strong collaboration features, automation, …",
+  "answerText": "The best project management tool for a remote team depends on your workflow, but current expert reviews consistently highlight *monday.com*, *Wrike*, and *ClickUp* as top choices thanks to their strong collaboration features, automation, an…",
   "sources": [
     {
-      "title": "10 Best Small Business CRM Software Of 2026 - Forbes",
-      "url": "https://www.forbes.com/advisor/business/software/best-crm-small-business/",
-      "domain": "forbes.com",
-      "siteName": "Forbes",
+      "title": "10 Best Project Management Tools For Remote Teams In 2026",
+      "url": "https://thedigitalprojectmanager.com/tools/project-management-tools-remote-teams/",
+      "domain": "thedigitalprojectmanager.com",
+      "siteName": "The Digital Project Manager",
       "citedInline": true,
       "number": 1,
-      "snippet": "To find the best small business CRMs, we evaluated 41 providers and ranked 33 features and tools that have the biggest impact on SMBs."
+      "snippet": null
     },
     {
-      "title": "12 Best Small Business CRM Tools",
-      "url": "https://fitsmallbusiness.com/best-crm-for-small-business/",
-      "domain": "fitsmallbusiness.com",
-      "siteName": "Fit Small Business",
+      "title": "10 Best Remote Project Management Tools Reviewed For 2026",
+      "url": "https://thedigitalprojectmanager.com/tools/remote-project-management-tools/",
+      "domain": "thedigitalprojectmanager.com",
+      "siteName": "The Digital Project Manager",
       "citedInline": true,
       "number": 2,
-      "snippet": "Compare the 12 best CRM tools for small business. Our 2026 top picks are HubSpot CRM, Bigin by Zoho CRM, and monday CRM to drive sales and growth."
-    }
+      "snippet": null
+    },
+    {
+      "title": "7 Best Remote Team Collaboration Tools 2026 [Free & Paid]",
+      "url": "https://www.cloudwards.net/team-collaboration-tools/",
+      "domain": "cloudwards.net",
+      "siteName": "Cloudwards",
+      "citedInline": true,
+      "number": 3,
+      "snippet": null
+    },
+    "… 1 more"
   ],
-  "sourceCount": 2,
+  "sourceCount": 4,
   "citedDomains": [
-    "forbes.com",
-    "fitsmallbusiness.com"
+    "thedigitalprojectmanager.com",
+    "cloudwards.net",
+    "apollotechnical.com"
   ],
   "yourBrand": "HubSpot",
-  "yourBrandMentioned": true,
-  "yourBrandRank": 1,
+  "yourBrandMentioned": false,
+  "yourBrandRank": null,
   "yourBrandCited": false,
   "brandsMentioned": [
-    "HubSpot",
-    "Pipedrive"
+    "monday.com",
+    "Zoho CRM"
   ],
   "brands": [
     {
       "brand": "HubSpot",
-      "mentioned": true,
-      "mentions": 4,
-      "rank": 1,
-      "firstMention": "The best overall CRM for most small businesses is HubSpot CRM, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools.",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
     },
@@ -2018,19 +1782,20 @@ items = list(client.dataset(dataset_id).iterate_items())
       "citedUrls": []
     },
     {
-      "brand": "Pipedrive",
+      "brand": "Zoho CRM",
       "mentioned": true,
-      "mentions": 3,
+      "mentions": 5,
       "rank": 2,
-      "firstMention": "If you want deep email marketing: Pipedrive",
+      "firstMention": "Zoho Projects — Best for automation within the Zoho ecosystem",
       "cited": false,
       "citedUrls": []
-    }
+    },
+    "… 2 more"
   ],
   "language": "en",
-  "proxy": "residential-US",
-  "askedAt": "2026-10-25T09:53:11Z",
-  "seconds": 21,
+  "proxy": "none",
+  "askedAt": "2026-11-17T21:10:43Z",
+  "seconds": 12.4,
   "error": null
 }
 ```
@@ -2099,79 +1864,82 @@ items = list(client.dataset(dataset_id).iterate_items())
   "brandedPrompt": false,
   "yourBrand": "Pipedrive",
   "yourBrandMentioned": true,
-  "yourBrandRank": 3,
+  "yourBrandRank": 2,
   "yourBrandCited": false,
   "brandsMentioned": [
     "HubSpot",
+    "Pipedrive",
     "Zoho CRM",
-    "Pipedrive"
+    "… 1 more"
   ],
   "brands": [
     {
       "brand": "Pipedrive",
       "mentioned": true,
-      "mentions": 2,
-      "rank": 3,
-      "firstMention": "Pipedrive",
+      "mentions": 1,
+      "rank": 2,
+      "firstMention": "Pipedrive: Best for sales-focused pipelines.",
       "cited": false,
       "citedUrls": []
     },
     {
       "brand": "HubSpot",
       "mentioned": true,
-      "mentions": 2,
+      "mentions": 1,
       "rank": 1,
-      "firstMention": "HubSpot CRM",
+      "firstMention": "HubSpot CRM: Best for all-in-one marketing and sales.",
       "cited": false,
       "citedUrls": []
     },
     {
       "brand": "Salesforce",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
+      "mentioned": true,
+      "mentions": 1,
+      "rank": 4,
+      "firstMention": "Salesforce Starter: Best for growing businesses wanting enterprise DNA.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.salesforce.com/crm/crm-for-small-business/"
+      ]
     },
-    "… 1 more"
+    "… 2 more"
   ],
-  "answerText": "The best CRM (Customer Relationship Management) software for small businesses depends on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM\n\nBest for: Inbound marketing, ease of use, and getting started on a fre…",
-  "answer": "The best CRM (Customer Relationship Management) software for small businesses depends on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM\n\nBest for: Inbound marketing, ease of use, and getting started on a fre…",
+  "answerText": "The top customer relationship management (CRM) software for small businesses in 2026 varies depending on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM: Best for all-in-one marketing and sales. Offers a popu…",
+  "answer": "The top customer relationship management (CRM) software for small businesses in 2026 varies depending on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM: Best for all-in-one marketing and sales. Offers a popu…",
   "sources": [
     {
-      "title": "10 Free or Low-Cost CRM Tools for Small Businesses",
-      "url": "https://www.uschamber.com/co/start/strategy/low-cost-crm-tools",
-      "domain": "uschamber.com",
-      "siteName": "U.S. Chamber of Commerce",
+      "title": "Best and inexpensive CRM for small business - Reddit",
+      "url": "https://www.reddit.com/r/CRM/comments/1e5141p/best_and_inexpensive_crm_for_small_business/",
+      "domain": "reddit.com",
+      "siteName": "Reddit",
       "citedInline": true
     },
     {
-      "title": "The Best Small Business CRM Software We've Tested for 2026 | PCMag",
-      "url": "https://www.pcmag.com/picks/the-best-small-business-crm-software",
-      "domain": "pcmag.com",
-      "siteName": "PCMag",
+      "title": "Best CRM for Small Businesses | Zoho CRM",
+      "url": "https://www.zoho.com/crm/small-business-crm-software/",
+      "domain": "zoho.com",
+      "siteName": "Zoho",
       "citedInline": true
     },
     {
-      "title": "The 11 Best CRMs for Small Business in 2026 | Zapier",
-      "url": "https://zapier.com/blog/best-crms-for-small-business/",
-      "domain": "zapier.com",
-      "siteName": "Zapier",
+      "title": "CRM For Small Business (Your Complete Guide) - Salesforce",
+      "url": "https://www.salesforce.com/crm/crm-for-small-business/",
+      "domain": "salesforce.com",
+      "siteName": "Salesforce",
       "citedInline": true
     },
-    "… 5 more"
+    "… 3 more"
   ],
-  "sourceCount": 8,
+  "sourceCount": 6,
   "citedDomains": [
-    "uschamber.com",
-    "pcmag.com",
-    "zapier.com",
-    "… 5 more"
+    "reddit.com",
+    "zoho.com",
+    "salesforce.com",
+    "… 3 more"
   ],
   "country": "US",
-  "askedAt": "2026-10-25T09:52:32Z",
-  "seconds": 9.3,
+  "askedAt": "2026-11-17T21:01:05Z",
+  "seconds": 7.5,
   "error": null
 }
 ```
@@ -2228,19 +1996,19 @@ items = list(client.dataset(dataset_id).iterate_items())
 ```json
 {
   "type": "trendingNow",
-  "title": "bills",
+  "title": "chargers",
   "geo": "US",
   "windowHours": 24,
   "searchVolume": 1000000,
   "increasePercent": 1000,
-  "startedAt": "2026-11-10T00:30:00+00:00",
-  "endedAt": null,
-  "isActive": true,
+  "startedAt": "2026-11-17T00:00:00+00:00",
+  "endedAt": "2026-11-17T15:40:00+00:00",
+  "isActive": false,
   "relatedSearches": [
-    "bills",
-    "vikings",
-    "buffalo bills",
-    "… 100 more"
+    "chargers",
+    "ravens",
+    "baltimore ravens",
+    "… 86 more"
   ],
   "categories": [
     "Sports"
@@ -2248,8 +2016,8 @@ items = list(client.dataset(dataset_id).iterate_items())
   "categoryIds": [
     17
   ],
-  "newsArticleCount": 0,
-  "trendsUrl": "https://trends.google.com/trends/explore?q=bills&geo=US&date=now+1-d",
+  "newsArticleCount": 97,
+  "trendsUrl": "https://trends.google.com/trends/explore?q=chargers&geo=US&date=now+1-d",
   "rank": 1
 }
 ```
@@ -2307,24 +2075,28 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "title": "Giving $10,000 To A Random Subscriber",
-  "id": "aNI2jv7lBPQ",
-  "url": "https://www.youtube.com/shorts/aNI2jv7lBPQ",
+  "title": "Useful Kitchen Hacks and DIY Solutions for Easier Cooking! 🍳 #easy #quick #cooking #recipes",
+  "id": "fHuCMjddNr8",
+  "url": "https://www.youtube.com/shorts/fHuCMjddNr8",
   "type": "shorts",
-  "thumbnailUrl": "https://i.ytimg.com/vi/aNI2jv7lBPQ/hqdefault.jpg",
-  "viewCount": 73876519,
-  "likes": 1614646,
-  "commentsCount": 32166,
-  "date": "2026-10-09T16:00:01Z",
-  "dateText": "Oct 9, 2026",
-  "duration": "00:00:40",
-  "durationSeconds": 40,
-  "text": null,
+  "thumbnailUrl": "https://i.ytimg.com/vi/fHuCMjddNr8/hqdefault.jpg",
+  "viewCount": 190143,
+  "likes": 2312,
+  "commentsCount": 10,
+  "date": "2026-11-12T17:00:08Z",
+  "dateText": "Nov 12, 2026",
+  "duration": "00:02:58",
+  "durationSeconds": 178,
+  "text": "Discover clever kitchen hacks and practical DIY solutions that simplify food preparation, save time, and make everyday cooking easier and more enjoyable.",
   "descriptionLinks": [],
   "hashtags": [],
   "location": null,
-  "category": "Entertainment",
-  "keywords": [],
+  "category": "People & Blogs",
+  "keywords": [
+    "simple",
+    "cooking",
+    "tricks"
+  ],
   "isLive": false,
   "commentsTurnedOff": false,
   "isMembersOnly": false,
@@ -2336,36 +2108,23 @@ items = list(client.dataset(dataset_id).iterate_items())
   "subtitles": null,
   "translatedTitle": null,
   "translatedText": null,
-  "channelName": "MrBeast",
-  "channelId": "UCX6OQ3DkcsbYNE6H8uQQuVA",
-  "channelUrl": "https://www.youtube.com/@MrBeast",
-  "channelUsername": "MrBeast",
-  "numberOfSubscribers": 525000000,
-  "isChannelVerified": true,
-  "channelAvatarUrl": "https://yt3.googleusercontent.com/nxYrc_1_2f77DoBadyxMTmv7ZpRZapHR5jbuYe7PlPd5cIRJxtNNEYyOC0ZsxaDyJJzXrnJiuDE=s900-c-k-c0x00ffffff-no-rj",
-  "channelBannerUrl": "https://yt3.googleusercontent.com/mHMO_eEMp0dPvh0ADwXhPXNYb_GnjSVsLI8biqF1CpxT8OPl7izhNQsDPD3JHhd5y5Mg9GrP=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-  "channelDescription": "SUBSCRIBE FOR A COOKIE!\nNew MrBeast or MrBeast Gaming video every single Saturday at noon eastern time!\nAccomplishments:\n- Raised $20,000,000 To Plant 20,000,000 Trees\n- Removed 30,000,000 pounds of trash from the ocean\n- Helped 2,000 peopl…",
-  "channelDescriptionLinks": [
-    {
-      "text": "Follow",
-      "url": "https://www.instagram.com/mrbeast/"
-    },
-    {
-      "text": "Twitter",
-      "url": "https://twitter.com/MrBeast"
-    },
-    {
-      "text": "Facebook",
-      "url": "https://facebook.com/mrbeast/"
-    }
-  ],
+  "channelName": "Beamish Mealy",
+  "channelId": "UCXEJKxzUrHy8p9XQUSojgdA",
+  "channelUrl": "https://www.youtube.com/@BeamishMealy",
+  "channelUsername": "BeamishMealy",
+  "numberOfSubscribers": 3060,
+  "isChannelVerified": false,
+  "channelAvatarUrl": "https://yt3.googleusercontent.com/TQgNRuTL-wau93UsWXnmOgCR02z3XnzsziZewlWSfPp_9dMwZc30ZrKrY-xbd2HkW70pXD7gA9A=s900-c-k-c0x00ffffff-no-rj",
+  "channelBannerUrl": null,
+  "channelDescription": "We strive to bring you the best and most creative recipes, cooking skills, and kitchen techniques. From delicious homemade meals to inspiring new ideas, we share our passion for food, creativity, and the art of cooking.\n\nDiscover new flavor…",
+  "channelDescriptionLinks": [],
   "channelLocation": "United States",
-  "channelJoinedDate": "2012-02-19",
-  "channelTotalVideos": 1012,
-  "channelTotalViews": 146262472980,
-  "input": "https://www.youtube.com/@MrBeast",
-  "fromYTUrl": "https://www.youtube.com/@MrBeast/shorts",
-  "order": 5,
+  "channelJoinedDate": "2026-10-18",
+  "channelTotalVideos": 18,
+  "channelTotalViews": 2641706,
+  "input": "cooking hacks",
+  "fromYTUrl": "https://www.youtube.com/results?search_query=cooking%20hacks&sp=EgIQCQ%3D%3D",
+  "order": 8,
   "error": null
 }
 ```
@@ -2439,27 +2198,27 @@ items = list(client.dataset(dataset_id).iterate_items())
   "origin": "JFK",
   "destination": "LAX",
   "destinationCity": "Los Angeles",
-  "departureDate": "2026-12-08",
+  "departureDate": "2026-12-17",
   "returnDate": null,
   "tripType": "one-way",
   "cabinClass": "economy",
   "adults": 1,
   "children": 0,
   "currency": "USD",
-  "lowestPrice": 164,
+  "lowestPrice": 265,
   "priceLevel": "typical",
   "typicalPrice": 179,
-  "typicalPriceLow": 105,
-  "typicalPriceHigh": 325,
+  "typicalPriceLow": 135,
+  "typicalPriceHigh": 335,
   "targetPrice": null,
   "belowTargetPrice": null,
-  "previousLowestPrice": 164,
-  "lowestPriceChange": 0,
-  "lowestPriceEver": 164,
-  "lowestPriceEverAt": "2026-11-08T13:02:34+00:00",
+  "previousLowestPrice": null,
+  "lowestPriceChange": null,
+  "lowestPriceEver": 265,
+  "lowestPriceEverAt": "2026-11-17T21:40:11+00:00",
   "isLowestEver": true,
-  "trackedSince": "2026-11-08T13:02:34+00:00",
-  "trackedRuns": 3,
+  "trackedSince": "2026-11-17T21:40:11+00:00",
+  "trackedRuns": 1,
   "changes": {
     "new": 0,
     "cheaper": 0,
@@ -2467,19 +2226,20 @@ items = list(client.dataset(dataset_id).iterate_items())
     "gone": 0
   },
   "cheapestFlight": {
-    "price": 164,
+    "price": 265,
     "airlines": [
-      "American"
+      "JetBlue"
     ],
     "flightNumbers": [
-      "AA 341"
+      "B6 1601",
+      "B6 201"
     ],
-    "departureTime": "2026-12-08T14:59",
-    "arrivalTime": "2026-12-08T18:16",
-    "durationMinutes": 377,
-    "stops": 0
+    "departureTime": "2026-12-17T08:00",
+    "arrivalTime": "2026-12-17T14:53",
+    "durationMinutes": 593,
+    "stops": 1
   },
-  "flightsFound": 89,
+  "flightsFound": 125,
   "hotelName": null,
   "hotelRating": null,
   "hotelStars": null,
@@ -2491,21 +2251,21 @@ items = list(client.dataset(dataset_id).iterate_items())
   "tripTotalPrice": null,
   "priceHistory": [
     {
-      "date": "2026-09-08",
-      "price": 169
+      "date": "2026-09-18",
+      "price": 284
     },
     {
-      "date": "2026-09-09",
-      "price": 169
+      "date": "2026-09-19",
+      "price": 284
     },
     {
-      "date": "2026-09-10",
-      "price": 169
+      "date": "2026-09-20",
+      "price": 284
     },
-    "… 59 more"
+    "… 58 more"
   ],
-  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+LAX+from+JFK+on+2026-12-08+one+way&hl=en&curr=USD",
-  "scrapedAt": "2026-11-08T13:04:58+00:00",
+  "googleFlightsUrl": "https://www.google.com/travel/flights?q=Flights+to+LAX+from+JFK+on+2026-12-17+one+way&hl=en&curr=USD",
+  "scrapedAt": "2026-11-17T21:40:11+00:00",
   "error": null
 }
 ```
@@ -2562,33 +2322,33 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "appId": "892970",
-  "appName": "Valheim",
-  "reviewId": "86178148",
+  "appId": "1145360",
+  "appName": "Hades",
+  "reviewId": "240453969",
   "recommended": true,
-  "text": "Found beach. Built nice hut on beach. Storm started. Started storm watching. \n\nTsunami came. No more hut.\n\nGG.",
+  "text": "I LOVE IT (Scratches the Wakfu/Dofus dungeon experiences in a crazy way) \r\nFinished the game 87 times, moving to Hades 2",
   "language": "english",
-  "createdAt": "2021-02-08T02:43:13Z",
-  "updatedAt": "2021-02-08T02:43:13Z",
-  "votesUp": 3699,
-  "votesFunny": 3878,
-  "helpfulScore": 0.9359886050224304,
-  "commentCount": 46,
+  "createdAt": "2026-11-17T21:36:01Z",
+  "updatedAt": "2026-11-17T21:36:01Z",
+  "votesUp": 0,
+  "votesFunny": 0,
+  "helpfulScore": 0.5,
+  "commentCount": 0,
   "steamPurchase": true,
   "receivedForFree": false,
   "refunded": false,
-  "writtenDuringEarlyAccess": true,
+  "writtenDuringEarlyAccess": false,
   "primarilySteamDeck": false,
-  "playtimeAtReviewHours": 2.9,
-  "playtimeForeverHours": 91.3,
-  "playtimeLastTwoWeeksHours": 0,
+  "playtimeAtReviewHours": 207.1,
+  "playtimeForeverHours": 207.1,
+  "playtimeLastTwoWeeksHours": 55.6,
   "deckPlaytimeAtReviewHours": null,
-  "lastPlayedAt": "2021-03-05T20:27:23Z",
-  "authorReviewCount": 37,
+  "lastPlayedAt": "2026-11-17T21:34:38Z",
+  "authorReviewCount": 4,
   "developerResponse": null,
   "developerResponseAt": null,
-  "reviewUrl": "https://steamcommunity.com/profiles/76561197988650549/recommended/892970/",
-  "authorSteamId": "(removed)",
+  "reviewUrl": null,
+  "authorSteamId": null,
   "error": null
 }
 ```
@@ -2642,20 +2402,20 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "appHandle": "judgeme",
-  "appName": "Judge.me Product Reviews App",
-  "developer": "Judge.me",
-  "reviewId": "2420949",
-  "rating": 1,
-  "text": "Really complicated and you need to be a computer tech engineer to figure it out! Spent hours going around in circles....",
-  "date": "2026-11-06",
+  "appHandle": "klaviyo-email-marketing",
+  "appName": "Klaviyo: Email Marketing & SMS",
+  "developer": "Klaviyo",
+  "reviewId": "2430677",
+  "rating": 5,
+  "text": "",
+  "date": "2026-11-16",
   "edited": false,
   "storeName": "(removed)",
-  "storeCountry": "United Kingdom",
-  "timeUsingApp": "About 1 year using the app",
-  "replyText": null,
-  "replyDate": null,
-  "reviewUrl": "https://apps.shopify.com/reviews/2420949",
+  "storeCountry": "United States",
+  "timeUsingApp": "12 days using the app",
+  "replyText": "Thank you for the 5-star rating!",
+  "replyDate": "2026-11-16",
+  "reviewUrl": "https://apps.shopify.com/reviews/2430677",
   "error": null
 }
 ```
@@ -2712,53 +2472,71 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "prompt": "best budget wireless earbuds 2026",
+  "prompt": "What is the best CRM for a small business?",
   "repeat": 1,
-  "answer": "The **Anker Soundcore Space A40** are the strongest all‑around budget earbuds in 2026 thanks to excellent ANC, customizable sound, long battery life, and consistently top-tier value.\n\n### ✅ Quick Answer (Top Picks)\n**Best overall:** **Anker…",
-  "answerText": "The Anker Soundcore Space A40 are the strongest all‑around budget earbuds in 2026 thanks to excellent ANC, customizable sound, long battery life, and consistently top-tier value.\n\n✅ Quick Answer (Top Picks)\nBest overall: Anker Soundcore Spa…",
+  "answer": "**For most small businesses, **HubSpot CRM** is the best starting point because its free plan covers core contact and deal management, while its broader platform can add marketing, service, and automation later. If your team is primarily sa…",
+  "answerText": "For most small businesses, HubSpot CRM is the best starting point because its free plan covers core contact and deal management, while its broader platform can add marketing, service, and automation later. If your team is primarily sales-fo…",
   "sources": [
     {
-      "title": "The 5 Best Budget Wireless Earbuds of 2026 - RTINGS.com",
-      "url": "https://www.rtings.com/headphones/reviews/best/cheap-wireless-earbuds",
-      "domain": "rtings.com",
-      "siteName": "RTINGS.com",
+      "title": "Customer Platform Pricing | HubSpot",
+      "url": "https://www.hubspot.com/pricing/suite",
+      "domain": "hubspot.com",
+      "siteName": "HubSpot",
       "citedInline": true,
       "number": 1,
-      "snippet": "The Anker Soundcore Space A40 Truly Wireless are the best budget wireless earbuds we've tested. These great-value earbuds offer amazing ANC."
+      "snippet": null
     },
     {
-      "title": "Best Cheap Earbuds 2026: Great sound and value on a budget",
-      "url": "https://www.trustedreviews.com/best/best-cheap-earbuds-4382625",
-      "domain": "trustedreviews.com",
-      "siteName": "Trusted Reviews",
+      "title": "HubSpot's Starter Plan for Startups & Small Businesses",
+      "url": "https://www.hubspot.com/products/crm/starter",
+      "domain": "hubspot.com",
+      "siteName": "HubSpot",
       "citedInline": true,
       "number": 2,
-      "snippet": "True wireless earbuds don’t need to cost an arm and a leg. We’ve compiled this list of the best cheap earbuds to help you find the right pair"
+      "snippet": null
     },
     {
-      "title": "Best Budget Wireless Earbuds: Top Picks Under $150 - Cybernews",
-      "url": "https://cybernews.com/headphones/best-budget-wireless-earbuds/",
-      "domain": "cybernews.com",
-      "siteName": "Cybernews",
+      "title": "CRM Pricing Plans | Affordable CRM Software Costs | Pipedrive",
+      "url": "https://www.pipedrive.com/en/pricing",
+      "domain": "pipedrive.com",
+      "siteName": "Pipedrive",
       "citedInline": true,
       "number": 3,
-      "snippet": "Discover the best budget wireless earbuds on the market in 2026. Read my detailed reviews of the top choices, with great sound, features, and value, all under $150."
-    }
+      "snippet": null
+    },
+    "… 2 more"
   ],
-  "sourceCount": 3,
+  "sourceCount": 5,
   "citedDomains": [
-    "rtings.com",
-    "trustedreviews.com",
-    "cybernews.com"
+    "hubspot.com",
+    "pipedrive.com",
+    "zoho.com",
+    "… 1 more"
   ],
-  "yourBrand": "Asana",
-  "yourBrandMentioned": false,
-  "yourBrandRank": null,
-  "yourBrandCited": false,
-  "brandsMentioned": [],
+  "yourBrand": "HubSpot",
+  "yourBrandMentioned": true,
+  "yourBrandRank": 1,
+  "yourBrandCited": true,
+  "brandsMentioned": [
+    "HubSpot",
+    "Pipedrive",
+    "Zoho CRM"
+  ],
   "brands": [
     {
-      "brand": "Asana",
+      "brand": "HubSpot",
+      "mentioned": true,
+      "mentions": 7,
+      "rank": 1,
+      "firstMention": "For most small businesses, HubSpot CRM is the best starting point because its free plan covers core contact and deal management, while its broader platform can add marketing, service, and automation later.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.hubspot.com/pricing/suite",
+        "https://www.hubspot.com/products/crm/starter"
+      ]
+    },
+    {
+      "brand": "Salesforce",
       "mentioned": false,
       "mentions": 0,
       "rank": null,
@@ -2767,28 +2545,22 @@ items = list(client.dataset(dataset_id).iterate_items())
       "citedUrls": []
     },
     {
-      "brand": "Trello",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
+      "brand": "Zoho CRM",
+      "mentioned": true,
+      "mentions": 6,
+      "rank": 3,
+      "firstMention": "If your team is primarily sales-focused, choose Pipedrive; if minimizing cost and maximizing customization matter most, choose Zoho CRM.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.zoho.com/en-us/crm/zohocrm-pricing.html"
+      ]
     },
-    {
-      "brand": "Monday.com",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
-    }
+    "… 2 more"
   ],
   "language": "en",
   "proxy": "none",
-  "askedAt": "2026-11-08T13:04:11Z",
-  "seconds": 1.8,
+  "askedAt": "2026-11-17T21:30:50Z",
+  "seconds": 27.4,
   "error": null
 }
 ```
@@ -2849,31 +2621,32 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "platform": "Mindrift",
-  "jobId": "1CF04FF2E4",
-  "title": "$110 for 90 Minutes of Conversation: Paid Research Study",
-  "company": "Mindrift",
-  "category": "Paid research study",
-  "skills": null,
-  "payMin": 110,
-  "payMax": 110,
-  "payCurrency": "USD",
-  "payPeriod": "one-time",
-  "payText": "$110 for 90 Minutes of Conversation: Paid Research Study",
-  "hoursPerWeek": null,
-  "commitment": "Part-time",
-  "workArrangement": "onsite",
-  "location": "San Mateo, California, United States",
-  "eligibleCountries": [
-    "United States"
+  "platform": "Turing",
+  "jobId": "120146",
+  "title": "Scientific Computing / Research Engineering Expert — Engineering",
+  "company": "Turing",
+  "category": "Engineering",
+  "skills": [
+    "Electrical Networks",
+    "Chemistry"
   ],
-  "postedAt": "2026-10-25T00:00:00Z",
-  "url": "https://apply.workable.com/j/1CF04FF2E4",
-  "description": "About the study\nMindrift is conducting an in-person research study exploring how people communicate and interact in everyday group conversations.\nWe're looking for adults in the Santa Clara Valley (South Bay) area to join a paid, guided con…",
+  "payMin": 300,
+  "payMax": 300,
+  "payCurrency": "USD",
+  "payPeriod": "task",
+  "payText": "Pay Per Task $300/per approved task",
+  "hoursPerWeek": null,
+  "commitment": "Contract",
+  "workArrangement": "remote",
+  "location": null,
+  "eligibleCountries": null,
+  "postedAt": "2026-11-17T18:44:10Z",
+  "url": "https://work.turing.com/job/home?jobCode=DwSgpKlWw_tN",
+  "description": "Role Overview:\nWe are staffing a frontier AI initiative that requires strong Engineering experts to develop realistic, terminal-based scientific and technical tasks used to train and evaluate AI agents.\nThe work involves translating authent…",
   "referralBonus": null,
   "openings": null,
   "isNew": null,
-  "scrapedAt": "2026-10-25T15:07:22Z",
+  "scrapedAt": "2026-11-17T23:00:13Z",
   "error": null
 }
 ```

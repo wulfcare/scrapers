@@ -46,14 +46,14 @@ items = list(client.dataset(dataset_id).iterate_items())
 {
   "prompt": "What is the best CRM for a small business?",
   "repeat": 1,
-  "answer": "Finding the best CRM for a small business depends heavily on your team's specific goals, technical comfort level, and budget. Because there is no one-size-fits-all solution, small business CRMs generally fall into a few distinct categories—…",
-  "answerText": "Finding the best CRM for a small business depends heavily on your team's specific goals, technical comfort level, and budget. Because there is no one-size-fits-all solution, small business CRMs generally fall into a few distinct categories—…",
+  "answer": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use. While HubSpot leads for all-in-one marketing…",
+  "answerText": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use. While HubSpot leads for all-in-one marketing…",
   "sources": [
     {
-      "title": "The Best Small Business CRM Software We've Tested for 2026 | PCMag",
-      "url": "https://www.pcmag.com/picks/the-best-small-business-crm-software",
-      "domain": "pcmag.com",
-      "siteName": "PCMag",
+      "title": "Best and inexpensive CRM for small business - Reddit",
+      "url": "https://www.reddit.com/r/CRM/comments/1e5141p/best_and_inexpensive_crm_for_small_business/",
+      "domain": "reddit.com",
+      "siteName": "Reddit",
       "citedInline": true
     },
     {
@@ -74,7 +74,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   ],
   "sourceCount": 12,
   "citedDomains": [
-    "pcmag.com",
+    "reddit.com",
     "hubspot.com",
     "zoho.com",
     "… 9 more"
@@ -85,7 +85,9 @@ items = list(client.dataset(dataset_id).iterate_items())
   "yourBrandCited": true,
   "brandsMentioned": [
     "HubSpot",
-    "Pipedrive"
+    "Pipedrive",
+    "Zoho CRM",
+    "… 1 more"
   ],
   "brands": [
     {
@@ -93,7 +95,7 @@ items = list(client.dataset(dataset_id).iterate_items())
       "mentioned": true,
       "mentions": 5,
       "rank": 1,
-      "firstMention": "HubSpot CRM - Ease of Use & Growth - Smohest user interface; excellent free tier.",
+      "firstMention": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use.",
       "cited": true,
       "citedUrls": [
         "https://www.hubspot.com/products/crm/ai-crm"
@@ -101,29 +103,32 @@ items = list(client.dataset(dataset_id).iterate_items())
     },
     {
       "brand": "Salesforce",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
-    },
-    {
-      "brand": "Pipedrive",
       "mentioned": true,
-      "mentions": 3,
-      "rank": 2,
-      "firstMention": "Pipedrive - Sales-Focused Teams - Visual, intuitive deal pipelines that teams pick up instantly.",
+      "mentions": 1,
+      "rank": 4,
+      "firstMention": "Salesforce Starter - Rapidly scaling teams - $25/user/month - No (Free trial) - Enterprise-grade scalability and deep reporting",
       "cited": true,
       "citedUrls": [
-        "https://www.pipedrive.com/"
+        "https://www.salesforce.com/crm/crm-for-small-business/"
       ]
-    }
+    },
+    {
+      "brand": "Zoho CRM",
+      "mentioned": true,
+      "mentions": 3,
+      "rank": 3,
+      "firstMention": "The best CRM for a small business depends on your primary goal, though HubSpot, Pipedrive, Zoho CRM, and Freshsales consistently rank as the top overall choices for affordability and ease of use.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.zoho.com/crm/small-business-crm-software/"
+      ]
+    },
+    "… 2 more"
   ],
   "country": "US",
   "language": "en",
-  "askedAt": "2026-10-25T09:57:02Z",
-  "seconds": 7.3,
+  "askedAt": "2026-11-17T21:15:33Z",
+  "seconds": 7,
   "error": null
 }
 ```

@@ -46,53 +46,71 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "prompt": "best budget wireless earbuds 2026",
+  "prompt": "What is the best CRM for a small business?",
   "repeat": 1,
-  "answer": "The **Anker Soundcore Space A40** are the strongest all‑around budget earbuds in 2026 thanks to excellent ANC, customizable sound, long battery life, and consistently top-tier value.\n\n### ✅ Quick Answer (Top Picks)\n**Best overall:** **Anker…",
-  "answerText": "The Anker Soundcore Space A40 are the strongest all‑around budget earbuds in 2026 thanks to excellent ANC, customizable sound, long battery life, and consistently top-tier value.\n\n✅ Quick Answer (Top Picks)\nBest overall: Anker Soundcore Spa…",
+  "answer": "**For most small businesses, **HubSpot CRM** is the best starting point because its free plan covers core contact and deal management, while its broader platform can add marketing, service, and automation later. If your team is primarily sa…",
+  "answerText": "For most small businesses, HubSpot CRM is the best starting point because its free plan covers core contact and deal management, while its broader platform can add marketing, service, and automation later. If your team is primarily sales-fo…",
   "sources": [
     {
-      "title": "The 5 Best Budget Wireless Earbuds of 2026 - RTINGS.com",
-      "url": "https://www.rtings.com/headphones/reviews/best/cheap-wireless-earbuds",
-      "domain": "rtings.com",
-      "siteName": "RTINGS.com",
+      "title": "Customer Platform Pricing | HubSpot",
+      "url": "https://www.hubspot.com/pricing/suite",
+      "domain": "hubspot.com",
+      "siteName": "HubSpot",
       "citedInline": true,
       "number": 1,
-      "snippet": "The Anker Soundcore Space A40 Truly Wireless are the best budget wireless earbuds we've tested. These great-value earbuds offer amazing ANC."
+      "snippet": null
     },
     {
-      "title": "Best Cheap Earbuds 2026: Great sound and value on a budget",
-      "url": "https://www.trustedreviews.com/best/best-cheap-earbuds-4382625",
-      "domain": "trustedreviews.com",
-      "siteName": "Trusted Reviews",
+      "title": "HubSpot's Starter Plan for Startups & Small Businesses",
+      "url": "https://www.hubspot.com/products/crm/starter",
+      "domain": "hubspot.com",
+      "siteName": "HubSpot",
       "citedInline": true,
       "number": 2,
-      "snippet": "True wireless earbuds don’t need to cost an arm and a leg. We’ve compiled this list of the best cheap earbuds to help you find the right pair"
+      "snippet": null
     },
     {
-      "title": "Best Budget Wireless Earbuds: Top Picks Under $150 - Cybernews",
-      "url": "https://cybernews.com/headphones/best-budget-wireless-earbuds/",
-      "domain": "cybernews.com",
-      "siteName": "Cybernews",
+      "title": "CRM Pricing Plans | Affordable CRM Software Costs | Pipedrive",
+      "url": "https://www.pipedrive.com/en/pricing",
+      "domain": "pipedrive.com",
+      "siteName": "Pipedrive",
       "citedInline": true,
       "number": 3,
-      "snippet": "Discover the best budget wireless earbuds on the market in 2026. Read my detailed reviews of the top choices, with great sound, features, and value, all under $150."
-    }
+      "snippet": null
+    },
+    "… 2 more"
   ],
-  "sourceCount": 3,
+  "sourceCount": 5,
   "citedDomains": [
-    "rtings.com",
-    "trustedreviews.com",
-    "cybernews.com"
+    "hubspot.com",
+    "pipedrive.com",
+    "zoho.com",
+    "… 1 more"
   ],
-  "yourBrand": "Asana",
-  "yourBrandMentioned": false,
-  "yourBrandRank": null,
-  "yourBrandCited": false,
-  "brandsMentioned": [],
+  "yourBrand": "HubSpot",
+  "yourBrandMentioned": true,
+  "yourBrandRank": 1,
+  "yourBrandCited": true,
+  "brandsMentioned": [
+    "HubSpot",
+    "Pipedrive",
+    "Zoho CRM"
+  ],
   "brands": [
     {
-      "brand": "Asana",
+      "brand": "HubSpot",
+      "mentioned": true,
+      "mentions": 7,
+      "rank": 1,
+      "firstMention": "For most small businesses, HubSpot CRM is the best starting point because its free plan covers core contact and deal management, while its broader platform can add marketing, service, and automation later.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.hubspot.com/pricing/suite",
+        "https://www.hubspot.com/products/crm/starter"
+      ]
+    },
+    {
+      "brand": "Salesforce",
       "mentioned": false,
       "mentions": 0,
       "rank": null,
@@ -101,28 +119,22 @@ items = list(client.dataset(dataset_id).iterate_items())
       "citedUrls": []
     },
     {
-      "brand": "Trello",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
+      "brand": "Zoho CRM",
+      "mentioned": true,
+      "mentions": 6,
+      "rank": 3,
+      "firstMention": "If your team is primarily sales-focused, choose Pipedrive; if minimizing cost and maximizing customization matter most, choose Zoho CRM.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.zoho.com/en-us/crm/zohocrm-pricing.html"
+      ]
     },
-    {
-      "brand": "Monday.com",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
-    }
+    "… 2 more"
   ],
   "language": "en",
   "proxy": "none",
-  "askedAt": "2026-11-08T13:04:11Z",
-  "seconds": 1.8,
+  "askedAt": "2026-11-17T21:30:50Z",
+  "seconds": 27.4,
   "error": null
 }
 ```

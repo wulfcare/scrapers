@@ -1,6 +1,6 @@
 # YouTube Scraper: Videos, Shorts, Channels & Search
 
-`wulfcare/youtube-scraper`: YouTube scraper: videos, Shorts and streams from searches, channels, playlists and hashtags. Views, likes, comments count, publish time, duration, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper. Free until Nov 18, then $0.90 per 1,000.
+`wulfcare/youtube-scraper`: YouTube scraper: videos, Shorts and streams from searches, channels, playlists and hashtags. Views, likes, comments count, publish time, duration, tags, plus channel subscribers, total views and country. Same input and output as the popular YouTube Scraper. $0.90 per 1,000 videos, no start fee.
 
 **Use it for:**
 - YouTube video metadata (views, likes, comment count, publish date, duration, tags) from searches, channels, playlists, hashtags
@@ -12,8 +12,7 @@
 - MCP: `https://mcp.apify.com?tools=wulfcare/youtube-scraper`
 
 **Price:**
-- Free (only Apify platform usage, usually fractions of a cent)
-- From 2026-11-18: $0.0009 per video (video): One YouTube video, Short or stream row with all its details. Errors and not-found inputs are never charged. No start fee.
+- $0.0009 per video (video): One YouTube video, Short or stream row with all its details. Errors and not-found inputs are never charged. No start fee.
 
 ## Call it
 
@@ -65,46 +64,47 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "title": "Python for Data Analytics - Full Course for Beginners",
-  "id": "wUSDVGivd-8",
-  "url": "https://www.youtube.com/watch?v=wUSDVGivd-8",
+  "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+  "id": "dQw4w9WgXcQ",
+  "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "type": "video",
-  "thumbnailUrl": "https://i.ytimg.com/vi/wUSDVGivd-8/hqdefault.jpg",
-  "viewCount": 1651110,
-  "likes": 37906,
-  "commentsCount": 1195,
-  "date": "2024-06-07T12:01:05Z",
-  "dateText": "Jun 7, 2024",
-  "duration": "11:09:41",
-  "durationSeconds": 40181,
-  "text": "📁 FREE Course Files & Project 👉 https://lukeb.co/python_repo\n🏆 Supporter Access: Problems, Certificate, & More 👉 https://lukeb.co/python\n\nMy FREE Course to be a Data Analyst 👉 https://lukebarousse.com/5daycourse\n\n📌💬 See pinned comment for t…",
+  "thumbnailUrl": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+  "viewCount": 1838269922,
+  "likes": 19509851,
+  "commentsCount": 2462446,
+  "date": "2009-10-25T06:57:33Z",
+  "dateText": "Oct 24, 2009",
+  "duration": "00:03:33",
+  "durationSeconds": 213,
+  "text": "The official video for “Never Gonna Give You Up” by Rick Astley. \n\nNever: The Autobiography 📚 OUT NOW! \nFollow this link to get your copy and listen to Rick’s ‘Never’ playlist ❤️ #RickAstleyNever\nhttps://linktr.ee/rickastleynever\n\n“Never Go…",
   "descriptionLinks": [
     {
-      "url": "https://lukeb.co/python_repo",
-      "text": "https://lukeb.co/python_repo"
+      "url": "https://linktr.ee/rickastleynever",
+      "text": "https://linktr.ee/rickastleynever"
     },
     {
-      "url": "https://lukeb.co/python",
-      "text": "https://lukeb.co/python"
+      "url": "https://RickAstley.lnk.to/YTSubID",
+      "text": "https://RickAstley.lnk.to/YTSubID"
     },
     {
-      "url": "https://lukebarousse.com/5daycourse",
-      "text": "https://lukebarousse.com/5daycourse"
+      "url": "https://RickAstley.lnk.to/FBFollowID",
+      "text": "https://RickAstley.lnk.to/FBFollowID"
     },
-    "… 26 more"
+    "… 8 more"
   ],
   "hashtags": [
-    "#datanerd",
-    "#dataanalyst",
-    "#datascience"
+    "#OfficialMusicVideo",
+    "#NeverGonnaGiveYouUp",
+    "#RickAstleyNever",
+    "… 2 more"
   ],
   "location": null,
-  "category": "Science & Technology",
+  "category": "Music",
   "keywords": [
-    "data viz by luke",
-    "business intelligence",
-    "data science",
-    "… 15 more"
+    "rick astley",
+    "Never Gonna Give You Up",
+    "nggyu",
+    "… 24 more"
   ],
   "isLive": false,
   "commentsTurnedOff": false,
@@ -117,37 +117,37 @@ items = list(client.dataset(dataset_id).iterate_items())
   "subtitles": null,
   "translatedTitle": null,
   "translatedText": null,
-  "channelName": "Luke Barousse",
-  "channelId": "UCLLw7jmFsvfIVaUFsLs8mlQ",
-  "channelUrl": "https://www.youtube.com/@LukeBarousse",
-  "channelUsername": "LukeBarousse",
-  "numberOfSubscribers": 681000,
+  "channelName": "Rick Astley",
+  "channelId": "UCuAXFkgsw1L7xaCfnd5JJOw",
+  "channelUrl": "https://www.youtube.com/@RickAstleyYT",
+  "channelUsername": "RickAstleyYT",
+  "numberOfSubscribers": 4560000,
   "isChannelVerified": true,
-  "channelAvatarUrl": "https://yt3.googleusercontent.com/ytc/AIdro_my6YXWfudW8qM_i1Na9IWEbiIUtVgb54u0XVVmtlYQig=s900-c-k-c0x00ffffff-no-rj",
-  "channelBannerUrl": "https://yt3.googleusercontent.com/NiqHB8Sy0UaObmZgUVDE3eLrp-GZkn445VvZIj1mB1VRXRwxQGotWNNGLkTnF3LH6k9NmfCj5w=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-  "channelDescription": "What's up, Data Nerds! I'm Luke, a data analyst who loves making tutorials.\n\n❓ If you have a question, drop a comment in any video. \n\n📩 Email is for business inquiries only, please.\n\n\n",
+  "channelAvatarUrl": "https://yt3.googleusercontent.com/_ShEGOdg-t5YGJse14Ooq6FYBZqX_QSlhaTNjG06miYusm5lWm1UroLyVxnYtahADfRTVLtuVQ=s900-c-k-c0x00ffffff-no-rj",
+  "channelBannerUrl": "https://yt3.googleusercontent.com/pi1YBgcetxpQG-xtEKHBLwe3nUxoo-cT1AKYfqLxh8krCgnkpZZM5zOtP2VlFfSFnRFi8EyA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+  "channelDescription": "Rick Astley’s Swinging Christmas 2026 🎄 Dec 9th, Royal Albert Hall. SOLD OUT ❤️\n",
   "channelDescriptionLinks": [
     {
-      "text": "My FREE Data Courses",
-      "url": "https://lukebarousse.com/crash-courses"
+      "text": "Swinging Christmas tickets",
+      "url": "https://lnk.to/RASC26"
     },
     {
-      "text": "All My Courses ",
-      "url": "https://lukebarousse.com/courses"
+      "text": "New single 'Raindrops'",
+      "url": "https://rickastley.lnk.to/Raindrops"
     },
     {
-      "text": "My Job-Skills App",
-      "url": "https://datanerd.tech"
+      "text": "Website",
+      "url": "https://www.rickastley.co.uk/"
     },
-    "… 2 more"
+    "… 8 more"
   ],
-  "channelLocation": "United States",
-  "channelJoinedDate": "2020-08-03",
-  "channelTotalVideos": 172,
-  "channelTotalViews": 36148433,
-  "input": "python tutorial",
-  "fromYTUrl": "https://www.youtube.com/results?search_query=python%20tutorial&sp=EgIQAQ%3D%3D",
-  "order": 8,
+  "channelLocation": "United Kingdom",
+  "channelJoinedDate": "2015-02-01",
+  "channelTotalVideos": 442,
+  "channelTotalViews": 2600576030,
+  "input": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "fromYTUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "order": 1,
   "error": null
 }
 ```

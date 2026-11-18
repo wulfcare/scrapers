@@ -44,29 +44,29 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "prompt": "What is the best CRM for a small business?",
+  "prompt": "Which project management tool is best for a remote team?",
   "repeat": 1,
-  "answer": "Finding the \"best\" CRM for a small business depends entirely on your budget, team size, and whether your primary focus is sales pipelines, marketing, or customer support. \n\n---\n\n### 1. HubSpot CRM — Best for Beginners & Inbound Marketing\n* …",
-  "answerText": "Finding the \"best\" CRM for a small business depends entirely on your budget, team size, and whether your primary focus is sales pipelines, marketing, or customer support.\n\n---\n\n1. HubSpot CRM — Best for Beginners & Inbound Marketing\n- Best …",
+  "answer": "The \"best\" project management tool for a remote team depends entirely on your team's workflow, technical level, and how much you rely on asynchronous communication. Because remote teams cannot tap shoulders to check on progress, the ideal t…",
+  "answerText": "The \"best\" project management tool for a remote team depends entirely on your team's workflow, technical level, and how much you rely on asynchronous communication. Because remote teams cannot tap shoulders to check on progress, the ideal t…",
   "sources": [
     {
-      "title": "The Best CRM for Small Business in 2026: An Honest Comparison",
-      "url": "https://1crm.com/best-crm-for-small-business/",
-      "domain": "1crm.com",
+      "title": "7 Best Project Management Tools for Remote Teams (2026)",
+      "url": "https://kova-digital.com/work/project-management-tools",
+      "domain": "kova-digital.com",
       "siteName": null,
       "citedInline": true
     },
     {
-      "title": "10 Best CRM Tools for Small Businesses in 2026 - Helpmonks",
-      "url": "https://helpmonks.com/blog/best-crm-tools-small-businesses-2026/",
-      "domain": "helpmonks.com",
+      "title": "Best project management tools and software: My 21 top picks for 2026",
+      "url": "https://www.wrike.com/project-management-guide/faq/what-are-project-management-tools/",
+      "domain": "wrike.com",
       "siteName": null,
       "citedInline": true
     },
     {
-      "title": "Best small business CRM of 2026 - TechRadar",
-      "url": "https://www.techradar.com/best/best-crm-for-small-business",
-      "domain": "techradar.com",
+      "title": "Best project management software for 2026? : r/projectmanagers",
+      "url": "https://www.reddit.com/r/projectmanagers/comments/1q4ndn0/best_project_management_software_for_2026/",
+      "domain": "reddit.com",
       "siteName": null,
       "citedInline": true
     },
@@ -74,53 +74,52 @@ items = list(client.dataset(dataset_id).iterate_items())
   ],
   "sourceCount": 6,
   "citedDomains": [
-    "1crm.com",
-    "helpmonks.com",
-    "techradar.com",
-    "… 2 more"
+    "kova-digital.com",
+    "wrike.com",
+    "reddit.com",
+    "… 3 more"
   ],
   "products": [],
   "yourBrand": "HubSpot",
-  "yourBrandMentioned": true,
-  "yourBrandRank": 1,
+  "yourBrandMentioned": false,
+  "yourBrandRank": null,
   "yourBrandCited": false,
   "brandsMentioned": [
-    "HubSpot",
-    "Pipedrive",
-    "Salesforce"
+    "monday.com"
   ],
   "brands": [
     {
       "brand": "HubSpot",
-      "mentioned": true,
-      "mentions": 4,
-      "rank": 1,
-      "firstMention": "HubSpot CRM — Best for Beginners & Inbound Marketing",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
     },
     {
       "brand": "Salesforce",
-      "mentioned": true,
-      "mentions": 4,
-      "rank": 3,
-      "firstMention": "The Catch: Advanced custom workflows and deep enterprise configurations are more limited than competitors like Salesforce or Zoho.",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
     },
     {
-      "brand": "Pipedrive",
-      "mentioned": true,
-      "mentions": 3,
-      "rank": 2,
-      "firstMention": "Pipedrive — Best for Sales-Driven Teams",
+      "brand": "Zoho CRM",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
-    }
+    },
+    "… 2 more"
   ],
   "language": "en",
-  "askedAt": "2026-10-25T09:52:20Z",
-  "seconds": 12.2,
+  "askedAt": "2026-11-17T21:05:22Z",
+  "seconds": 16.4,
   "error": null
 }
 ```

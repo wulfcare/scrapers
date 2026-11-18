@@ -46,50 +46,61 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "prompt": "What is the best CRM for a small business?",
+  "prompt": "Which project management tool is best for a remote team?",
   "repeat": 1,
-  "answer": "The **best overall CRM for most small businesses is HubSpot CRM**, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools [2].\n\n**If you want the simplest setup:** Bigin by Zoho CRM\n**If you want visual p…",
-  "answerText": "The best overall CRM for most small businesses is HubSpot CRM, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools.\n\nIf you want the simplest setup: Bigin by Zoho CRM\nIf you want visual pipelines: mond…",
+  "answer": "**The best project management tool for a remote team depends on your workflow, but current expert reviews consistently highlight *monday.com*, *Wrike*, and *ClickUp* as top choices thanks to their strong collaboration features, automation, …",
+  "answerText": "The best project management tool for a remote team depends on your workflow, but current expert reviews consistently highlight *monday.com*, *Wrike*, and *ClickUp* as top choices thanks to their strong collaboration features, automation, an…",
   "sources": [
     {
-      "title": "10 Best Small Business CRM Software Of 2026 - Forbes",
-      "url": "https://www.forbes.com/advisor/business/software/best-crm-small-business/",
-      "domain": "forbes.com",
-      "siteName": "Forbes",
+      "title": "10 Best Project Management Tools For Remote Teams In 2026",
+      "url": "https://thedigitalprojectmanager.com/tools/project-management-tools-remote-teams/",
+      "domain": "thedigitalprojectmanager.com",
+      "siteName": "The Digital Project Manager",
       "citedInline": true,
       "number": 1,
-      "snippet": "To find the best small business CRMs, we evaluated 41 providers and ranked 33 features and tools that have the biggest impact on SMBs."
+      "snippet": null
     },
     {
-      "title": "12 Best Small Business CRM Tools",
-      "url": "https://fitsmallbusiness.com/best-crm-for-small-business/",
-      "domain": "fitsmallbusiness.com",
-      "siteName": "Fit Small Business",
+      "title": "10 Best Remote Project Management Tools Reviewed For 2026",
+      "url": "https://thedigitalprojectmanager.com/tools/remote-project-management-tools/",
+      "domain": "thedigitalprojectmanager.com",
+      "siteName": "The Digital Project Manager",
       "citedInline": true,
       "number": 2,
-      "snippet": "Compare the 12 best CRM tools for small business. Our 2026 top picks are HubSpot CRM, Bigin by Zoho CRM, and monday CRM to drive sales and growth."
-    }
+      "snippet": null
+    },
+    {
+      "title": "7 Best Remote Team Collaboration Tools 2026 [Free & Paid]",
+      "url": "https://www.cloudwards.net/team-collaboration-tools/",
+      "domain": "cloudwards.net",
+      "siteName": "Cloudwards",
+      "citedInline": true,
+      "number": 3,
+      "snippet": null
+    },
+    "… 1 more"
   ],
-  "sourceCount": 2,
+  "sourceCount": 4,
   "citedDomains": [
-    "forbes.com",
-    "fitsmallbusiness.com"
+    "thedigitalprojectmanager.com",
+    "cloudwards.net",
+    "apollotechnical.com"
   ],
   "yourBrand": "HubSpot",
-  "yourBrandMentioned": true,
-  "yourBrandRank": 1,
+  "yourBrandMentioned": false,
+  "yourBrandRank": null,
   "yourBrandCited": false,
   "brandsMentioned": [
-    "HubSpot",
-    "Pipedrive"
+    "monday.com",
+    "Zoho CRM"
   ],
   "brands": [
     {
       "brand": "HubSpot",
-      "mentioned": true,
-      "mentions": 4,
-      "rank": 1,
-      "firstMention": "The best overall CRM for most small businesses is HubSpot CRM, thanks to its intuitive interface, strong automation, and all‑in‑one sales/marketing tools.",
+      "mentioned": false,
+      "mentions": 0,
+      "rank": null,
+      "firstMention": null,
       "cited": false,
       "citedUrls": []
     },
@@ -103,19 +114,20 @@ items = list(client.dataset(dataset_id).iterate_items())
       "citedUrls": []
     },
     {
-      "brand": "Pipedrive",
+      "brand": "Zoho CRM",
       "mentioned": true,
-      "mentions": 3,
+      "mentions": 5,
       "rank": 2,
-      "firstMention": "If you want deep email marketing: Pipedrive",
+      "firstMention": "Zoho Projects — Best for automation within the Zoho ecosystem",
       "cited": false,
       "citedUrls": []
-    }
+    },
+    "… 2 more"
   ],
   "language": "en",
-  "proxy": "residential-US",
-  "askedAt": "2026-10-25T09:53:11Z",
-  "seconds": 21,
+  "proxy": "none",
+  "askedAt": "2026-11-17T21:10:43Z",
+  "seconds": 12.4,
   "error": null
 }
 ```

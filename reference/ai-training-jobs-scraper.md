@@ -50,31 +50,32 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "platform": "Mindrift",
-  "jobId": "1CF04FF2E4",
-  "title": "$110 for 90 Minutes of Conversation: Paid Research Study",
-  "company": "Mindrift",
-  "category": "Paid research study",
-  "skills": null,
-  "payMin": 110,
-  "payMax": 110,
-  "payCurrency": "USD",
-  "payPeriod": "one-time",
-  "payText": "$110 for 90 Minutes of Conversation: Paid Research Study",
-  "hoursPerWeek": null,
-  "commitment": "Part-time",
-  "workArrangement": "onsite",
-  "location": "San Mateo, California, United States",
-  "eligibleCountries": [
-    "United States"
+  "platform": "Turing",
+  "jobId": "120146",
+  "title": "Scientific Computing / Research Engineering Expert — Engineering",
+  "company": "Turing",
+  "category": "Engineering",
+  "skills": [
+    "Electrical Networks",
+    "Chemistry"
   ],
-  "postedAt": "2026-10-25T00:00:00Z",
-  "url": "https://apply.workable.com/j/1CF04FF2E4",
-  "description": "About the study\nMindrift is conducting an in-person research study exploring how people communicate and interact in everyday group conversations.\nWe're looking for adults in the Santa Clara Valley (South Bay) area to join a paid, guided con…",
+  "payMin": 300,
+  "payMax": 300,
+  "payCurrency": "USD",
+  "payPeriod": "task",
+  "payText": "Pay Per Task $300/per approved task",
+  "hoursPerWeek": null,
+  "commitment": "Contract",
+  "workArrangement": "remote",
+  "location": null,
+  "eligibleCountries": null,
+  "postedAt": "2026-11-17T18:44:10Z",
+  "url": "https://work.turing.com/job/home?jobCode=DwSgpKlWw_tN",
+  "description": "Role Overview:\nWe are staffing a frontier AI initiative that requires strong Engineering experts to develop realistic, terminal-based scientific and technical tasks used to train and evaluate AI agents.\nThe work involves translating authent…",
   "referralBonus": null,
   "openings": null,
   "isNew": null,
-  "scrapedAt": "2026-10-25T15:07:22Z",
+  "scrapedAt": "2026-11-17T23:00:13Z",
   "error": null
 }
 ```

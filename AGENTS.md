@@ -73,7 +73,7 @@ The response is a JSON array of items.
 
 ## 4. Cost (per result, failures free)
 
-Google Trends $0.003/report (more than 5 keywords or daily data: one report per Google query needed, e.g. 12 keywords ≈ 6) · YouTube transcripts $0.003 · YouTube videos free until 2026-11-18, then $0.0009 · YouTube comments $0.00025 · Google Jobs $0.004/job · Google Hotels $0.0008/price · Google Flights $0.0005/result · App Store / Google Play reviews $0.0001 · app details $0.0005 · ChatGPT $0.05/answer · Gemini $0.001 (+$0.002 with residential proxy) · AI Mode $0.0045 · Copilot $0.008 (+$0.008 with residential proxy) · AI Visibility $0.04/answer · AI training jobs free.
+Google Trends $0.003/report (more than 5 keywords or daily data: one report per Google query needed, e.g. 12 keywords ≈ 6) · YouTube transcripts $0.003 · YouTube videos $0.0009 · YouTube comments $0.00025 · Google Jobs $0.004/job · Google Hotels $0.0008/price · Google Flights $0.0005/result · App Store / Google Play reviews $0.0001 · app details $0.0005 · ChatGPT $0.05/answer · Gemini $0.001 (+$0.002 with residential proxy) · AI Mode $0.0045 · Copilot $0.008 (+$0.008 with residential proxy) · AI Visibility $0.04/answer · AI training jobs free.
 
 ## Rules
 

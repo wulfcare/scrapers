@@ -70,7 +70,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "developer": "TikTok Ltd.",
   "developerId": "1322881000",
   "score": 4.8,
-  "ratings": 89676,
+  "ratings": 102202,
   "genre": "Entertainment",
   "free": true,
   "price": 0,
@@ -80,7 +80,7 @@ items = list(client.dataset(dataset_id).iterate_items())
   "contentRating": "12+",
   "releasedAt": "2026-06-03",
   "description": "TikTok Pro - Events is a global discovery platform for videos where you can discover cool, funny, and educational short videos, as well as share important moments with your friends.\n\nEngage more with videos you love\nWith TikTok Pro - Events…",
-  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c7/e0/05/c7e00539-f686-7de1-776b-2389d4f8d3af/AppIcon_TikTok-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.png",
+  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/06/2d/12/062d12ba-6f42-bebb-94db-7860f8a333d2/AppIcon_TikTok-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.png",
   "country": "US",
   "language": null,
   "error": null

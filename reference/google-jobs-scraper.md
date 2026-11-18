@@ -44,62 +44,59 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "query": "remote software engineer",
-  "searchUsed": "remote software engineer",
+  "query": "nurse jobs new york",
+  "searchUsed": "nurse jobs new york",
   "country": "US",
   "position": 1,
-  "title": "Full-Stack Software Engineer (New Grad) - Remote",
-  "company": "SpruceID",
-  "location": "Anywhere",
-  "via": "ZipRecruiter",
-  "postedAgo": "8 days ago",
-  "postedAt": "2026-10-17T10:01:13+00:00",
-  "salary": "110K-140K a year",
-  "jobType": "Full-time",
-  "degree": null,
-  "otherTags": [],
+  "title": "Registered Nurse / RN - Labor and Delivery / L&D",
+  "company": "Solomon Page",
+  "location": "New York, NY",
+  "via": "LinkedIn",
+  "postedAgo": "6 hours ago",
+  "postedAt": "2026-11-17T16:10:11+00:00",
+  "salary": null,
+  "jobType": "Contractor",
+  "degree": "No Degree Mentioned",
+  "otherTags": [
+    "Dental insurance",
+    "Health insurance"
+  ],
   "applyOptions": [
     {
-      "source": "ZipRecruiter",
-      "url": "https://www.ziprecruiter.com/c/SpruceID/Job/Full-Stack-Software-Engineer-Remote/-in-Remote,US?jid=19daffea3bfe03e5",
-      "domain": "ziprecruiter.com",
+      "source": "LinkedIn",
+      "url": "https://www.linkedin.com/jobs/view/registered-nurse-rn-labor-and-delivery-l-d-at-solomon-page-4491581477",
+      "domain": "linkedin.com",
       "direct": false
     },
     {
-      "source": "Jobgether",
-      "url": "https://jobgether.com/offer/6a7bdabf490731f1e196f124-full-stack-software-engineer---remote-services",
-      "domain": "jobgether.com",
+      "source": "BeBee",
+      "url": "https://bebee.com/us/jobs/registered-nurse-labor-and-delivery-ld-rn-36-12-holy-redeemer-new-york--lensa-7428_b49d0d20db42334741408ccf256d0a195c6ca6894a7a94765fe6effec1b44942",
+      "domain": "bebee.com",
       "direct": false
-    },
-    {
-      "source": "JobLeads",
-      "url": "https://www.jobleads.com/us/job/full-stack-software-engineer-new-grad-remote--united-states--e458dc7a885af25429cd861e8c385462b",
-      "domain": "jobleads.com",
-      "direct": false
-    },
-    "… 5 more"
+    }
   ],
   "highlights": {
     "qualifications": [
-      "This is an ideal role for a recent graduate who wants to grow quickly while working on technology that matters",
-      "We're not looking for someone who already knows everything",
-      "We're looking for someone eager to learn, humble enough to ask questions, and motivated to do meaningful work",
-      "… 15 more"
+      "Current New York license",
+      "Excellent interpersonal skills including patience, empathy, and compassion",
+      "Effective communication skills, including active listening, writing, speaking and reading comprehension",
+      "… 3 more"
     ],
     "benefits": [
-      "Dedicated mentorship from senior engineers who will guide your technical development"
+      "Estimated Gross Weekly Pay: $2,837",
+      "Estimated Weekly Stipend: $1,967",
+      "Offering a comprehensive benefits package, travel nurses have immediate access to medical coverage and ReviveHealth virtual care",
+      "… 2 more"
     ],
     "responsibilities": [
-      "You'll work alongside experienced engineers and directly with state governments, public sector partners, and enterprise clients to help design, build, and deploy impactful identity solutions",
-      "You'll gain hands-on experience across the full stack, learn from senior engineers, and contribute to systems that serve millions of people",
-      "Collaborate with customer delivery leads, engineers, and UX designers on real-world deployments",
-      "… 11 more"
+      "Shift: 3x12 Nights",
+      "More job highlights"
     ]
   },
-  "description": "About SpruceID\nSpruceID builds privacy-preserving, standards-based digital identity and credentialing solutions that give individuals control of their information while enabling governments and enterprises to deliver secure, interoperable s…",
-  "googleJobId": "UsmJK6H351WAV-x4AAAAAA==",
-  "applyUrl": "https://www.monster.com/job-openings/full-stack-software-engineer-new-grad-remote-beverly-hills-ca--706c9c1e-bef1-4862-823f-d1bfce004f9a",
-  "scrapedAt": "2026-10-25T10:01:13+00:00"
+  "description": "Our client is looking to add a Registered Nurse to their team.\nJob Details:\n• Location: Bronx, New York\n• Duration: 13 Weeks\n• Start Date: 12/09/2026\n• Shift: 3x12 Nights\n• Estimated Gross Weekly Pay: $2,837\n• Estimated Weekly Stipend: $1,9…",
+  "googleJobId": "vM-UmBytgiYzR1wLAAAAAA==",
+  "applyUrl": "https://www.linkedin.com/jobs/view/registered-nurse-rn-labor-and-delivery-l-d-at-solomon-page-4491581477",
+  "scrapedAt": "2026-11-17T22:10:11+00:00"
 }
 ```
 

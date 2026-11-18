@@ -58,79 +58,82 @@ items = list(client.dataset(dataset_id).iterate_items())
   "brandedPrompt": false,
   "yourBrand": "Pipedrive",
   "yourBrandMentioned": true,
-  "yourBrandRank": 3,
+  "yourBrandRank": 2,
   "yourBrandCited": false,
   "brandsMentioned": [
     "HubSpot",
+    "Pipedrive",
     "Zoho CRM",
-    "Pipedrive"
+    "… 1 more"
   ],
   "brands": [
     {
       "brand": "Pipedrive",
       "mentioned": true,
-      "mentions": 2,
-      "rank": 3,
-      "firstMention": "Pipedrive",
+      "mentions": 1,
+      "rank": 2,
+      "firstMention": "Pipedrive: Best for sales-focused pipelines.",
       "cited": false,
       "citedUrls": []
     },
     {
       "brand": "HubSpot",
       "mentioned": true,
-      "mentions": 2,
+      "mentions": 1,
       "rank": 1,
-      "firstMention": "HubSpot CRM",
+      "firstMention": "HubSpot CRM: Best for all-in-one marketing and sales.",
       "cited": false,
       "citedUrls": []
     },
     {
       "brand": "Salesforce",
-      "mentioned": false,
-      "mentions": 0,
-      "rank": null,
-      "firstMention": null,
-      "cited": false,
-      "citedUrls": []
+      "mentioned": true,
+      "mentions": 1,
+      "rank": 4,
+      "firstMention": "Salesforce Starter: Best for growing businesses wanting enterprise DNA.",
+      "cited": true,
+      "citedUrls": [
+        "https://www.salesforce.com/crm/crm-for-small-business/"
+      ]
     },
-    "… 1 more"
+    "… 2 more"
   ],
-  "answerText": "The best CRM (Customer Relationship Management) software for small businesses depends on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM\n\nBest for: Inbound marketing, ease of use, and getting started on a fre…",
-  "answer": "The best CRM (Customer Relationship Management) software for small businesses depends on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM\n\nBest for: Inbound marketing, ease of use, and getting started on a fre…",
+  "answerText": "The top customer relationship management (CRM) software for small businesses in 2026 varies depending on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM: Best for all-in-one marketing and sales. Offers a popu…",
+  "answer": "The top customer relationship management (CRM) software for small businesses in 2026 varies depending on your primary goal, team size, and budget:\n\nTop Small Business CRMs\n\nHubSpot CRM: Best for all-in-one marketing and sales. Offers a popu…",
   "sources": [
     {
-      "title": "10 Free or Low-Cost CRM Tools for Small Businesses",
-      "url": "https://www.uschamber.com/co/start/strategy/low-cost-crm-tools",
-      "domain": "uschamber.com",
-      "siteName": "U.S. Chamber of Commerce",
+      "title": "Best and inexpensive CRM for small business - Reddit",
+      "url": "https://www.reddit.com/r/CRM/comments/1e5141p/best_and_inexpensive_crm_for_small_business/",
+      "domain": "reddit.com",
+      "siteName": "Reddit",
       "citedInline": true
     },
     {
-      "title": "The Best Small Business CRM Software We've Tested for 2026 | PCMag",
-      "url": "https://www.pcmag.com/picks/the-best-small-business-crm-software",
-      "domain": "pcmag.com",
-      "siteName": "PCMag",
+      "title": "Best CRM for Small Businesses | Zoho CRM",
+      "url": "https://www.zoho.com/crm/small-business-crm-software/",
+      "domain": "zoho.com",
+      "siteName": "Zoho",
       "citedInline": true
     },
     {
-      "title": "The 11 Best CRMs for Small Business in 2026 | Zapier",
-      "url": "https://zapier.com/blog/best-crms-for-small-business/",
-      "domain": "zapier.com",
-      "siteName": "Zapier",
+      "title": "CRM For Small Business (Your Complete Guide) - Salesforce",
+      "url": "https://www.salesforce.com/crm/crm-for-small-business/",
+      "domain": "salesforce.com",
+      "siteName": "Salesforce",
       "citedInline": true
     },
-    "… 5 more"
+    "… 3 more"
   ],
-  "sourceCount": 8,
+  "sourceCount": 6,
   "citedDomains": [
-    "uschamber.com",
-    "pcmag.com",
-    "zapier.com",
-    "… 5 more"
+    "reddit.com",
+    "zoho.com",
+    "salesforce.com",
+    "… 3 more"
   ],
   "country": "US",
-  "askedAt": "2026-10-25T09:52:32Z",
-  "seconds": 9.3,
+  "askedAt": "2026-11-17T21:01:05Z",
+  "seconds": 7.5,
   "error": null
 }
 ```

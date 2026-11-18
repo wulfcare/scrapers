@@ -2,7 +2,7 @@
 
 The YouTube Data API v3 limits a project to **100 `search.list` calls a day** by default, plus 10,000 units a day for most other methods, before you get `quotaExceeded`. Quota resets at midnight Pacific Time. Full guide: [YouTube Data API quotaExceeded](https://wulfcare.github.io/scrapers/youtube-api-quota-exceeded/).
 
-The [YouTube Scraper on Apify](https://apify.com/wulfcare/youtube-scraper) has no quota. It's free until 2026-11-18 (you only pay Apify's tiny platform usage), then $0.90 per 1,000 videos, and Apify's free plan includes $5/month. It reads public YouTube pages: no API key, no Google account.
+The [YouTube Scraper on Apify](https://apify.com/wulfcare/youtube-scraper) has no quota. It costs $0.90 per 1,000 videos (no start fee, no platform usage on top), and Apify's free plan includes $5/month. It reads public YouTube pages: no API key, no Google account.
 
 ```python
 from wulfcare import run   # ../wulfcare.py

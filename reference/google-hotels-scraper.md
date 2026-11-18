@@ -48,100 +48,43 @@ items = list(client.dataset(dataset_id).iterate_items())
 | `device` | string |  | "desktop" | `desktop` (Desktop), `mobile` (Mobile) | Device: Get the prices Google shows on desktop or on mobile (some sites have mobile-only rates). |
 | `language` | string |  | "en" |  | Language: Language of hotel descriptions and texts (en, fr, de, es...). |
 | `maxConcurrency` | integer |  | 6 | 1–20 | Parallel requests: Requests to Google at once. |
+| `onlyChanges` | boolean |  | false |  | Monitor: only new and changed prices: For a schedule or a task that runs every hour or day. The Actor remembers each price from the last run (in a key-value store named "google-hotels-monitor" on your own account) and outputs only prices that are new, cheaper, dearer or gone, each with change, previousPrice, priceChange and priceChangePercent. You pay only for the rows that come out. The first run outputs every price as new. If a run stops early (maximum cost reached, or blocked), the remembered prices stay as they were, so the next run reports those changes again. |
+| `minChangePercent` | integer |  | 0 | 0–100 | Ignore changes smaller than (%): With monitoring on: skip price moves smaller than this, e.g. 5 to hear only about moves of 5% or more. 0 reports every change. |
+| `onlyDrops` | boolean |  | false |  | Only price drops: With monitoring on: output only new prices and price drops (no rises, no gone rows). Good for deal alerts. |
+| `monitorName` | string |  |  |  | Monitor name (optional): With monitoring on: which saved prices to compare against. Leave empty and each different input keeps its own; set a name to keep comparing after you edit the input, or to run two monitors on the same input. |
 | `entity` | string |  |  |  | Entity (compatibility): A single hotel (entity ID, link or name): same as one line in Hotels. |
 
 ## Output: one dataset item (real run, long values trimmed)
 
 ```json
 {
-  "query": "hotels in Paris",
-  "rank": 1,
-  "name": "The Originals Boutique, Hôtel Maison Montmartre, Paris",
-  "hotelClass": 4,
-  "hotelClassText": "4-star tourist hotel",
-  "rating": 4,
-  "reviewCount": 2135,
-  "checkInDate": "2026-10-26",
-  "checkOutDate": "2026-10-27",
-  "nights": 1,
+  "hotelName": "Hôtel Atrium by HappyCulture",
+  "provider": "Agoda",
+  "isOfficial": false,
+  "price": 71,
+  "price2": 82,
   "adults": 2,
   "currency": "USD",
-  "pricePerNight": 76.03,
-  "pricePerNightWithTaxes": 102.56,
-  "totalPrice": 76.03,
-  "totalPriceWithTaxes": 102.56,
-  "priceText": "$76",
-  "dealText": "17% less than usual",
-  "cheapestProvider": null,
-  "prices": null,
-  "address": null,
-  "phone": null,
-  "website": "https://www.hotelmaisonmontmartre.com/?utm_campaign=uberall&utm_medium=organic&utm_source=googlelisting",
-  "latitude": 48.900537,
-  "longitude": 2.3362689999999997,
-  "countryCode": "FR",
-  "checkInTime": "3:00 PM",
-  "checkOutTime": "12:00 PM",
-  "description": "Hip hotel featuring a sophisticated restaurant & a cool rooftop eatery/bar with a terrace.",
-  "descriptionLong": null,
-  "ratingBreakdown": {
-    "1": 225,
-    "2": 107,
-    "3": 180,
-    "4": 497,
-    "5": 1126
-  },
-  "reviewAspects": [
-    {
-      "aspect": "Safety",
-      "mentions": 67,
-      "positive": 13,
-      "negative": 51
-    },
-    {
-      "aspect": "Bar or lounge",
-      "mentions": 60,
-      "positive": 47,
-      "negative": 6
-    },
-    {
-      "aspect": "Room entertainment",
-      "mentions": 17,
-      "positive": 8,
-      "negative": 9
-    },
-    "… 3 more"
-  ],
-  "otherRatings": null,
-  "nearbyPlaces": [
-    {
-      "name": "Aéroport de Paris-Charles de Gaulle",
-      "travelTimes": {
-        "driving": "19 min",
-        "transit": "56 min"
-      }
-    },
-    {
-      "name": "Restaurant le 365",
-      "travelTimes": {
-        "walking": "7 min"
-      }
-    }
-  ],
-  "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/AABkmLfwYtcmqfrRWvXV6Jl_jRqJ1i-gDYNxdNuhF8KnH9MlOZvxPqJR-u-L9giDhwMbyl2jRtRgs-9rCsbYPTzZdW9R1MUmqq_Z8J0e33BQSSc_Zid_ePbJWZ4YavQcgFDAQzqNBvS2=s150-w92-h150-n-k-no",
-  "photos": [
-    "https://lh3.googleusercontent.com/grass-cs/AABkmLfwYtcmqfrRWvXV6Jl_jRqJ1i-gDYNxdNuhF8KnH9MlOZvxPqJR-u-L9giDhwMbyl2jRtRgs-9rCsbYPTzZdW9R1MUmqq_Z8J0e33BQSSc_Zid_ePbJWZ4YavQcgFDAQzqNBvS2=s287-w287-h192-n-k-no-v1",
-    "https://lh3.googleusercontent.com/grass-cs/AABkmLeNZs2aEW5P2S1v2uLfL5EAo-_dNkj_vVC-0_D0Ws0CCJWKzPnPzBKN3Zluz7bAO2QpGLzK1plMg1a9n1BR2Sb9WotAg4MTqB9ZsBMKzUiIzoWDV1zSxLBbwNehjlGFN3dc3514=s287-w287-h192-n-k-no-v1",
-    "https://lh3.googleusercontent.com/grass-cs/AABkmLcIWcvK-UkQaYFjs6lLuuwBw34mD0V2f_8LabReVSEGypdwGKQqelb6A_df2oWwfF3qxM18cdiPmIaAdT4-TUVO7z4ujzRTy_TOo3mMAOs3QMrX53L7GkqpCLJIFh-HZzPv2ZM1=s287-w287-h192-n-k-no-v1",
-    "… 6 more"
-  ],
-  "googleMapsUrl": "https://www.google.com/maps?cid=11195438155682968190",
+  "checkInDate": "2026-12-17",
+  "checkOutDate": "2026-12-18",
+  "nights": 1,
+  "pricePerNight": 71.13,
+  "pricePerNightWithTaxes": 82.38,
+  "totalPrice": 71.13,
+  "totalPriceWithTaxes": 82.38,
+  "rank": 1,
+  "isCheapest": true,
+  "bookingUrl": "https://www.agoda.com/partners/partnersearch.aspx?site_id=1917614&CkInDay=17&CkInMonth=12&CkInYear=2026&CkOutDay=18&campaignid=&CkOutMonth=12&CkOutYear=2026&SearchDateType=default&NumberOfAdults=2&LT=29&NumberOfChildren=0&childages=&NumberO…",
+  "otaUrl": "https://www.google.com/travel/lodging/clk?pc=AJ0xEyhrWPnkXWOzI8HriD1qsmSs7SOHIzO06nsu5uHBzATgrjPU821OYNdEsuZckHh0dbdbS3Pk_D5HYZWRowOq1K9S2-BmYPle3v3s3xYzYlEg5jRhzdKEgF0VS1mTKuKx6chV23Q4giuDTmKsbnhmzeGwy3zKAuypgv2w9bXPhIPDr_gDqTdGPNEXq0aFSg&…",
+  "isAd": false,
+  "rooms": null,
+  "priceText": "$71",
   "googleCurrency": null,
   "exchangeRate": null,
-  "entityId": "ChoI_uTZsvz1i6-bARoNL2cvMTFmZHB6eDEwMxAB",
-  "hotelUrl": "https://www.google.com/travel/hotels/entity/ChoI_uTZsvz1i6-bARoNL2cvMTFmZHB6eDEwMxAB/prices?hl=en&gl=us&ts=CAASCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAKGBoSBwjqDxAKGBsYATICEAA",
-  "input": "hotels in Paris",
-  "scrapedAt": "2026-10-25T09:56:42+00:00",
+  "entityId": "ChcIhpronI2bp7cBGgsvZy8xdmc2dDB6NRAB",
+  "hotelUrl": "https://www.google.com/travel/hotels/entity/ChcIhpronI2bp7cBGgsvZy8xdmc2dDB6NRAB/prices?hl=en&gl=us&ts=CAASCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAMGBESBwjqDxAMGBIYATICEAA",
+  "input": "ChcIhpronI2bp7cBGgsvZy8xdmc2dDB6NRAB",
+  "scrapedAt": "2026-11-17T23:20:10+00:00",
   "error": null
 }
 ```

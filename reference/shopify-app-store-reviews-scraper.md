@@ -43,20 +43,20 @@ items = list(client.dataset(dataset_id).iterate_items())
 
 ```json
 {
-  "appHandle": "judgeme",
-  "appName": "Judge.me Product Reviews App",
-  "developer": "Judge.me",
-  "reviewId": "2420949",
-  "rating": 1,
-  "text": "Really complicated and you need to be a computer tech engineer to figure it out! Spent hours going around in circles....",
-  "date": "2026-11-06",
+  "appHandle": "klaviyo-email-marketing",
+  "appName": "Klaviyo: Email Marketing & SMS",
+  "developer": "Klaviyo",
+  "reviewId": "2430677",
+  "rating": 5,
+  "text": "",
+  "date": "2026-11-16",
   "edited": false,
   "storeName": "(removed)",
-  "storeCountry": "United Kingdom",
-  "timeUsingApp": "About 1 year using the app",
-  "replyText": null,
-  "replyDate": null,
-  "reviewUrl": "https://apps.shopify.com/reviews/2420949",
+  "storeCountry": "United States",
+  "timeUsingApp": "12 days using the app",
+  "replyText": "Thank you for the 5-star rating!",
+  "replyDate": "2026-11-16",
+  "reviewUrl": "https://apps.shopify.com/reviews/2430677",
   "error": null
 }
 ```

@@ -46,19 +46,19 @@ items = list(client.dataset(dataset_id).iterate_items())
 ```json
 {
   "type": "trendingNow",
-  "title": "bills",
+  "title": "chargers",
   "geo": "US",
   "windowHours": 24,
   "searchVolume": 1000000,
   "increasePercent": 1000,
-  "startedAt": "2026-11-10T00:30:00+00:00",
-  "endedAt": null,
-  "isActive": true,
+  "startedAt": "2026-11-17T00:00:00+00:00",
+  "endedAt": "2026-11-17T15:40:00+00:00",
+  "isActive": false,
   "relatedSearches": [
-    "bills",
-    "vikings",
-    "buffalo bills",
-    "… 100 more"
+    "chargers",
+    "ravens",
+    "baltimore ravens",
+    "… 86 more"
   ],
   "categories": [
     "Sports"
@@ -66,8 +66,8 @@ items = list(client.dataset(dataset_id).iterate_items())
   "categoryIds": [
     17
   ],
-  "newsArticleCount": 0,
-  "trendsUrl": "https://trends.google.com/trends/explore?q=bills&geo=US&date=now+1-d",
+  "newsArticleCount": 97,
+  "trendsUrl": "https://trends.google.com/trends/explore?q=chargers&geo=US&date=now+1-d",
   "rank": 1
 }
 ```

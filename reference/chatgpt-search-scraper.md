@@ -61,7 +61,7 @@ items = list(client.dataset(dataset_id).iterate_items())
       "mentioned": true,
       "mentions": 4,
       "rank": 1,
-      "firstMention": "For most small businesses, HubSpot CRM is the best overall choice, particularly if you want something easy to use, affordable to start, and capable of growing with your business.",
+      "firstMention": "For most small businesses, HubSpot CRM is my top recommendation.",
       "cited": true,
       "citedUrls": [
         "https://www.hubspot.com/products/crm"
@@ -79,7 +79,7 @@ items = list(client.dataset(dataset_id).iterate_items())
     {
       "brand": "Zoho CRM",
       "mentioned": true,
-      "mentions": 3,
+      "mentions": 4,
       "rank": 2,
       "firstMention": "Zoho CRM",
       "cited": true,
@@ -93,7 +93,7 @@ items = list(client.dataset(dataset_id).iterate_items())
       "rank": 1,
       "name": "HubSpot CRM",
       "category": "software",
-      "description": "Customer relationship management platform"
+      "description": null
     },
     {
       "rank": 2,
@@ -107,13 +107,13 @@ items = list(client.dataset(dataset_id).iterate_items())
       "category": "software",
       "description": null
     },
-    "… 3 more"
+    "… 2 more"
   ],
   "productCount": 0,
   "products": [],
   "followUpQuestions": [],
-  "answerText": "For most small businesses, HubSpot CRM is the best overall choice, particularly if you want something easy to use, affordable to start, and capable of growing with your business.\n\nHowever, the best CRM depends on how you acquire customers, …",
-  "answer": "For most small businesses, HubSpot CRM is the best overall choice, particularly if you want something easy to use, affordable to start, and capable of growing with your business.\n\nHowever, the best CRM depends on how you acquire customers, …",
+  "answerText": "For most small businesses, HubSpot CRM is my top recommendation. It offers a strong free starting point, is relatively easy to learn, and can grow with your business as you add employees, customers, and marketing activities.\n\nHowever, the b…",
+  "answer": "For most small businesses, HubSpot CRM is my top recommendation. It offers a strong free starting point, is relatively easy to learn, and can grow with your business as you add employees, customers, and marketing activities.\n\nHowever, the b…",
   "sources": [
     {
       "title": null,
@@ -136,19 +136,19 @@ items = list(client.dataset(dataset_id).iterate_items())
       "siteName": null,
       "citedInline": true
     },
-    "… 3 more"
+    "… 2 more"
   ],
-  "sourceCount": 6,
+  "sourceCount": 5,
   "citedDomains": [
     "hubspot.com",
     "zoho.com",
     "pipedrive.com",
-    "… 3 more"
+    "… 2 more"
   ],
   "webSearch": true,
   "location": "US",
-  "askedAt": "2026-11-09T22:50:55Z",
-  "seconds": 33.6,
+  "askedAt": "2026-11-17T22:50:59Z",
+  "seconds": 34.4,
   "error": null
 }
 ```

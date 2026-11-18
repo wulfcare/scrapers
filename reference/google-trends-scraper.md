@@ -65,175 +65,118 @@ items = list(client.dataset(dataset_id).iterate_items())
 ```json
 {
   "searchTerms": [
-    "coffee",
-    "tea"
+    "weather"
   ],
   "geo": "US",
   "timeRange": "today 12-m",
   "category": 0,
   "property": "web",
-  "trendsUrl": "https://trends.google.com/trends/explore?q=coffee%2Ctea&date=today+12-m&hl=en-US&geo=US",
+  "trendsUrl": "https://trends.google.com/trends/explore?q=weather&date=today+12-m&hl=en-US&geo=US",
   "interestOverTime": [
-    {
-      "date": "2025-11-02T00:00:00+00:00",
-      "label": "Nov 2 – 8, 2025",
-      "values": {
-        "coffee": 65,
-        "tea": 32
-      },
-      "isPartial": false
-    },
-    {
-      "date": "2025-11-09T00:00:00+00:00",
-      "label": "Nov 9 – 15, 2025",
-      "values": {
-        "coffee": 73,
-        "tea": 34
-      },
-      "isPartial": false
-    },
     {
       "date": "2025-11-16T00:00:00+00:00",
       "label": "Nov 16 – 22, 2025",
       "values": {
-        "coffee": 71,
-        "tea": 35
+        "weather": 53
+      },
+      "isPartial": false
+    },
+    {
+      "date": "2025-11-23T00:00:00+00:00",
+      "label": "Nov 23 – 29, 2025",
+      "values": {
+        "weather": 56
+      },
+      "isPartial": false
+    },
+    {
+      "date": "2025-11-30T00:00:00+00:00",
+      "label": "Nov 30 – Dec 6, 2025",
+      "values": {
+        "weather": 66
       },
       "isPartial": false
     },
     "… 50 more"
   ],
-  "averages": {
-    "coffee": 77,
-    "tea": 37
-  },
+  "averages": null,
   "interestByRegion": [
     {
-      "geoCode": "US-WY",
-      "geoName": "Wyoming",
+      "geoCode": "US-WI",
+      "geoName": "Wisconsin",
       "values": {
-        "coffee": 69,
-        "tea": 31
+        "weather": 100
       },
       "hasData": true
     },
     {
-      "geoCode": "US-HI",
-      "geoName": "Hawaii",
+      "geoCode": "US-MT",
+      "geoName": "Montana",
       "values": {
-        "coffee": 70,
-        "tea": 30
+        "weather": 97
       },
       "hasData": true
     },
     {
-      "geoCode": "US-KS",
-      "geoName": "Kansas",
+      "geoCode": "US-ME",
+      "geoName": "Maine",
       "values": {
-        "coffee": 69,
-        "tea": 31
+        "weather": 95
       },
       "hasData": true
     },
     "… 48 more"
   ],
   "relatedQueries": {
-    "coffee": {
+    "weather": {
       "top": [
         {
-          "query": "coffee near me",
+          "query": "weather tomorrow",
           "value": 100,
           "formattedValue": "100",
-          "link": "https://trends.google.com/trends/explore?q=coffee+near+me&date=today+12-m&geo=US"
+          "link": "https://trends.google.com/trends/explore?q=weather+tomorrow&date=today+12-m&geo=US"
         },
         {
-          "query": "coffee shop",
-          "value": 85,
-          "formattedValue": "85",
-          "link": "https://trends.google.com/trends/explore?q=coffee+shop&date=today+12-m&geo=US"
+          "query": "the weather",
+          "value": 46,
+          "formattedValue": "46",
+          "link": "https://trends.google.com/trends/explore?q=the+weather&date=today+12-m&geo=US"
         },
         {
-          "query": "coffee maker",
-          "value": 81,
-          "formattedValue": "81",
-          "link": "https://trends.google.com/trends/explore?q=coffee+maker&date=today+12-m&geo=US"
+          "query": "weather forecast",
+          "value": 22,
+          "formattedValue": "22",
+          "link": "https://trends.google.com/trends/explore?q=weather+forecast&date=today+12-m&geo=US"
         },
         "… 22 more"
       ],
       "rising": [
         {
-          "query": "home workout routines",
-          "value": 6200,
-          "formattedValue": "Breakout",
-          "link": "https://trends.google.com/trends/explore?q=home+workout+routines&date=today+12-m&geo=US",
-          "isBreakout": true
-        },
-        {
-          "query": "sports scores today",
-          "value": 6000,
-          "formattedValue": "Breakout",
-          "link": "https://trends.google.com/trends/explore?q=sports+scores+today&date=today+12-m&geo=US",
-          "isBreakout": true
-        },
-        {
-          "query": "top songs this week",
-          "value": 5950,
-          "formattedValue": "Breakout",
-          "link": "https://trends.google.com/trends/explore?q=top+songs+this+week&date=today+12-m&geo=US",
-          "isBreakout": true
-        },
-        "… 22 more"
-      ]
-    },
-    "tea": {
-      "top": [
-        {
-          "query": "green tea",
-          "value": 100,
-          "formattedValue": "100",
-          "link": "https://trends.google.com/trends/explore?q=green+tea&date=today+12-m&geo=US"
-        },
-        {
-          "query": "black tea",
-          "value": 43,
-          "formattedValue": "43",
-          "link": "https://trends.google.com/trends/explore?q=black+tea&date=today+12-m&geo=US"
-        },
-        {
-          "query": "coffee",
-          "value": 41,
-          "formattedValue": "41",
-          "link": "https://trends.google.com/trends/explore?q=coffee&date=today+12-m&geo=US"
-        },
-        "… 22 more"
-      ],
-      "rising": [
-        {
-          "query": "loaded tea shop",
-          "value": 2100,
-          "formattedValue": "+2,100%",
-          "link": "https://trends.google.com/trends/explore?q=loaded+tea+shop&date=today+12-m&geo=US",
+          "query": "winter weather advisory",
+          "value": 900,
+          "formattedValue": "+900%",
+          "link": "https://trends.google.com/trends/explore?q=winter+weather+advisory&date=today+12-m&geo=US",
           "isBreakout": false
         },
         {
-          "query": "how to make cold brew tea",
-          "value": 2000,
-          "formattedValue": "+2,000%",
-          "link": "https://trends.google.com/trends/explore?q=how+to+make+cold+brew+tea&date=today+12-m&geo=US",
+          "query": "fire weather watch",
+          "value": 700,
+          "formattedValue": "+700%",
+          "link": "https://trends.google.com/trends/explore?q=fire+weather+watch&date=today+12-m&geo=US",
           "isBreakout": false
         },
         {
-          "query": "the loaded tea shop",
-          "value": 1900,
-          "formattedValue": "+1,900%",
-          "link": "https://trends.google.com/trends/explore?q=the+loaded+tea+shop&date=today+12-m&geo=US",
+          "query": "weather today near me",
+          "value": 250,
+          "formattedValue": "+250%",
+          "link": "https://trends.google.com/trends/explore?q=weather+today+near+me&date=today+12-m&geo=US",
           "isBreakout": false
         },
-        "… 22 more"
+        "… 2 more"
       ]
     }
   },
-  "scrapedAt": "2026-11-04T08:10:15+00:00"
+  "scrapedAt": "2026-11-17T22:00:26+00:00"
 }
 ```
 
